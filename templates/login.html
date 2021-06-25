@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
     <title>Log in</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <section class="hero">
         <div class = "container">
             <a href="#">
-            <img src="Images/Lock_key.png" alt = "Lock and Key">
+            <img src="{{url_for('static',filename='Images/Lock_key.png')}}" alt = "Lock and Key">
         </a> 
         </div>
     </section>
@@ -30,8 +30,9 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
                 </div>
-
-                <input type="submit" class="login-clk" value="log in">
+                
+                <input type="submit" class="login-clk" value="log in" id="login">
+            
 
             </form>
 
@@ -45,6 +46,14 @@
             <a href="#">Contacts</a>
         </div>    
     </section>
+
+    <script>
+        const tempLogInBtn = document.getElementById('login');
+
+        tempLogInBtn.addEventListener('click', ()=> {
+            window.open("start.html")
+        })
+    </script>
 
 
     
