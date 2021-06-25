@@ -1,0 +1,39 @@
+body{
+    background-color: rgb(150, 150, 150);
+  
+}
+.image1 {
+    text-align: center;
+    margin-top:7em ;
+    img{
+        border: 3px solid #535353;
+        padding: 10em;
+    }
+}
+
+.ans{
+    text-align: center;
+    padding: 3em;
+
+    input[name="answer"]{
+        padding-right: 4em;
+        padding-top: .5em;
+    }
+    
+    input[type="submit"]{
+        color: black;
+        margin-top: 1em;
+        border: 3px solid #535353;
+
+        &:hover{
+            background-color: #535353;
+            color: white;
+        }
+
+        
+
+    }
+
+}
+
+
