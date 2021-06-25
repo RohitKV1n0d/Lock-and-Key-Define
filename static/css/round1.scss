@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&display=swap');
+
 body{
     background-color: rgb(150, 150, 150);
+    font-family: Cinzel;
   
 }
 .image1 {
@@ -7,6 +10,8 @@ body{
     margin-top:7em ;
     img{
         border: 3px solid #535353;
+        background-color: #535353;
+        border-radius: 1em;
         padding: 10em;
     }
 }
@@ -34,6 +39,23 @@ body{
 
     }
 
+}
+
+.next-clue{
+    text-align: center;
+    word-spacing: 2em;
+    a{
+        text-decoration: none;
+        border: 2px solid black;
+        color:black;
+        padding: .2em;
+        border-radius: .6em;
+        &:hover{
+            background-color: black;
+            color: whitesmoke;
+        }
+    }
+    
 }
 
 

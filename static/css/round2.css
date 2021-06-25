@@ -114,4 +114,22 @@ body {
   background-color: #535353;
   color: white;
 }
+
+.next-clue {
+  text-align: center;
+  word-spacing: 2em;
+}
+
+.next-clue a {
+  text-decoration: none;
+  border: 2px solid black;
+  color: black;
+  padding: .2em;
+  border-radius: .6em;
+}
+
+.next-clue a:hover {
+  background-color: black;
+  color: whitesmoke;
+}
 /*# sourceMappingURL=round2.css.map */
