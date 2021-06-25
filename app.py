@@ -22,6 +22,10 @@ def rules():
 @app.route('/start.html')
 def start():
     return render_template("start-page.html")
+
+@app.route('/unlock.html')
+def unlock():
+    return render_template("unlock.html")
     
 
 @app.route('/key1.html')

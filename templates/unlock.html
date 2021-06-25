@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock!</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/unlcok.css')}}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="logo-div">
+            <a class="logo" href="#">
+                <img src="{{url_for('static',filename='Images/Lock_key.png')}}" alt="Lock and Key">
+            </a>
+            </div>
+
+            <img id="mobile-cta" class="mobile-menu" src="{{url_for('static',filename='Images/menu.svg')}}" alt="Open Navigation">
+
+            <nav>
+                <img id="mobile-exit" class="mobile-menu-exit" src="{{url_for('static',filename='Images/exit.svg')}}" alt="Close Navigation">
+                
+                <ul class="primary-nav">
+                    <li class="current"><a href="unlock.html">Home</a></li> 
+                    <li><a href="#">Rules & Guidelines</a></li>
+                    <li><a href="#">Key 1</a></li>
+                    <li><a href="#">Key 2</a></li>
+                    <li><a href="#">Key 3</a></li>
+                </ul>
+
+                <ul class="secondary-nav">
+                    <li><a href="#">Contact</a></li>
+                    <li class="go-premium-cta"><a href="#">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <script>
+
+        const mobileBtn = document.getElementById('mobile-cta')
+              nav = document.querySelector('nav')
+              mobileBtnExit = document.getElementById('mobile-exit');
+
+        mobileBtn.addEventListener('click', () => {
+            nav.classList.add('menu-btn');
+        })
+
+        mobileBtnExit.addEventListener('click', () => {
+            nav.classList.remove('menu-btn');
+        })
+
+
+
+    </script>
+
+<section class="hero">
+    <div class = "container">
+        <a href="#">
+        <img src="{{url_for('static',filename='Images/Lock_key.png')}}" alt = "Lock and Key">
+    </a> 
+    </div>
+</section>
+
+<section class="next-clue">
+    <a href="round2.html">Find the keys!</a>
+</section>
+
+<section class="gold-key">
+    <img src="{{url_for('static',filename='Images/golden-key.png')}}">
+</section>
+
+<section class="key-answers">
+    <form action="">
+        <ul>
+            <input type="text" name="key1" id="key1">
+            <input type="text" name="key2" id="key2">
+            <input type="text" name="key3" id="key3">
+            <input type="text" name="key4" id="key4">
+            <input type="text" name="key5" id="key5">
+            <input type="text" name="key6" id="key6">
+            <input type="text" name="key6" id="key7">
+            <input type="text" name="key6" id="key8">
+            <input type="text" name="key6" id="key9">
+        </ul>
+    </form>
+</section>
+
+<section class="unlock-btn">
+    <input type="submit" name="unlock-btn" value="Unlock" id="unlock-btn">
+</section>
+
+<div class="timer">
+    <h1 id="headline"></h1>
+    <div id="countdown">
+      <ul>
+        <li><span id="days"></span>days</li>
+        <li><span id="hours"></span>Hours</li>
+        <li><span id="minutes"></span>Minutes</li>
+        <li><span id="seconds"></span>Seconds</li>
+      </ul>
+    </div>
+</div>
+
+
+
+<script>
+    (function () {
+     const second = 1000,
+    minute = second * 60,
+    hour = minute * 60,
+    day = hour * 24;
+
+    let deadline = "July 8, 2021 18:33:00",
+    countDown = new Date(deadline).getTime(),
+    x = setInterval(function() {    
+
+    let now = new Date().getTime(),
+        distance = countDown - now;
+
+    document.getElementById("days").innerText = Math.floor(distance / (day)),
+      document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+      document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+      document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+    //Do DO OD OD ODDODODODODO
+    if (distance < 0) {
+      let headline = document.getElementById("headline"),
+          countdown = document.getElementById("countdown"),
+          content = document.getElementById("content");
+
+        headline.innerText = "GOOOOO";
+        countdown.style.display = "none";
+        content.style.display = "block";
+
+        clearInterval(x);
+    }
+    //seconds
+  }, 0)
+}());
+  </script>
+    
+</body>
+</html>
