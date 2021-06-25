@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+body{
+    background-color: black;
+    margin: 0;
+    font-family: Cinzel;
+}
+
+h1{
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 3em;
+    color: red;
+}
+
+.okay-btn{
+    text-align: center;
+    
+    font-family: Cinzel;
+    
+        a{
+            font-size: 1.5em;
+            color: gray;
+            text-decoration: none;
+            border-radius: .8em;
+            border: 3px solid rgb(255, 0, 0);
+            padding: .2em;
+            &:hover{
+                background-color: #ff0000;
+                color: aliceblue;
+                cursor: pointer;
+        }
+    
+    }
+    
+   
+}

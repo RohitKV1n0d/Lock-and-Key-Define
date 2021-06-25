@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock and key</title>
+    <link rel="stylesheet" href="css/lading-page.css">
+</head>
+<body>
+
+    
+    <section class="hero">
+        <div class = "container">
+            <a href="#">
+            <img src="Images/Lock_key.png" alt = "Lock and Key">
+        </a> 
+        </div>
+    </section>
+
+    <div class="timer">
+        <h1 id="headline"></h1>
+        <div id="countdown">
+          <ul>
+            <li><span id="days"></span>days</li>
+            <li><span id="hours"></span>Hours</li>
+            <li><span id="minutes"></span>Minutes</li>
+            <li><span id="seconds"></span>Seconds</li>
+          </ul>
+        </div>
+    </div>
+    
+
+
+    <script>
+        (function () {
+         const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+        let deadline = "July 8, 2021 18:33:00",
+        countDown = new Date(deadline).getTime(),
+        x = setInterval(function() {    
+
+        let now = new Date().getTime(),
+            distance = countDown - now;
+
+        document.getElementById("days").innerText = Math.floor(distance / (day)),
+          document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+          document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+          document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+        //Do DO OD OD ODDODODODODO
+        if (distance < 0) {
+          let headline = document.getElementById("headline"),
+              countdown = document.getElementById("countdown"),
+              content = document.getElementById("content");
+
+            headline.innerText = "GOOOOO";
+            countdown.style.display = "none";
+            content.style.display = "block";
+
+            clearInterval(x);
+        }
+        //seconds
+      }, 0)
+  }());
+      </script>
+
+
+    <section class="user-data" id="user-data">
+        <a class="login" href="login.html">LogIn</a>
+        <a class="sign-up" href="register.html">Sign Up</a>
+    </section>
+
+    <section class="footer">
+        <div class="rule">
+            <a href="rules.html">Rules & Guidlines</a>
+        </div>
+        <div class="contacts">
+            <a href="#">Contacts</a>
+        </div>    
+    </section>
+    
+
+
+    
+</body>
+</html>
