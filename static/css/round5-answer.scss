@@ -1,0 +1,105 @@
+
+body{
+    background-color: rgb(168, 167, 167);
+}
+
+.key-answers{
+
+   text-align: center;
+   margin-top: 20em;
+   word-spacing: 1em;
+    input{
+        width: 30px;
+        text-align: center;
+        font-size: xx-large;
+        border-radius: .5em;
+        padding: .2em;
+
+    }
+    margin-bottom: 5em;
+  
+}
+
+#key1{
+    background-color: yellow;
+}
+#key2{
+    background-color:grey;
+}
+#key3{
+    background-color:blue;
+}
+#key4{
+    background-color:aqua;
+}
+#key5{
+    background-color:palegreen
+}
+#key6{
+    background-color:red;
+}
+#key7{
+    background-color:darkgreen;
+}
+#key8{
+    background-color:blueviolet;
+}
+#key9{
+    background-color:brown;
+}
+#key10{
+    background-color:rosybrown;
+}
+#key11{
+    background-color:orange;
+}
+#key12{
+    background-color:hotpink;
+}
+
+button{
+    font-size: xx-large;
+    color: black;
+    margin-top: -3em;
+    
+    
+    font-family: Cinzel;
+    border-radius: .5em;
+    
+    border: 3px solid #535353;
+
+    &:hover{
+        background-color: #535353;
+        color: white;
+    }
+}
+.enter{
+    text-align: center;
+    padding-bottom: 3em;
+}
+
+
+#Myid{
+    display: none;
+    
+}
+
+.next-clue{
+    
+    
+    text-align: center;
+    word-spacing: 2em;
+    a{
+        
+        text-decoration: none;
+        border: 2px solid black;
+        color:black;
+        padding: .2em;
+        border-radius: .6em;
+        &:hover{
+            background-color: black;
+            color: whitesmoke;
+        }
+    }
+    
+}

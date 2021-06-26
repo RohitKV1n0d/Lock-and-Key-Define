@@ -16,35 +16,60 @@ body{
     }
 }
 
+
+/////////////////////////////////////////////////////////////////
 .ans{
     text-align: center;
-    padding: 3em;
+    padding: 1em;
 
     input[name="answer"]{
         padding-right: 4em;
         padding-top: .5em;
+        margin-right: 2em;
     }
     
-    input[type="submit"]{
-        color: black;
-        margin-top: 1em;
-        border: 3px solid #535353;
+}
 
-        &:hover{
-            background-color: #535353;
-            color: white;
-        }
+button{
+    color: black;
+    margin-top: -3em;
+    
+    
+    font-family: Cinzel;
+    border-radius: .5em;
+    
+    border: 3px solid #535353;
 
-        
-
+    &:hover{
+        background-color: #535353;
+        color: white;
     }
+}
+.enter{
+    text-align: center;
+    padding-bottom: 3em;
+}
 
+
+//////////////////////////////////////////////////////
+
+
+
+
+
+
+#Myid{
+    display: none;
+    
 }
 
 .next-clue{
+    
+    
     text-align: center;
     word-spacing: 2em;
     a{
+        
         text-decoration: none;
         border: 2px solid black;
         color:black;

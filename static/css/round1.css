@@ -18,23 +18,35 @@ body {
 
 .ans {
   text-align: center;
-  padding: 3em;
+  padding: 1em;
 }
 
 .ans input[name="answer"] {
   padding-right: 4em;
   padding-top: .5em;
+  margin-right: 2em;
 }
 
-.ans input[type="submit"] {
+button {
   color: black;
-  margin-top: 1em;
+  margin-top: -3em;
+  font-family: Cinzel;
+  border-radius: .5em;
   border: 3px solid #535353;
 }
 
-.ans input[type="submit"]:hover {
+button:hover {
   background-color: #535353;
   color: white;
+}
+
+.enter {
+  text-align: center;
+  padding-bottom: 3em;
+}
+
+#Myid {
+  display: none;
 }
 
 .next-clue {
