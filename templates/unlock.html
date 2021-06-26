@@ -1,290 +1,143 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&display=swap");
-body {
-  background-color: black;
-  font-family: Cinzel;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock!</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/unlcok.css')}}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="logo-div">
+            <a class="logo" href="#">
+                <img src="{{url_for('static',filename='Images/Lock_key.png')}}" alt="Lock and Key">
+            </a>
+            </div>
 
-.navbar {
-  background: black;
-  padding: 1em;
-}
+            <img id="mobile-cta" class="mobile-menu" src="{{url_for('static',filename='Images/menu.svg')}}" alt="Open Navigation">
 
-.navbar .logo-div {
-  width: 100%;
-}
+            <nav>
+                <img id="mobile-exit" class="mobile-menu-exit" src="{{url_for('static',filename='Images/exit.svg')}}" alt="Close Navigation">
+                
+                <ul class="primary-nav">
+                    <li class="current"><a href="unlock.html">Home</a></li> 
+                    <li><a href="key1.html">Key 1</a></li>
+                    <li><a href="key2.html">Key 2</a></li>
+                    <li><a href="key3.html">Key 3</a></li>
+                </ul>
 
-.navbar .logo-div img {
-  width: 70%;
-}
+                <ul class="secondary-nav">
+                    <li><a href="#">Contact</a></li>
+                    <li class="go-premium-cta"><a href="#">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <script>
 
-.navbar nav {
-  display: none;
-}
+        const mobileBtn = document.getElementById('mobile-cta')
+              nav = document.querySelector('nav')
+              mobileBtnExit = document.getElementById('mobile-exit');
 
-.navbar .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  place-content: space-between;
-}
+        mobileBtn.addEventListener('click', () => {
+            nav.classList.add('menu-btn');
+        })
 
-.navbar .mobile-menu {
-  cursor: pointer;
-}
-
-nav.menu-btn {
-  display: block;
-}
-
-nav {
-  position: fixed;
-  z-index: 999;
-  width: 66%;
-  right: 0;
-  top: 0;
-  background: #20272E;
-  height: 100vh;
-  padding: 1em;
-}
-
-nav ul.primary-nav {
-  margin-top: 5em;
-}
-
-nav li {
-  list-style-type: none;
-}
-
-nav li a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  padding: .9em;
-  font-size: 1em;
-  text-align: right;
-}
-
-nav li a:hover {
-  font-weight: bolder;
-}
-
-.mobile-menu-exit {
-  float: right;
-  margin: .5em;
-  cursor: pointer;
-}
-
-@media only screen and (min-width: 768px) {
-  .mobile-menu, .mobile-menu-exit {
-    display: none;
-  }
-  .logo-div {
-    margin-right: -1em;
-  }
-  .logo-div {
-    width: 150%;
-  }
-  .logo-div img {
-    width: 50%;
-  }
-  .navbar .container {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 180px auto;
-        grid-template-columns: 180px auto;
-    -webkit-box-pack: unset;
-        -ms-flex-pack: unset;
-            justify-content: unset;
-  }
-  .navbar {
-    border-bottom: 3px solid red;
-  }
-  .navbar nav {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    background: none;
-    position: unset;
-    height: auto;
-    width: 100%;
-    padding: 0;
-  }
-  .navbar nav ul {
-    list-style-type: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .navbar nav a {
-    color: whitesmoke;
-    text-decoration: none;
-    font-size: 1.2em;
-    padding: .1em 1em;
-  }
-  .navbar nav ul.primary-nav {
-    margin: 0;
-    margin-right: 2em;
-  }
-  .navbar nav .secondary-nav {
-    margin-top: -0.2em;
-  }
-  .navbar nav li.current a {
-    font-weight: bold;
-  }
-  .navbar nav li.go-premium-cta a {
-    text-decoration: none;
-    color: whitesmoke;
-    border: 3px solid whitesmoke;
-    font-weight: bold;
-    border-radius: 5em;
-    margin-top: -0.2em;
-  }
-  .navbar nav li.go-premium-cta a:hover {
-    background: whitesmoke;
-    color: black;
-  }
-}
-
-.hero {
-  padding: 1em;
-}
-
-.hero .container {
-  text-align: center;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.next-clue {
-  text-align: center;
-  margin-bottom: 0em;
-  z-index: 999;
-}
-
-.next-clue a {
-  border: 3px solid red;
-  position: relative;
-  z-index: 999;
-  font-size: larger;
-  border-radius: 1em;
-  padding: .3em;
-  color: red;
-  text-decoration: none;
-}
-
-.next-clue a:hover {
-  color: whitesmoke;
-  background-color: red;
-}
-
-.gold-key {
-  text-align: center;
-  position: relative;
-  z-index: -999;
-  margin-top: -9em;
-}
-
-.gold-key img {
-  width: 70%;
-}
-@media only all and (min-width: 768px)
-{.div section img{
-  height: 100px;
-  width: 2px;
-}}
-.key-answers {
-  text-align: center;
-  word-spacing: 1em;
-  margin-top: -15em;
-  margin-bottom: 2em;
-}
-
-.key-answers input {
-  width: 30px;
-  border-radius: .5em;
-  border: brown;
-}
-
-.unlock-btn {
-  text-align: center;
-}
-
-.unlock-btn input {
-  font-family: Cinzel;
-  font-size: larger;
-  border-radius: .5em;
-}
-@media all and (max-width: 768px) {
-  
-  .next-clue{
-    padding-bottom: 150px;
-  }
-  .key-answers
-  { padding-left: 10px;
-    padding-top: 150px;
-  }
-  .key-answers input{
-    padding-right: 1px;
-    margin-right: 1px;
-     width: 9px;
-  }
-  .key-answers ul{
-    margin-right: 200px;
-    word-spacing: 0.05em;
-    width: 250px;
-  }
-  .gold-key img{
-    text-align: center;
-    /* padding-bottom: 500px; */
-    width: 320px;
-  }
-  .unlock-btn{
-    padding-top: 40px;
-  }
-  
-}
-
-.timer {
-  font-family: Orbitron;
-  color: #8d4123;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.timer h1 {
-  font-weight: normal;
-  letter-spacing: .125rem;
-  text-transform: uppercase;
-}
-
-.timer li {
-  display: inline-block;
-  font-size: 1.5em;
-  list-style-type: none;
-  padding: 1em;
-  text-transform: uppercase;
-}
-
-.timer li span {
-  display: block;
-  font-size: 4.5rem;
-}
+        mobileBtnExit.addEventListener('click', () => {
+            nav.classList.remove('menu-btn');
+        })
 
 
-@media all and (max-width: 768px) {
-  .timer h1 {
-    font-size: 1.5rem;
-  }
-  .timer li {
-    font-size: 1.125rem;
-    padding: .75rem;
-  }
-  .timer li span {
-    font-size: 3.375rem;
-  }
-  
-}
-/*# sourceMappingURL=unlcok.css.map */
+
+    </script>
+
+<section class="hero">
+    <div class = "container">
+        <a href="#">
+        <img src="{{url_for('static',filename='Images/Lock_key.png')}}" alt = "Lock and Key">
+    </a> 
+    </div>
+</section>
+
+<section class="next-clue">
+    <a href="round2.html">Find the keys!</a>
+</section>
+
+<section class="gold-key">
+    <img src="{{url_for('static',filename='Images/golden-key.png')}}">
+</section>
+
+<section class="key-answers">
+    <form action="">
+        <ul>
+            <input type="text" name="key1" id="key1">
+            <input type="text" name="key2" id="key2">
+            <input type="text" name="key3" id="key3">
+            <input type="text" name="key4" id="key4">
+            <input type="text" name="key5" id="key5">
+            <input type="text" name="key6" id="key6">
+            <input type="text" name="key6" id="key7">
+            <input type="text" name="key6" id="key8">
+            <input type="text" name="key6" id="key9">
+        </ul>
+    </form>
+</section>
+
+<section class="unlock-btn">
+    <input type="submit" name="unlock-btn" value="Unlock" id="unlock-btn">
+</section>
+
+<div class="timer">
+    <h1 id="headline"></h1>
+    <div id="countdown">
+      <ul>
+        <li><span id="days"></span>days</li>
+        <li><span id="hours"></span>Hours</li>
+        <li><span id="minutes"></span>Minutes</li>
+        <li><span id="seconds"></span>Seconds</li>
+      </ul>
+    </div>
+</div>
+
+
+
+<script>
+    (function () {
+     const second = 1000,
+    minute = second * 60,
+    hour = minute * 60,
+    day = hour * 24;
+
+    let deadline = "July 8, 2021 18:33:00",
+    countDown = new Date(deadline).getTime(),
+    x = setInterval(function() {    
+
+    let now = new Date().getTime(),
+        distance = countDown - now;
+
+    document.getElementById("days").innerText = Math.floor(distance / (day)),
+      document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+      document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+      document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+    //Do DO OD OD ODDODODODODO
+    if (distance < 0) {
+      let headline = document.getElementById("headline"),
+          countdown = document.getElementById("countdown"),
+          content = document.getElementById("content");
+
+        headline.innerText = "GOOOOO";
+        countdown.style.display = "none";
+        content.style.display = "block";
+
+        clearInterval(x);
+    }
+    //seconds
+  }, 0)
+}());
+  </script>
+    
+</body>
+</html>
