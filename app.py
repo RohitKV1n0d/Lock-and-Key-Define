@@ -43,6 +43,18 @@ def round3():
     return render_template("round3.html")
 
 
+@app.route('/crossword')
+def crossword():
+    return render_template("round5.html")
+
+
+@app.route('/key5.html')
+def round5():
+    return render_template("round5-answers.html")
+
+
+
+
 
 
 
