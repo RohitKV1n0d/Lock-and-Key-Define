@@ -85,7 +85,7 @@ nav li a:hover {
     width: 150%;
   }
   .logo-div img {
-    width: 100%;
+    width: 50%;
   }
   .navbar .container {
     display: -ms-grid;
@@ -190,7 +190,11 @@ nav li a:hover {
 .gold-key img {
   width: 70%;
 }
-
+@media only all and (min-width: 768px)
+{.div section img{
+  height: 100px;
+  width: 2px;
+}}
 .key-answers {
   text-align: center;
   word-spacing: 1em;
@@ -212,6 +216,35 @@ nav li a:hover {
   font-family: Cinzel;
   font-size: larger;
   border-radius: .5em;
+}
+@media all and (max-width: 768px) {
+  
+  .next-clue{
+    padding-bottom: 150px;
+  }
+  .key-answers
+  { padding-left: 10px;
+    padding-top: 150px;
+  }
+  .key-answers input{
+    padding-right: 1px;
+    margin-right: 1px;
+     width: 9px;
+  }
+  .key-answers ul{
+    margin-right: 200px;
+    word-spacing: 0.05em;
+    width: 250px;
+  }
+  .gold-key img{
+    text-align: center;
+    /* padding-bottom: 500px; */
+    width: 320px;
+  }
+  .unlock-btn{
+    padding-top: 40px;
+  }
+  
 }
 
 .timer {
@@ -240,6 +273,7 @@ nav li a:hover {
   font-size: 4.5rem;
 }
 
+
 @media all and (max-width: 768px) {
   .timer h1 {
     font-size: 1.5rem;
@@ -251,5 +285,6 @@ nav li a:hover {
   .timer li span {
     font-size: 3.375rem;
   }
+  
 }
 /*# sourceMappingURL=unlcok.css.map */
