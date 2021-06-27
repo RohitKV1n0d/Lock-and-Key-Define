@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,18 +22,28 @@
     <section class="login">
         <div class="container">
             <h2>Log in</h2>
-            <form action="">
+            <form  method="POST" action="login.html">
+
+                {{ form.hidden_tag() }}
+             
                 <div class="email">
-                <label for="email">Email</label>
-                <input type="email" name="eamil" id="eamil">
-                </div>
-        
+                {{ form.username }}
+                {% for error in form.username.error: %}
+                    <li style="color:red;">{{error}}</li>
+                {% endfor %}
+                </div>       
                 <div class="pass">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
-                </div>
+                {{ form.password }}
+                {% for error in form.password.error: %}
+                    <li style="color:red;">{{error}}</li>
+                {% endfor %}
                 
-                <input type="submit" class="login-clk" value="log in" id="login">
+                </div>
+                {{ form.remember}}
+                
+
+                <button type="submit" class="login-clk"  id="login">Log in</button>
+
             
 
             </form>
@@ -47,13 +59,13 @@
         </div>    
     </section>
 
-    <script>
+    <!-- <script>
         const tempLogInBtn = document.getElementById('login');
 
         tempLogInBtn.addEventListener('click', ()=> {
             window.open("start.html")
         })
-    </script>
+    </script> -->
 
 
     

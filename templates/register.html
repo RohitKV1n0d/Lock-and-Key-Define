@@ -20,25 +20,28 @@
     <section class="register">
         <div class="container">
             <h2>Register</h2>
-            <form action="">
+            <form action="register.html" method="POST">
+                {{ form.hidden_tag() }}
+              
                 <div class="name">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name">
+                    <p>Username</p>
+                    {{ form.username }}
                 </div>
 
                 <div class="email">
-                <label for="email">Email</label>
-                <input type="email" name="eamil" id="eamil">
+                    <p>Email</p>
+                    {{ form.email }}
+                    {% for error in form.username.error: %}
+                        <li style="color:red;">{{error}}</li>
+                    {% endfor %}    
                 </div>
         
                 <div class="pass">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                    <p>Password</p>
+                     {{ form.password }}
                 </div>
 
-                
-
-                <input type="submit" class="register-clk" value="Register" id="reggister-clk">
+                <button type="submit" class="register-clk" value="Register" id="register-clk">Submit</button>
 
             </form>
 
