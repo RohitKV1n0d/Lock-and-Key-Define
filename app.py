@@ -22,7 +22,7 @@ app.config['SECRET_KEY'] = 'qwertyuio'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
 # app.config['SQLALCHEMY_BINDS'] = {'Progress' : 'sqlite:///../my_flask/progress_database.db' }
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zpcdgfxgkfizaa:dc91ac3d675ca76fb01b3e66b264b04cfa4628eab97ff13379bf971e5d886120@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5lj8l6oardsvc'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://zpcdgfxgkfizaa:dc91ac3d675ca76fb01b3e66b264b04cfa4628eab97ff13379bf971e5d886120@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5lj8l6oardsvc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 # C:\Users\criza\my_flask
