@@ -19,8 +19,11 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 app = Flask(__name__,template_folder="templates")
 app.config['SECRET_KEY'] = 'qwertyuio'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
-app.config['SQLALCHEMY_BINDS'] = {'Progress' : 'sqlite:///../my_flask/progress_database.db' }
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
+# app.config['SQLALCHEMY_BINDS'] = {'Progress' : 'sqlite:///../my_flask/progress_database.db' }
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zpcdgfxgkfizaa:dc91ac3d675ca76fb01b3e66b264b04cfa4628eab97ff13379bf971e5d886120@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5lj8l6oardsvc'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 # C:\Users\criza\my_flask
 # Bootstrap(app)
@@ -42,11 +45,11 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
     
-class UserProgress(db.Model):
-    __bind_key__ = 'Progress'
-    id = db.Column(db.Integer, primary_key = True)
-    key1 = db.Column(db.Boolean)
-    key1_time = db.Column(db.Time)
+# class UserProgress(db.Model):
+#     __bind_key__ = 'Progress'
+#     id = db.Column(db.Integer, primary_key = True)
+#     key1 = db.Column(db.Boolean)
+#     key1_time = db.Column(db.Time)
 
 
 class LoginForm(FlaskForm):
