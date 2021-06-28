@@ -79,7 +79,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(15), unique=True) 
     email = db.Column(db.String(50), unique=True ) 
-    password = db.Column(db.String(80)) 
+    password = db.Column(db.String(81)) 
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -94,7 +94,7 @@ def load_user(user_id):
 
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired('Username is required'),Length(min=4, max=15)])
-    password = PasswordField('password', validators= [InputRequired(), Length(min=8, max=80, message=('8 letters!'))])
+    password = PasswordField('password', validators= [InputRequired(), Length(min=8, max=81, message=('8 letters!'))])
     remember = BooleanField('remember me')
 
 
