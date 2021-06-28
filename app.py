@@ -1,5 +1,8 @@
 
+
+import os
 import re
+
 from flask import Flask, render_template, redirect, url_for
 
 
@@ -12,6 +15,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 
@@ -19,21 +23,45 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 app = Flask(__name__,template_folder="templates")
 app.config['SECRET_KEY'] = 'qwertyuio'
+
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
 # app.config['SQLALCHEMY_BINDS'] = {'Progress' : 'sqlite:///../my_flask/progress_database.db' }
 
-import os
-import re
+# uri = os.getenv("postgres://zpcdgfxgkfizaa:dc91ac3d675ca76fb01b3e66b264b04cfa4628eab97ff13379bf971e5d886120@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5lj8l6oardsvc")  # or other relevant config var
+# if uri.startswith("postgres://"):
+#     uri = uri.replace("postgres://", "postgresql://", 1)
 
-uri = os.getenv("postgres://zpcdgfxgkfizaa:dc91ac3d675ca76fb01b3e66b264b04cfa4628eab97ff13379bf971e5d886120@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5lj8l6oardsvc")  # or other relevant config var
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
+# app.config['SQLALCHEMY_DATABASE_URI'] = uri
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+# ENV = 'dev'
 
-# C:\Users\criza\my_flask
-# Bootstrap(app)
+# if ENV == 'dev' :
+#     app.debug = True
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:rkv#3117@localhost/user_data'
+
+# else:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = ''
+#     app.debug = False
+
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+
+
+
+
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+DATABASE_URL = ''
+SECRET_KEY = ''
+
+
+
+
+
+
+
 db = SQLAlchemy(app)
 
 login_manager = LoginManager()
@@ -169,6 +197,12 @@ def round5():
 def logout():
     logout_user()
     return redirect(url_for('welcome'))
+
+
+
+
+if __name__ == '__mainn__' :
+    app.run()
 
 
 
