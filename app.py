@@ -22,7 +22,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 
 app = Flask(__name__,template_folder="templates")
-app.config['SECRET_KEY'] = 'qwertyuio'
+
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
 # app.config['SQLALCHEMY_BINDS'] = {'Progress' : 'sqlite:///../my_flask/progress_database.db' }
@@ -53,8 +53,10 @@ SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-DATABASE_URL = ''
-SECRET_KEY = ''
+
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+app.config['SECRET_KEY'] = SECRET_KEY
+
 
 
 
