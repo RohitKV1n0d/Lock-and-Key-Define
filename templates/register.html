@@ -26,19 +26,25 @@
                 <div class="name">
                     <p>Username</p>
                     {{ form.username }}
+                    {% for error in form.username.error: %}
+                        <li class="name-error" style="color:red;">{{ error }}</li>
+                    {% endfor %}  
                 </div>
 
                 <div class="email">
                     <p>Email</p>
                     {{ form.email }}
-                    {% for error in form.username.error: %}
-                        <li style="color:red;">{{error}}</li>
+                    {% for error in form.email.error: %}
+                        <li style="color:red;">{{ error }}</li>
                     {% endfor %}    
                 </div>
         
                 <div class="pass">
                     <p>Password</p>
                      {{ form.password }}
+                     {% for error in form.password.error: %}
+                        <li style="color:red;">{{ error }}</li>
+                    {% endfor %}  
                 </div>
 
                 <button type="submit" class="register-clk" value="Register" id="register-clk">Submit</button>

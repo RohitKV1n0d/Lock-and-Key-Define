@@ -4,6 +4,15 @@ body {
   background-color: black;
   margin: 0;
   font-family: Cinzel;
+  text-align: center;
+}
+
+.typetext {
+  font-size: 30px;
+  margin: 10px 50px;
+  letter-spacing: 6px;
+  color: red;
+  font-weight: bold;
 }
 
 .hero {

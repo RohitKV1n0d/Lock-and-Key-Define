@@ -28,17 +28,22 @@
              
                 <div class="username">
                     <label>Username</label>
-                {{ form.username }}
-                {% for error in form.username.error: %}
-                    <li style="color:red;">{{error}}</li>
-                {% endfor %}
-                </div>       
+                        {{ form.username }}
+                    <ul>
+                        {% for error in form.username.error: %}
+                            <li style="color:red;">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>  
+
                 <div class="pass">
                     <label>Password</label>
-                {{ form.password }}
-                {% for error in form.password.error: %}
-                    <li style="color:red;">{{error}}</li>
-                {% endfor %}
+                        {{ form.password }}
+                    <ul>
+                        {% for error in form.password.error: %}
+                            <li style="color:red;">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
                 
                 </div>
 

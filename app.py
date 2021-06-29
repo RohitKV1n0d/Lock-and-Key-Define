@@ -6,7 +6,7 @@ import string
 import datetime
 #from . import keys
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, session, g
 
 
 from flask_wtf import FlaskForm
@@ -19,10 +19,14 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+ 
+from flask_admin import Admin, AdminIndexView
+from flask_admin.contrib.sqla import ModelView
 
 
 
 app = Flask(__name__,template_folder="templates")
+app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
@@ -72,6 +76,10 @@ timeStamp =  str(datetime.datetime.now())
 
 db = SQLAlchemy(app)
 
+
+
+
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -100,7 +108,7 @@ def load_user(user_id):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired('Username is required'),Length(min=4, max=15)])
+    username = StringField('username', validators=[InputRequired('Username is required'),Length(min=4, max=15,message='must be min 4 letters')])
     password = PasswordField('password', validators= [InputRequired(), Length(min=8, max=81, message=('8 letters!'))])
     remember = BooleanField('remember me')
 
@@ -112,6 +120,31 @@ class ResgisterForm(FlaskForm):
 
 
 
+class MyModelView(ModelView):
+    def is_accessible(self):
+        # if g.user.role == 'admin':
+        #     return  True
+        # else:
+        #     return Fal
+        return current_user.is_authenticated
+    
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(redirect(url_for('login')))
+
+
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        if g.user.role == 'admin':
+            return  True
+        else:
+            return False
+    
+    
+
+
+
+admin = Admin(app, index_view=MyAdminIndexView())
+admin.add_view(ModelView(User, db.session))
 
 #Admin
 AdminUsername = 'Admin@user'
@@ -126,11 +159,22 @@ admin_status(0)
     
 
 
-# check_admin = User.query.filter_by(username='Admin@user').first()
-# if check_admin== None :
-#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
-#     db.session.add(admin_user)
-#     db.session.commit()
+check_admin = User.query.filter_by(username='Admin@user').first()
+if check_admin== None :
+    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
+    db.session.add(admin_user)
+    db.session.commit()
+
+
+
+
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user_id' in session:
+        user = User.query.filter_by(id=session['user_id']).first()  
+        g.user = user 
+
 
 
 
@@ -148,18 +192,22 @@ def welcome():
 def login():   
     form = LoginForm()
     if form.validate_on_submit():
+        session.pop('user_id',None)
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             # if check_password_hash(user.password, form.password.data):
-            if form.username.data == AdminUsername: 
-                login_user(user,AdminPassword)
-                admin_status(1)
-                if admin_status:
-                    return 'admin page'
-                else:
-                    return 'somehting Woring'
+            
+            # if form.username.data == AdminUsername:
+            #     session['user_id'] = user.id 
+            #     login_user(user,AdminPassword)
+            #     admin_status(1)
+            #     if admin_status:
+            #         return redirect(redirect(url_for('start')))
+            #     else:
+            #         return 'Something Working'
 
             if user.password == form.password.data:
+                session['user_id'] = user.id
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('start'))
         return '<h1>Invalid username or password</h1>'

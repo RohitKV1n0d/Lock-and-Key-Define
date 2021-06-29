@@ -41,6 +41,10 @@ body {
   border-radius: .35em;
 }
 
+.register .name .name-error {
+  padding: 2em;
+}
+
 .register .email {
   padding-bottom: 2em;
   padding-right: 1em;
