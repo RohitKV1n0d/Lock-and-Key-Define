@@ -52,7 +52,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 #https://lockandkey-define.herokuapp.com/admin/
 
 
-ENV = 'prod'
+ENV = 'devs'
 
 if ENV == 'dev' :
     app.debug = True
