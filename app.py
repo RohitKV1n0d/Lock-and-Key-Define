@@ -84,9 +84,9 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(15), unique=True) 
     email = db.Column(db.String(50), unique=True ) 
-    role = db.Column(db.String(10))
-    password = db.Column(db.String(255))
-    key1_time = db.Column(db.String(50))
+    role = db.Column(db.String(256))
+    password = db.Column(db.String(256))
+    key1_time = db.Column(db.String(256))
      
 
 
