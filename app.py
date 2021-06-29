@@ -48,7 +48,8 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 
 
 
-
+#http://127.0.0.1:5000/admin
+#https://lockandkey-define.herokuapp.com/admin/
 
 
 ENV = 'prod'

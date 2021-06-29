@@ -70,25 +70,21 @@
       </script>
 
 
-      <!-- <div >
-          <h1 class="welcome-text">Welcome {{g.user.username}}</h1>
-      </div>
-       -->
-
+     
        <div id="typedtext" , class="typetext"></div>
 
        <SCript>
            var aText = new Array(
 "Welcome {{g.user.username}}"
 );
-var iSpeed = 100; // time delay of print out
-var iIndex = 0; // start printing array at this posision
-var iArrLength = aText[0].length; // the length of the text array
-var iScrollAt = 20; // start scrolling up at this many lines
+var iSpeed = 100; 
+var iIndex = 0; 
+var iArrLength = aText[0].length; 
+var iScrollAt = 20; 
  
-var iTextPos = 0; // initialise text position
-var sContents = ''; // initialise contents variable
-var iRow; // initialise current row
+var iTextPos = 0; 
+var sContents = ''; 
+var iRow; 
  
 function typewriter()
 {
@@ -125,12 +121,40 @@ typewriter();
 
     <section class="footer">
         <div class="rule">
-            <a href="rules.html">Rules & Guidlines</a>
+            <li>
+                <a href="rules.html">Rules & Guidlines</a>
+                <a href="#" style="color: red; padding: 1em;">|</a>
+                <a href="#">Contacts</a>
+            </li>
         </div>
         <div class="contacts">
-            <a href="https://lockandkey-define.herokuapp.com/admin/">Contacts</a>
+            <li>
+                <a href="https://lockandkey-define.herokuapp.com/admin/" id="admin">Admin</a>
+                <a href="#" style="color: red; padding: 1em;" id="withAdmin">|</a>
+
+                <a href="{{url_for('logout')}}">Logout</a>
+            </li>
         </div>    
     </section>
+
+
+    <script>
+        var role_var = "{{g.user.role}}";
+        var x = document.getElementById("admin");
+        var with_x = document.getElementById("withAdmin");
+        if ( role_var != "admin" ){
+            {
+            x.style.display = "none";
+            with_x.style.display = "none";
+        }
+
+        }
+        // else{
+        //     x.style.display = "none";
+        //     with_x.style.display = "none";
+        // }
+
+    </script>
 
     
     

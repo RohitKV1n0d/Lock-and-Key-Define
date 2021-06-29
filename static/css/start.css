@@ -111,8 +111,13 @@ li span {
   display: -ms-grid;
   display: grid;
   position: fixed;
-  bottom: 1em;
-  margin: 1em;
+  bottom: .1em;
+  margin: .1em;
+  font-size: 60%;
+}
+
+.footer .rule {
+  padding-right: 1em;
 }
 
 .footer a {

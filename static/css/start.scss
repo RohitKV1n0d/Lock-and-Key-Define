@@ -130,8 +130,12 @@ body {
     
     display: grid;
     position: fixed;
-    bottom: 1em;
-    margin: 1em;
+    bottom: .1em;
+    margin: .1em;
+    font-size: 60%;
+    .rule{
+      padding-right: 1em;
+    }
     a{
         color:brown;
         text-decoration: none;
