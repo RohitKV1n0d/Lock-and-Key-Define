@@ -86,7 +86,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), unique=True ) 
     role = db.Column(db.String(10))
     password = db.Column(db.String(255))
-    key1_time = db.Column(db.String(20))
+    key1_time = db.Column(db.String(50))
      
 
 
