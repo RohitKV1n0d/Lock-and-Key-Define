@@ -47,7 +47,7 @@ app = Flask(__name__,template_folder="templates")
 
 
 
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev' :
     app.debug = True
