@@ -2,6 +2,9 @@
 
 import os
 import re
+import string
+import datetime
+#from . import keys
 
 from flask import Flask, render_template, redirect, url_for
 
@@ -15,9 +18,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-
 
 
 
@@ -27,14 +28,8 @@ app = Flask(__name__,template_folder="templates")
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
 # app.config['SQLALCHEMY_BINDS'] = {'Progress' : 'sqlite:///../my_flask/progress_database.db' }
 
-# uri = os.getenv("postgres://zpcdgfxgkfizaa:dc91ac3d675ca76fb01b3e66b264b04cfa4628eab97ff13379bf971e5d886120@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5lj8l6oardsvc")  # or other relevant config var
-# if uri.startswith("postgres://"):
-#     uri = uri.replace("postgres://", "postgresql://", 1)
-
 # app.config['SQLALCHEMY_DATABASE_URI'] = uri
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-
-# ENV = 'dev'
 
 # if ENV == 'dev' :
 #     app.debug = True
@@ -49,22 +44,30 @@ app = Flask(__name__,template_folder="templates")
 
 
 
-SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-SECRET_KEY = os.environ.get('SECRET_KEY')
+
+
+
+ENV = 'dev'
+
+if ENV == 'dev' :
+    app.debug = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
+    app.config['SECRET_KEY'] = 'ajbdihswvkhbwfvjblanvljadn322rijfqp31'
+
+else:
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+    app.config['SECRET_KEY'] = SECRET_KEY
+    
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-app.config['SECRET_KEY'] = SECRET_KEY
-
-
-
-
-
-
+timeStamp =  str(datetime.datetime.now())
 
 
 db = SQLAlchemy(app)
@@ -75,21 +78,25 @@ login_manager.login_view = 'login'
 
 
 
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(15), unique=True) 
     email = db.Column(db.String(50), unique=True ) 
-    password = db.Column(db.String(81)) 
+    role = db.Column(db.String(10))
+    password = db.Column(db.String(255))
+    key1_time = db.Column(db.String(20))
+     
+
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
     
-# class UserProgress(db.Model):
-#     __bind_key__ = 'Progress'
-#     id = db.Column(db.Integer, primary_key = True)
-#     key1 = db.Column(db.Boolean)
-#     key1_time = db.Column(db.Time)
+
 
 
 class LoginForm(FlaskForm):
@@ -106,6 +113,25 @@ class ResgisterForm(FlaskForm):
 
 
 
+#Admin
+AdminUsername = 'Admin@user'
+AdminPassword = 'Admin@user123'
+def admin_status(Astatus):
+    status = Astatus
+    if status == 1:
+        return True
+    else:
+        return False 
+admin_status(0)
+    
+    
+# admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
+# db.session.add(admin_user)
+# db.session.commit()
+
+
+
+
 
 
 
@@ -115,12 +141,20 @@ def welcome():
     return render_template("landing-page.html")
 
 @app.route('/login.html', methods=['GET', 'POST'])                                   #Login
-def login():
+def login():   
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-           # if check_password_hash(user.password, form.password.data):
+            # if check_password_hash(user.password, form.password.data):
+            if form.username.data == AdminUsername: 
+                login_user(user,AdminPassword)
+                admin_status(1)
+                if admin_status:
+                    return 'admin page'
+                else:
+                    return 'somehting Woring'
+
             if user.password == form.password.data:
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('start'))
@@ -134,11 +168,14 @@ def login():
 @app.route('/register.html', methods=['GET', 'POST'])                                    #Registration
 def register():
     form = ResgisterForm()
+    
     if form.validate_on_submit():
        # hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(username=form.username.data, email=form.email.data, password=form.password.data)#hashed_password)
+        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, key1_time=timeStamp)#hashed_password)
+        
         db.session.add(new_user)
         db.session.commit()
+        return redirect(url_for('login'))
     return render_template("register.html", form=form)
 
 
@@ -201,6 +238,7 @@ def round5():
 @app.route('/logout')
 @login_required
 def logout():
+    
     logout_user()
     return redirect(url_for('welcome'))
 

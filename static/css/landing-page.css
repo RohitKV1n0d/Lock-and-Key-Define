@@ -48,10 +48,6 @@ li span {
 }
 
 @media all and (max-width: 768px) {
-  div img
-  {
-    height:100px;
-  }
   h1 {
     font-size: 1.5rem;
   }
@@ -63,8 +59,6 @@ li span {
     font-size: 3.375rem;
   }
 }
-
-
 
 .user-data {
   text-align: center;

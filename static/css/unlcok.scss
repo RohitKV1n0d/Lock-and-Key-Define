@@ -5,18 +5,14 @@ body{
     font-family: Cinzel;
 }
 .navbar {
-    background: black;
+    background: rgb(31, 31, 31);
     padding: 1em;
-
+    
     .logo-div {
-        width: 100%;
-        
-        img{
-            width: 70%;
-        }
-
-
+        width: 80%;
+        margin-right: 3em;
     }
+
 
     nav {
         display: none;
@@ -278,4 +274,62 @@ nav {
       font-size: 3.375rem;
     }
 }
+  }
+
+  @media all and (max-width: 640px) {
+  
+    .next-clue{
+      padding-left: 80px;
+      padding-bottom: 120px;
+    }
+    .key-answers
+    { padding-left: 46px;
+      padding-top: 135px;
+    }
+    .key-answers input{
+      padding-right: 1px;
+      margin-right: 1px;
+       width: 14px;
+    }
+    .key-answers ul{
+      margin-right: 200px;
+      word-spacing: 0.05em;
+      width: 250px;
+    }
+    .gold-key img{
+      text-align: center;
+      /* padding-bottom: 500px; */
+      width: 400px;
+    }
+    .unlock-btn{
+      padding-left: 50px;
+      padding-top: 20px;
+    }
+    
+  }
+  
+  .timer {
+    font-family: Orbitron;
+    color: #8d4123;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .timer h1 {
+    font-weight: normal;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+  }
+  
+  .timer li {
+    display: inline-block;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+  }
+  
+  .timer li span {
+    display: block;
+    font-size: 4.5rem;
   }

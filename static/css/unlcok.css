@@ -5,16 +5,13 @@ body {
 }
 
 .navbar {
-  background: black;
+  background: #1f1f1f;
   padding: 1em;
 }
 
 .navbar .logo-div {
-  width: 100%;
-}
-
-.navbar .logo-div img {
-  width: 70%;
+  width: 80%;
+  margin-right: 3em;
 }
 
 .navbar nav {
@@ -85,7 +82,7 @@ nav li a:hover {
     width: 150%;
   }
   .logo-div img {
-    width: 50%;
+    width: 100%;
   }
   .navbar .container {
     display: -ms-grid;
@@ -190,11 +187,7 @@ nav li a:hover {
 .gold-key img {
   width: 70%;
 }
-@media only all and (min-width: 768px)
-{.div section img{
-  height: 100px;
-  width: 2px;
-}}
+
 .key-answers {
   text-align: center;
   word-spacing: 1em;
@@ -216,35 +209,6 @@ nav li a:hover {
   font-family: Cinzel;
   font-size: larger;
   border-radius: .5em;
-}
-@media all and (max-width: 768px) {
-  
-  .next-clue{
-    padding-bottom: 150px;
-  }
-  .key-answers
-  { padding-left: 10px;
-    padding-top: 150px;
-  }
-  .key-answers input{
-    padding-right: 1px;
-    margin-right: 1px;
-     width: 9px;
-  }
-  .key-answers ul{
-    margin-right: 200px;
-    word-spacing: 0.05em;
-    width: 250px;
-  }
-  .gold-key img{
-    text-align: center;
-    /* padding-bottom: 500px; */
-    width: 320px;
-  }
-  .unlock-btn{
-    padding-top: 40px;
-  }
-  
 }
 
 .timer {
@@ -273,7 +237,6 @@ nav li a:hover {
   font-size: 4.5rem;
 }
 
-
 @media all and (max-width: 768px) {
   .timer h1 {
     font-size: 1.5rem;
@@ -285,6 +248,61 @@ nav li a:hover {
   .timer li span {
     font-size: 3.375rem;
   }
-  
+}
+
+@media all and (max-width: 640px) {
+  .next-clue {
+    padding-left: 80px;
+    padding-bottom: 120px;
+  }
+  .key-answers {
+    padding-left: 46px;
+    padding-top: 135px;
+  }
+  .key-answers input {
+    padding-right: 1px;
+    margin-right: 1px;
+    width: 14px;
+  }
+  .key-answers ul {
+    margin-right: 200px;
+    word-spacing: 0.05em;
+    width: 250px;
+  }
+  .gold-key img {
+    text-align: center;
+    /* padding-bottom: 500px; */
+    width: 400px;
+  }
+  .unlock-btn {
+    padding-left: 50px;
+    padding-top: 20px;
+  }
+}
+
+.timer {
+  font-family: Orbitron;
+  color: #8d4123;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.timer h1 {
+  font-weight: normal;
+  letter-spacing: .125rem;
+  text-transform: uppercase;
+}
+
+.timer li {
+  display: inline-block;
+  font-size: 1.5em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+}
+
+.timer li span {
+  display: block;
+  font-size: 4.5rem;
 }
 /*# sourceMappingURL=unlcok.css.map */

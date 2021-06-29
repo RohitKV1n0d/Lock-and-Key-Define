@@ -26,20 +26,27 @@
 
                 {{ form.hidden_tag() }}
              
-                <div class="email">
+                <div class="username">
+                    <label>Username</label>
                 {{ form.username }}
                 {% for error in form.username.error: %}
                     <li style="color:red;">{{error}}</li>
                 {% endfor %}
                 </div>       
                 <div class="pass">
+                    <label>Password</label>
                 {{ form.password }}
                 {% for error in form.password.error: %}
                     <li style="color:red;">{{error}}</li>
                 {% endfor %}
                 
                 </div>
-                {{ form.remember}}
+
+                <div class="remember-me">
+                    {{ form.remember}}
+                    <label>Remember me</label>
+                      
+                </div>  
                 
 
                 <button type="submit" class="login-clk"  id="login">Log in</button>

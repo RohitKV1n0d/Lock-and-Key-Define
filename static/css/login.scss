@@ -33,12 +33,12 @@ body{
 
     
 
-    .email{
+    .username{
         padding-bottom: 2em;
         padding-right: 1em;
         font-size: large;
         input{
-            margin-left: 3em;
+            margin-left: 0em;
             box-sizing: 2em;
             padding: .3em;
             padding-right: 2em;
@@ -47,19 +47,29 @@ body{
     }
 
     .pass{
-        padding-bottom: 3em;
-        label{
-            margin-left: -2em;
-            padding-right: 2em;
-        }
+        padding-bottom: 1em;
+        
         input{
-            margin-left: 2.3em;
+            
             padding: .3em;
             padding-right: 2em;
             border-radius: .35em;
         }
         
     }
+
+    .remember-me {
+        margin-left: 4.7em;
+        padding-bottom: 3em;
+
+    }
+    .remember-me label{
+        font-size: small;
+        
+        
+        
+    }
+    
 
     .login-clk{
         font-size: large;
@@ -74,6 +84,7 @@ body{
             cursor: pointer;
         }
     }
+
 
    
 
@@ -106,3 +117,53 @@ body{
 
 
 
+@media all and (max-width: 640px) {
+    .container img
+     { width: 50%;
+     }
+     .login .username {
+       /* padding-bottom: 3em; */
+       font-size: large;
+       
+       padding-top: 25px;
+       
+     }
+     /* .login .username label {
+       padding-left: 100px;
+     } */
+     .login .username input {
+       /* margin-left: 0px; */
+      
+       width: 130px;
+       -webkit-box-sizing: 2em;
+               box-sizing: 2em;
+       padding: .3em;
+       padding-right: 2em;
+       border-radius: .35em;
+     }
+     .login .pass {
+       padding-bottom: 3em;
+       font-size: large;
+       padding-left: -150px;
+       /* margin-right: 40px; */
+    margin-bottom: 0px;
+     }
+     
+     .login .pass label {
+       margin-left: -10px;
+       
+       padding-left: -10em;
+     }
+     
+     .login .pass input {
+       width: 130px;
+       margin-top: 10px;
+       margin-right: -20px;
+      
+       padding: .3em;
+       padding-left: 2em;
+       border-radius: .35em;
+       border-radius: .35em;
+     }
+     
+   }

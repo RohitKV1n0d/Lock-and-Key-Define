@@ -1,0 +1,10 @@
+key1 = 26
+key2 = 21
+key3 = 12
+key4 = 54
+key5 = 76
+key6 = 43
+key7 = 23
+key8 = 54
+key9 = 23
+key10 = 12
