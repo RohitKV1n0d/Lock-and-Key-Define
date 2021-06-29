@@ -8,48 +8,140 @@
     <link rel="stylesheet" href="/static/css/html.css">
 </head>
 <body>
-  <div class="intro-text" id="intro-text">
-    <h2>INTRO TEXT AWESOMENESS</h2>
-    <h2>Made Possible With</h2>
-    <h2>CSS ANIMATION</h2>
-    <h2>& A TINY BIT OF</h2>
-    <h2>JAVASCRIPT</h2>
-    <h2>TO INITIATE THE</h2>
-    <h2>jQuery LETTERING.js PLUGIN</h2>
-    <h2>REFRESH TO SEE IT AGAIN...</h2>
+  
+<div id="body"> 
+  
+  <div id="chat-circle" class="btn btn-raised">
+          <div id="chat-overlay"></div>
+          <i class="material-icons">speaker_phone</i>
+    </div>
+    
+    <div class="chat-box">
+      <div class="chat-box-header">
+        ChatBot
+        <span class="chat-box-toggle"><i class="material-icons">close</i></span>
+      </div>
+      <div class="chat-box-body">
+        <div class="chat-box-overlay">   
+        </div>
+        <div class="chat-logs">
+         
+        </div><!--chat-log -->
+      </div>
+      <div class="chat-input">      
+        <form>
+          <input type="text" id="chat-input" placeholder="Send a message..."/>
+        <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button>
+        </form>      
+      </div>
+    </div>
+    
+    
+    
+    
   </div>
 
+
   <script>
-    $(document).ready(function() {
-$("#intro-text > h2").css('opacity',1).lettering('words').children("span").lettering().children("span").lettering(); 
+    $(function() {
+  var INDEX = 0; 
+  $("#chat-submit").click(function(e) {
+    e.preventDefault();
+    var msg = $("#chat-input").val(); 
+    if(msg.trim() == ''){
+      return false;
+    }
+    generate_message(msg, 'self');
+    var buttons = [
+        {
+          name: 'Existing User',
+          value: 'existing'
+        },
+        {
+          name: 'New User',
+          value: 'new'
+        }
+      ];
+    setTimeout(function() {      
+      generate_message(msg, 'user');  
+    }, 1000)
+    
+  })
+  
+  function generate_message(msg, type) {
+    INDEX++;
+    var str="";
+    str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
+    str += "          <span class=\"msg-avatar\">";
+    str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
+    str += "          <\/span>";
+    str += "          <div class=\"cm-msg-text\">";
+    str += msg;
+    str += "          <\/div>";
+    str += "        <\/div>";
+    $(".chat-logs").append(str);
+    $("#cm-msg-"+INDEX).hide().fadeIn(300);
+    if(type == 'self'){
+     $("#chat-input").val(''); 
+    }    
+    $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);    
+  }  
+  
+  function generate_button_message(msg, buttons){    
+    /* Buttons should be object array 
+      [
+        {
+          name: 'Existing User',
+          value: 'existing'
+        },
+        {
+          name: 'New User',
+          value: 'new'
+        }
+      ]
+    */
+    INDEX++;
+    var btn_obj = buttons.map(function(button) {
+       return  "              <li class=\"button\"><a href=\"javascript:;\" class=\"btn btn-primary chat-btn\" chat-value=\""+button.value+"\">"+button.name+"<\/a><\/li>";
+    }).join('');
+    var str="";
+    str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg user\">";
+    str += "          <span class=\"msg-avatar\">";
+    str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
+    str += "          <\/span>";
+    str += "          <div class=\"cm-msg-text\">";
+    str += msg;
+    str += "          <\/div>";
+    str += "          <div class=\"cm-msg-button\">";
+    str += "            <ul>";   
+    str += btn_obj;
+    str += "            <\/ul>";
+    str += "          <\/div>";
+    str += "        <\/div>";
+    $(".chat-logs").append(str);
+    $("#cm-msg-"+INDEX).hide().fadeIn(300);   
+    $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);
+    $("#chat-input").attr("disabled", true);
+  }
+  
+  $(document).delegate(".chat-btn", "click", function() {
+    var value = $(this).attr("chat-value");
+    var name = $(this).html();
+    $("#chat-input").attr("disabled", false);
+    generate_message(name, 'self');
+  })
+  
+  $("#chat-circle").click(function() {    
+    $("#chat-circle").toggle('scale');
+    $(".chat-box").toggle('scale');
+  })
+  
+  $(".chat-box-toggle").click(function() {
+    $("#chat-circle").toggle('scale');
+    $(".chat-box").toggle('scale');
+  })
+  
 })
-
-/*Life's Not Complete Without Art. (Expand Your Editor > ASCII Is Not Responsive ;)
-
-
-                    ,.ood888888888888boo.,
-               .od888P^""            ""^Y888bo.
-           .od8P''   ..oood88888888booo.    ``Y8bo.
-        .odP'"  .ood8888888888888888888888boo.  "`Ybo.
-      .d8'   od8'd888888888f`8888't888888888b`8bo   `Yb.
-     d8'  od8^   8888888888[  `'  ]8888888888   ^8bo  `8b
-   .8P  d88'     8888888888P      Y8888888888     `88b  Y8.
-  d8' .d8'       `Y88888888'      `88888888P'       `8b. `8b
- .8P .88P            """"            """"            Y88. Y8.
- 88  888                                              888  88
- 88  888                                              888  88
- 88  888.        ..                        ..        .888  88
- `8b `88b,     d8888b.od8bo.      .od8bo.d8888b     ,d88' d8'
-  Y8. `Y88.    8888888888888b    d8888888888888    .88P' .8P
-   `8b  Y88b.  `88888888888888  88888888888888'  .d88P  d8'
-     Y8.  ^Y88bod8888888888888..8888888888888bod88P^  .8P
-      `Y8.   ^Y888888888888888LS888888888888888P^   .8P'
-        `^Yb.,  `^^Y8888888888888888888888P^^'  ,.dP^'
-           `^Y8b..   ``^^^Y88888888P^^^'    ..d8P^'
-               `^Y888bo.,            ,.od888P^'
-                    "`^^Y8888TMR8888P^^'"  
-|I'm Batman|
-*/
   </script>
     
 </body>

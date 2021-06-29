@@ -246,7 +246,7 @@ def rules():
 def start():
     return render_template("start-page.html")
 
-@app.route('/unlock.html')
+@app.route('/unlock')
 @login_required
 def unlock():
     return render_template("unlock.html")
