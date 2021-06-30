@@ -202,11 +202,11 @@ admin_status(0)
     
 
 
-# check_admin = User.query.filter_by(username='Admin@user').first()
-# if check_admin== None :
-#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
-#     db.session.add(admin_user)
-#     db.session.commit()
+check_admin = User.query.filter_by(username='Admin@user').first()
+if check_admin== None :
+    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
+    db.session.add(admin_user)
+    db.session.commit()
 
 
 
