@@ -18,11 +18,12 @@
         </div>
     </div>
     <section class="ans">
-        <form action="">
-            <div class="answer">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            
                 <label for="answer"></label>
-                <input type="text" name="answer" id="answer">
-            </div>
+                {{ form.answer }}
+            
             <input type="submit" name="enter" id="enter" value="enter">
         </form>
     </section>
@@ -52,15 +53,24 @@
 
     setInterval(clock, inc);
 
-    </script>
+    </script>`
 
 
-<section class="next-clue">
-    <ul class="click">
-        <a href="unlock.html">XX</a>
+<section class="next-clue" >
+    <ul class="click" style="display: none;" id="Myid">
+        <a href="unlock">{{nextKey}}</a>
         <a href="key3.html">NextClue</a>
     </ul>
 </section>
+
+<script>
+     var x = document.getElementById("Myid");
+    
+    if ( "{{g.user.key2}}" == "1" ) {
+        x.style.display = "block";
+         }
+
+</script>
     
 </body>
 </html>

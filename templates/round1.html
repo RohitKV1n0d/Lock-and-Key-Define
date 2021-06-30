@@ -18,22 +18,22 @@
 
 
     <section class="ans">
-        <form action="">
-            <ul>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            
             
                 <label for="answer"></label>
-                <input type="text" name="answer" id="answer">
-            
-            
-            
-                
-        </ul>
+                {{form.answer}}
+       
+
+
+       <button class="enter" type="submit" id="enter">Enter</button>
+
         </form>
     </section>
 
-    <div class="enter">
-    <button onclick="toggleText()" id="enter">Enter</button>
-</div>
+   
+
 
     
 
@@ -42,7 +42,7 @@
     <section class="next-clue" >
         <div id="Myid">
         <ul>
-            <a href="unlock.html">XX</a>
+            <a href="unlock">{{nextKey}}</a>
             <a href="key2.html">NextClue</a>
         </ul>
     </div>
@@ -52,15 +52,16 @@
    
 
 <script>
-function toggleText(){
-  var x = document.getElementById("Myid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+    var x = document.getElementById("Myid");
+    
+    if ( "{{g.user.key1}}" == "1" ) {
+        x.style.display = "block";
+         }
+
+
+ 
    
-}
+
 </script>
 
     

@@ -63,6 +63,7 @@ nav li a {
 
 nav li a:hover {
   font-weight: bolder;
+  color: red;
 }
 
 .mobile-menu-exit {

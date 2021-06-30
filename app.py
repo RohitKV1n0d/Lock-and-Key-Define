@@ -4,12 +4,13 @@ import os
 import re
 import string
 import datetime
-#from . import keys
+
 
 from flask import Flask, render_template, redirect, url_for, session, g
 
 
 from flask_wtf import FlaskForm
+from sqlalchemy.orm import backref
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms import validators
 from wtforms.validators import InputRequired, Email, Length
@@ -22,6 +23,31 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
  
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
+
+
+
+key1 = 26
+key2 = 21
+key3 = 12
+key4 = 54
+key5 = 76
+key6 = 43
+key7 = 23
+key8 = 54
+
+
+
+ans_round1 = "answer"
+ans_round2 = "answer"
+ans_round3 = "answer"
+ans_round4 = "answer"
+ans_round5 = "answer"
+ans_round6 = "answer"
+ans_round7 = "answer"
+ans_round8 = "answer"
+
+
+
 
 
 
@@ -52,7 +78,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 #https://lockandkey-define.herokuapp.com/admin/
 
 
-ENV = 'pro'
+ENV = 'prod'
 
 if ENV == 'dev' :
     app.debug = True
@@ -72,7 +98,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 
-timeStamp =  str(datetime.datetime.now())
+ 
 
 
 db = SQLAlchemy(app)
@@ -95,7 +121,20 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), unique=True ) 
     role = db.Column(db.String(256))
     password = db.Column(db.String(256))
-    key1_time = db.Column(db.String(256))
+    reg_time = db.Column(db.String(256))
+    key1= db.Column(db.String(20))
+    key2= db.Column(db.String(20))
+    key3= db.Column(db.String(20))
+    key4= db.Column(db.String(20))
+    key5= db.Column(db.String(20))
+    key6= db.Column(db.String(20))
+    key7= db.Column(db.String(20))
+    key8= db.Column(db.String(20))
+    unlcok_time = db.Column(db.String(256))
+    
+
+
+
      
 
 
@@ -118,6 +157,9 @@ class ResgisterForm(FlaskForm):
     email = StringField('email', validators = [InputRequired(), Email(), Length(max=50) ])
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators= [InputRequired(), Length(min=8, max=81)])
+
+class GetAnswer(FlaskForm):
+    answer = StringField('answer', validators=[InputRequired()] )
 
 
 
@@ -160,11 +202,11 @@ admin_status(0)
     
 
 
-check_admin = User.query.filter_by(username='Admin@user').first()
-if check_admin== None :
-    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
-    db.session.add(admin_user)
-    db.session.commit()
+# check_admin = User.query.filter_by(username='Admin@user').first()
+# if check_admin== None :
+#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
+#     db.session.add(admin_user)
+#     db.session.commit()
 
 
 
@@ -215,7 +257,6 @@ def login():
         
     return render_template("login.html", form=form)
 
-#######################################################################################################
 
 
 @app.route('/register.html', methods=['GET', 'POST'])                                    #Registration
@@ -224,8 +265,8 @@ def register():
     
     if form.validate_on_submit():
        # hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, key1_time=timeStamp)#hashed_password)
-        
+        time =str(datetime.datetime.now())
+        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, reg_time= time)#hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -233,6 +274,7 @@ def register():
 
 
 
+#######################################################################################################
 
 
 
@@ -252,36 +294,90 @@ def unlock():
     return render_template("unlock.html")
     
 
-@app.route('/key1.html')
+@app.route('/key1.html', methods=['GET', 'POST'])                           #######    round 1
 @login_required
 def round1():
-    return render_template("round1.html")
+    nextKey = key1
+    form = GetAnswer()
+    if form.validate_on_submit():
+        user = User.query.filter_by(id = g.user.id).first()
+        if form.answer.data == ans_round1:
+            user.key1 = '1'                   
+            db.session.add(user)
+            db.session.commit()
+    return render_template("round1.html" , form=form, nextKey=nextKey)
 
 
 
-@app.route('/key2.html')
+@app.route('/key2.html', methods=['GET', 'POST'])                                                     #######    round 2
 @login_required
 def round2():
-    return render_template("round2.html")
+    if g.user.key1 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:
+        nextKey = key2
+        form = GetAnswer()
+        if form.validate_on_submit():
+            user = User.query.filter_by(id = g.user.id).first()
+            if form.answer.data == ans_round2:
+                user.key2 = '1'                   
+                db.session.add(user)
+                db.session.commit()
+        return render_template("round2.html", form=form ,nextKey=nextKey)
 
-@app.route('/key3.html')
+
+
+@app.route('/key3.html')                                                                                  #######    round 3
 @login_required
 def round3():
+    if g.user.key2 != '1':
+        return "Finish the last round you sneaky KID!"
+
     return render_template("round3.html")
 
 
-@app.route('/crossword')
+@app.route('/key4.html')                                                                                 #######    round 4
+@login_required
+def round4():
+    return render_template("round4.html")
+
+
+
+
+
+@app.route('/crossword')                                                                                   #######    round 5
 @login_required
 def crossword():
     return render_template("round5.html")
 
 
-@app.route('/key5.html')
+
+
+
+@app.route('/key5.html')                                                                                     #######    round 5 ANSWER
 @login_required
 def round5():
     return render_template("round5-answer.html")
 
 
+@app.route('/key6.html')                                                                                     #######    round 6
+@login_required
+def round6():
+    return render_template("round6.html")
+
+
+@app.route('/key7.html')                                                                                     #######    round 7
+@login_required
+def round7():
+    return render_template("round7.html")
+
+
+
+
+@app.route('/key8.html')                                                                                     #######    round 8
+@login_required
+def round8():
+    return render_template("round8.html")
 
 
 

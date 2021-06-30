@@ -21,8 +21,8 @@
     </div>
 
 
-    <div class="bonus">
-      <a href="https://meet.google.com/vti-dock-oek">Bonus Round</a>
+    <div class="bonus" >
+      <a  href="https://meet.google.com/vti-dock-oek" id="bon">Bonus Round</a>
     </div>
         
 
@@ -33,7 +33,7 @@
         hour = minute * 60,
         day = hour * 24;
 
-        let deadline = "July 8, 2021 18:33:00",
+        let deadline = "June 30, 2021 23:06:00",
         countDown = new Date(deadline).getTime(),
         x = setInterval(function() {    
 
@@ -51,9 +51,15 @@
               countdown = document.getElementById("countdown"),
               content = document.getElementById("content");
 
-            headline.innerText = "Too late";
+
+            document.getElementById("bon").innerHTML = "Continue ";
+            document.getElementById("bon").href = "crossword";
+            headline.innerText = "Too late, Missed the Bonus Round!";
             countdown.style.display = "none";
             content.style.display = "block";
+
+            
+            
 
             clearInterval(x);
         }
