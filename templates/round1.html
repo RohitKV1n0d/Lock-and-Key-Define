@@ -14,30 +14,14 @@
             <img src="#" alt="img" >
     </section>
     
-
-
-
     <section class="ans">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
-            
-            
                 <label for="answer"></label>
                 {{form.answer}}
-       
-
-
        <button class="enter" type="submit" id="enter">Enter</button>
-
         </form>
     </section>
-
-   
-
-
-    
-
-
 
     <section class="next-clue" >
         <div id="Myid">
@@ -49,20 +33,15 @@
     </section>
 
 
-   
-
 <script>
     var x = document.getElementById("Myid");
     
     if ( "{{g.user.key1}}" == "1" ) {
         x.style.display = "block";
          }
-
-
- 
-   
-
 </script>
+
+
 
     
 
