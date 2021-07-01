@@ -6,7 +6,7 @@ import string
 import datetime
 
 
-from flask import Flask, render_template, redirect, url_for, session, g
+from flask import Flask, render_template, redirect, url_for, session, g , request
 
 
 from flask_wtf import FlaskForm
@@ -39,9 +39,9 @@ key8 = 54
 
 ans_round1 = "answer"
 ans_round2 = "answer"
-ans_round3 = "answer"
+ans_round3 = "answer"   #bonus roun
 ans_round4 = "answer"
-ans_round5 = "answer"
+ans_round5 = ['0','0','0','0','0','0','0','0','0','0','0','0']
 ans_round6 = "answer"
 ans_round7 = "answer"
 ans_round8 = "answer"
@@ -75,7 +75,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 
 
 #http://127.0.0.1:5000/admin
-#https://lockandkey-define.herokuapp.com/admin/
+#https://lockandkey-define.in/admin/
 
 
 ENV = 'prod'
@@ -160,6 +160,22 @@ class ResgisterForm(FlaskForm):
 
 class GetAnswer(FlaskForm):
     answer = StringField('answer', validators=[InputRequired()] )
+
+class round5_ans(FlaskForm):
+    a1 = StringField('key1', validators=[InputRequired()] )
+    a2 = StringField('key2', validators=[InputRequired()] )
+    a3 = StringField('key3', validators=[InputRequired()] )
+    a4 = StringField('key4', validators=[InputRequired()] )
+    a5 = StringField('key5', validators=[InputRequired()] )
+    a6 = StringField('key6', validators=[InputRequired()] )
+    a7 = StringField('key7', validators=[InputRequired()] )
+    a8 = StringField('key8', validators=[InputRequired()] )
+    a9 = StringField('key9', validators=[InputRequired()] )
+    a10 = StringField('key10', validators=[InputRequired()] )
+    a11 = StringField('key11', validators=[InputRequired()] )
+    a12 = StringField('key12', validators=[InputRequired()] )
+
+    
 
 
 
@@ -336,10 +352,22 @@ def round3():
     return render_template("round3.html")
 
 
-@app.route('/key4.html')                                                                                 #######    round 4
+@app.route('/key4.html',  methods=['GET', 'POST'])                                                           #######    round 4
 @login_required
 def round4():
-    return render_template("round4.html")
+    if g.user.key2 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:
+        nextKey = key4
+        form = GetAnswer()
+        if form.validate_on_submit():
+            user = User.query.filter_by(id = g.user.id).first()
+            if form.answer.data == ans_round4:
+                user.key4 = '1'                   
+                db.session.add(user)
+                db.session.commit()
+
+        return render_template("round4.html", form=form ,nextKey=nextKey)
 
 
 
@@ -348,22 +376,64 @@ def round4():
 @app.route('/crossword')                                                                                   #######    round 5
 @login_required
 def crossword():
+    if g.user.key4 != '1':
+        return "Finish the last round you sneaky KID!"
+
     return render_template("round5.html")
 
 
 
 
 
-@app.route('/key5.html')                                                                                     #######    round 5 ANSWER
+@app.route('/key5.html',  methods=['GET', 'POST'])                                             #######    round 5 ANSWER
 @login_required
 def round5():
-    return render_template("round5-answer.html")
+    if g.user.key4 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:   
+        nextKey = key5
+        form = round5_ans()
+        if form.validate_on_submit():
+            user = User.query.filter_by(id = g.user.id).first()
+            if form.a1.data == str(ans_round5[0]):
+                if form.a2.data == str(ans_round5[1]):
+                    if form.a3.data == str(ans_round5[2]):
+                        if form.a4.data == str(ans_round5[3]):
+                            if form.a5.data == str(ans_round5[4]):
+                                if form.a6.data == str(ans_round5[5]):
+                                    if form.a7.data == str(ans_round5[6]):
+                                        if form.a8.data == str(ans_round5[7]):
+                                            if form.a9.data == str(ans_round5[8]):
+                                                if form.a10.data == str(ans_round5[9]):
+                                                    if form.a11.data == str(ans_round5[10]):
+                                                        if form.a12.data == str(ans_round5[11]):
+                                                            user.key5 = '1'                   
+                                                            db.session.add(user)
+                                                            db.session.commit()
+
+            
+
+            
+                
+        
+        return render_template("round5-answer.html", form=form ,nextKey=nextKey)
 
 
-@app.route('/key6.html')                                                                                     #######    round 6
+@app.route('/key6.html', methods=['GET', 'POST'])                                                                                     #######    round 6
 @login_required
 def round6():
-    return render_template("round6.html")
+    if g.user.key5 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:
+        nextKey = key6
+        form = GetAnswer()  
+        if form.validate_on_submit():
+            user = User.query.filter_by(id = g.user.id).first()
+            if form.answer.data == ans_round6:
+                user.key6 = '1'                   
+                db.session.add(user)
+                db.session.commit()    
+        return render_template("round6.html",  form=form ,nextKey=nextKey)
 
 
 @app.route('/key7.html')                                                                                     #######    round 7

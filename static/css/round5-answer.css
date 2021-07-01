@@ -17,51 +17,51 @@ body {
   padding: .2em;
 }
 
-#key1 {
+#a1 {
   background-color: yellow;
 }
 
-#key2 {
+#a2 {
   background-color: grey;
 }
 
-#key3 {
+#a3 {
   background-color: blue;
 }
 
-#key4 {
+#a4 {
   background-color: aqua;
 }
 
-#key5 {
+#a5 {
   background-color: palegreen;
 }
 
-#key6 {
+#a6 {
   background-color: red;
 }
 
-#key7 {
+#a7 {
   background-color: darkgreen;
 }
 
-#key8 {
+#a8 {
   background-color: blueviolet;
 }
 
-#key9 {
+#a9 {
   background-color: brown;
 }
 
-#key10 {
+#a10 {
   background-color: rosybrown;
 }
 
-#key11 {
+#a11 {
   background-color: orange;
 }
 
-#key12 {
+#a12 {
   background-color: hotpink;
 }
 
@@ -82,10 +82,6 @@ button:hover {
 .enter {
   text-align: center;
   padding-bottom: 3em;
-}
-
-#Myid {
-  display: none;
 }
 
 .next-clue {

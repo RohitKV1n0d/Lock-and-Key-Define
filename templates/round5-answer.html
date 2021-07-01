@@ -11,54 +11,58 @@
 <body>
 
     <section class="key-answers">
-        <form action="">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
             <ul>
-                <input type="text" name="key1" id="key1">
-                <input type="text" name="key2" id="key2">
-                <input type="text" name="key3" id="key3">
-                <input type="text" name="key4" id="key4">
-                <input type="text" name="key5" id="key5">
-                <input type="text" name="key6" id="key6">
-                <input type="text" name="key6" id="key7">
-                <input type="text" name="key6" id="key8">
-                <input type="text" name="key6" id="key9">
-                <input type="text" name="key6" id="key10">
-                <input type="text" name="key6" id="key11">
-                <input type="text" name="key6" id="key12">
+
+                {{form.a1}}
+                {{form.a2}}
+                {{form.a3}}
+                {{form.a4}}
+                {{form.a5}}
+                {{form.a6}}
+                {{form.a7}}
+                {{form.a8}}
+                {{form.a9}}
+                {{form.a10}}
+                {{form.a11}}
+                {{form.a12}}
+             
+                
+
+                
             </ul>
+            <div class="enter" style="margin-top: 5em;">
+                <button  id="enter">Enter</button>
+            </div>
         </form>
+
+        <a id="homepage" href="unlock">HomePage</a>
     </section>
 
-    <div class="enter">
-        <button onclick="toggleText()" id="enter">Enter</button>
-    </div>
-    
+
+
+   
         
     
     
     
-        <section class="next-clue" >
-            <div id="Myid">
-            <ul>
-                <a href="unlock.html">XX</a>
-                <a href="#">NextClue</a>
-            </ul>
-        </div>
-        </section>
-    
-    
-       
+    <section class="next-clue" >
+        <div id="Myid" style="display: none;" >
+        <ul>
+            <a href="unlock">{{nextKey}}</a>
+            <a href="key6.html">NextClue</a>
+        </ul>
+    </div>
+    </section>
+
     
     <script>
-        function toggleText(){
-            var x = document.getElementById("Myid");
-            if (x.style.display === "none") {
-            x.style.display = "block";
-            } else {
-            x.style.display = "none";
-            }
-            
-        }
+        var x = document.getElementById("Myid");
+        if ( "{{g.user.key5}}" == "1" ) {
+        x.style.display = "block";
+         }
+      
     </script>
     
     

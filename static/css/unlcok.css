@@ -9,11 +9,6 @@ body {
   padding: 1em;
 }
 
-.navbar .logo-div {
-  width: 80%;
-  margin-right: 3em;
-}
-
 .navbar nav {
   display: none;
 }
@@ -50,6 +45,7 @@ nav ul.primary-nav {
 
 nav li {
   list-style-type: none;
+  font-size: .8em;
 }
 
 nav li a {
@@ -57,7 +53,6 @@ nav li a {
   text-decoration: none;
   display: block;
   padding: .9em;
-  font-size: 1em;
   text-align: right;
 }
 
@@ -80,16 +75,16 @@ nav li a:hover {
     margin-right: -1em;
   }
   .logo-div {
-    width: 150%;
+    display: block;
   }
   .logo-div img {
-    width: 100%;
+    width: 115%;
   }
   .navbar .container {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 180px auto;
-        grid-template-columns: 180px auto;
+    -ms-grid-columns: 100px auto;
+        grid-template-columns: 100px auto;
     -webkit-box-pack: unset;
         -ms-flex-pack: unset;
             justify-content: unset;
@@ -165,7 +160,7 @@ nav li a:hover {
 .next-clue a {
   border: 3px solid red;
   position: relative;
-  z-index: 999;
+  z-index: 900;
   font-size: larger;
   border-radius: 1em;
   padding: .3em;
@@ -252,6 +247,9 @@ nav li a:hover {
 }
 
 @media all and (max-width: 640px) {
+  .logo-div {
+    display: none;
+  }
   .next-clue {
     padding-left: 80px;
     padding-bottom: 120px;
