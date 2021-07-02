@@ -6,13 +6,35 @@ body {
   font-family: Cinzel;
 }
 
+.top-logos {
+  display: -ms-grid;
+  display: grid;
+  position: fixed;
+  top: 1em;
+  margin: 1em;
+}
+
+.top-logos img {
+  width: 10em;
+}
+
+.top-logos .gulf {
+  position: fixed;
+  right: 0;
+  padding-right: 1em;
+}
+
+.top-logos .define {
+  right: -4em;
+}
+
 .hero {
   padding: 1em;
 }
 
 .hero .container {
   text-align: center;
-  margin-top: 4em;
+  margin-top: 8em;
   margin-bottom: 0em;
 }
 
@@ -120,5 +142,31 @@ li span {
   position: fixed;
   right: 0;
   padding-right: 1em;
+}
+
+.mid {
+  padding-top: 7em;
+  padding-left: 37em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mid img {
+  padding-right: .3em;
+}
+
+.mid .rset img {
+  width: 6em;
+}
+
+.mid .iedc img {
+  margin-top: -.8em;
+  width: 6em;
+}
+
+.mid .iedc-grey img {
+  width: 10em;
+  margin-top: -.3em;
 }
 /*# sourceMappingURL=landing-page.css.map */

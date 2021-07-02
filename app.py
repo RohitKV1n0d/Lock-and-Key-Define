@@ -121,7 +121,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), unique=True ) 
     role = db.Column(db.String(256))
     password = db.Column(db.String(256))
-    reg_time = db.Column(db.String(256))
+    unlock = db.Column(db.String(20))
     key1= db.Column(db.String(20))
     key2= db.Column(db.String(20))
     key3= db.Column(db.String(20))
@@ -218,11 +218,11 @@ admin_status(0)
     
 
 
-check_admin = User.query.filter_by(username='Admin@user').first()
-if check_admin== None :
-    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
-    db.session.add(admin_user)
-    db.session.commit()
+# check_admin = User.query.filter_by(username='Admin@user').first()
+# if check_admin== None :
+#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword)        
+#     db.session.add(admin_user)
+#     db.session.commit()
 
 
 
@@ -282,7 +282,7 @@ def register():
     if form.validate_on_submit():
        # hashed_password = generate_password_hash(form.password.data, method='sha256')
         time =str(datetime.datetime.now())
-        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, reg_time= time)#hashed_password)
+        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data)#hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -307,6 +307,11 @@ def start():
 @app.route('/unlock')
 @login_required
 def unlock():
+    user = User.query.filter_by(id = g.user.id).first()
+    user.unlock = '1'                   
+    db.session.add(user)
+    db.session.commit()
+    
     return render_template("unlock.html")
     
 
@@ -348,8 +353,13 @@ def round2():
 def round3():
     if g.user.key2 != '1':
         return "Finish the last round you sneaky KID!"
+    else:
+        user = User.query.filter_by(id = g.user.id).first()
+        user.key3 = '1'                   
+        db.session.add(user)
+        db.session.commit()
 
-    return render_template("round3.html")
+        return render_template("round3.html")
 
 
 @app.route('/key4.html',  methods=['GET', 'POST'])                                                           #######    round 4

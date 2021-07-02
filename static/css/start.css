@@ -7,6 +7,28 @@ body {
   text-align: center;
 }
 
+.top-logos {
+  display: -ms-grid;
+  display: grid;
+  position: fixed;
+  top: 1em;
+  margin: 1em;
+}
+
+.top-logos img {
+  width: 10em;
+}
+
+.top-logos .gulf {
+  position: fixed;
+  right: 0;
+  padding-right: 1em;
+}
+
+.top-logos .define {
+  right: -4em;
+}
+
 .typetext {
   font-size: 30px;
   margin: 10px 50px;
@@ -154,5 +176,31 @@ li span {
     color: aliceblue;
     cursor: pointer;
   }
+}
+
+.mid {
+  padding-top: 7em;
+  padding-left: 37em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mid img {
+  padding-right: .3em;
+}
+
+.mid .rset img {
+  width: 6em;
+}
+
+.mid .iedc img {
+  margin-top: -.8em;
+  width: 6em;
+}
+
+.mid .iedc-grey img {
+  width: 10em;
+  margin-top: -.3em;
 }
 /*# sourceMappingURL=start.css.map */

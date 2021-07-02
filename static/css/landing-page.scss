@@ -6,6 +6,31 @@ body{
     font-family:Cinzel;
 }
 
+.top-logos{
+    
+  display: grid;
+  position: fixed;
+  top: 1em;
+  margin: 1em;
+
+
+  img{
+    width: 10em;
+  }
+  .gulf{
+    position: fixed;
+    right: 0;
+    padding-right: 1em;
+
+  }
+  .define{
+    right: -4em;
+  }
+
+}
+
+
+
 .hero{
     padding: 1em;
 }
@@ -13,7 +38,7 @@ body{
 .hero {
    .container{
        text-align: center;
-       margin-top: 4em;
+       margin-top: 8em;
        margin-bottom: 0em;
    }
   }
@@ -121,6 +146,8 @@ body{
             color: red;
         }
     }
+
+    
     .contacts{
         position: fixed;
         right: 0;
@@ -129,3 +156,29 @@ body{
     }
 
   }
+
+  .mid{
+    padding-top: 7em;
+    padding-left: 37em;
+    
+    display: flex;
+
+    img{
+      padding-right: .3em;
+    }
+    
+    .rset img{
+      width: 6em;
+      
+    }
+    .iedc img{
+     margin-top: -.8em;
+     width: 6em;
+    }
+    .iedc-grey img{
+      width: 10em;
+      margin-top: -.3em;
+    }
+    
+  }
+  
