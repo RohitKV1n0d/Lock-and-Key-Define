@@ -37,7 +37,7 @@ key8 = 54
 
 
 
-ans_round1 = "answer"
+ans_round1 = "hint"
 ans_round2 = "answer"
 ans_round3 = "answer"   #bonus roun
 ans_round4 = "answer"

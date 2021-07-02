@@ -9,19 +9,26 @@
     <link rel="stylesheet" href="/static/css/round1.css">
 </head>
 <body>
+    <div class="all" style="display: grid;">
+    <div class="back" style="background-color: rgb(150, 150, 150);">.</div>
+    <!-- <p style="color: rgb(150, 150, 150);">You can .......asfqv</p> -->
 
     <section class="image1">
-            <img src="#" alt="img" >
+            <div class="left" style="background-color: rgb(150, 150, 150);">.</div>
+            <img class="key1-image" src="{{url_for('static',filename='Images/key1.png')}}" alt="img" >
+            <div class="right" style="background-color: rgb(150, 150, 150); color: rgb(150, 150, 150); text-transform: none;">People dont do what you expect but what you "INSPECT"</div>
     </section>
+    <div class="bot" style="background-color: rgb(150, 150, 150);">.</div>
+</div>
     
     <section class="ans">
-        <form method="POST" action="">
+        <form method="POST" action="" style="margin-bottom:2em ;">
             {{ form.hidden_tag() }}
                 <label for="answer"></label>
                 {{form.answer}}
        <button class="enter" type="submit" id="enter">Enter</button>
         </form>
-        <a id="homepage" href="unlock">HomePage</a>
+        <a id="homepage" href="unlock" >HomePage</a>
     </section>
 
     <section class="next-clue" >

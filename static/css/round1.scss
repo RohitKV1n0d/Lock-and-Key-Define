@@ -3,16 +3,42 @@
 body{
     background-color: rgb(150, 150, 150);
     font-family: Cinzel;
+    margin: 0;
   
 }
+.back{
+    background-color: rgb(150, 150, 150);
+    padding: 3em;
+    margin-bottom: -4em;
+    
+    z-index: 999;
+}
+.left{
+    padding-right:37em ;
+    z-index: 999;
+    
+}
+.right{
+    padding-right: 40.5em;
+    
+     position: relative;
+    z-index: 999;
+}
+.bot{
+    padding-bottom: 3em;
+    z-index: 999;
+}
+
 .image1 {
-    text-align: center;
-    margin-top:7em ;
+    
+    margin-top:3em ;
+    display: flex;
+    position: relative;
+    
     img{
-        border: 3px solid #535353;
-        background-color: #535353;
-        border-radius: 1em;
-        padding: 10em;
+        margin: -4em;
+        width: 25em;
+        z-index: 99;
     }
 }
 
@@ -47,7 +73,25 @@ button{
 }
 .enter{
     text-align: center;
-    padding-bottom: 3em;
+    padding-bottom: 0em;
+}
+
+#homepage{
+    color: black;
+    margin-top: -3em;
+    text-decoration: none;
+    
+    
+    font-family: Cinzel;
+    border-radius: .5em;
+    
+    border: 3px solid #535353;
+
+    &:hover{
+        background-color: #535353;
+        color: white;
+    }
+
 }
 
 
