@@ -307,12 +307,15 @@ def start():
 @app.route('/unlock')
 @login_required
 def unlock():
-    user = User.query.filter_by(id = g.user.id).first()
-    user.unlock = '1'                   
-    db.session.add(user)
-    db.session.commit()
-    
-    return render_template("unlock.html")
+    if g.user.role != 'admin':
+        return "Have a little patience You SNEAKY KId !"
+    else:
+        user = User.query.filter_by(id = g.user.id).first()
+        user.unlock = '1'                   
+        db.session.add(user)
+        db.session.commit()
+        
+        return render_template("unlock.html")
     
 
 @app.route('/key1.html', methods=['GET', 'POST'])                           #######    round 1
