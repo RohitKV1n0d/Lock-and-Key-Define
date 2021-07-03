@@ -404,7 +404,7 @@ def register():
 
 #######################################################################################################
 
-
+hinttimer = 10000
 
 
 @app.route('/rules.html')
@@ -430,7 +430,7 @@ def unlock():
         return render_template("unlock.html")
 
 
-c_hints = 4  
+
 
 @app.route('/key1.html', methods=['GET', 'POST'])                           #######    round 1
 @login_required
@@ -477,7 +477,7 @@ def round1():
         db.session.add(user)
         db.session.commit()
         return 'OK', 200
-    return render_template("round1.html" , form=form, nextKey=nextKey)
+    return render_template("round1.html" , form=form, nextKey=nextKey, hinttimer=hinttimer)
 
 
 
@@ -528,7 +528,7 @@ def round2():
             db.session.add(user)
             db.session.commit()
             return 'OK', 200
-        return render_template("round2.html", form=form ,nextKey=nextKey)
+        return render_template("round2.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
 
 
 
@@ -593,7 +593,7 @@ def round4():
             db.session.commit()
             return 'OK', 200
 
-        return render_template("round4.html", form=form ,nextKey=nextKey)
+        return render_template("round4.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
 
 
 
@@ -669,7 +669,7 @@ def round5():
             db.session.commit()
             return 'OK', 200  
         
-        return render_template("round5-answer.html", form=form ,nextKey=nextKey)
+        return render_template("round5-answer.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
 
 
 @app.route('/key6.html', methods=['GET', 'POST'])                                                                                     #######    round 6
@@ -718,7 +718,7 @@ def round6():
             db.session.add(user)
             db.session.commit()
             return 'OK', 200    
-        return render_template("round6.html",  form=form ,nextKey=nextKey)
+        return render_template("round6.html",  form=form ,nextKey=nextKey,hinttimer=hinttimer)
 
 
 @app.route('/key7.html')                                                                                     #######    round 7
