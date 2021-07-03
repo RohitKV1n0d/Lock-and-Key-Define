@@ -9,17 +9,45 @@
     <link rel="stylesheet" href="/static/css/round1.css">
 </head>
 <body>
+
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 style="text-align: center;">Hints</h2>
+
+            <ul class="hints">
+                <li><button   id="hint1" style="padding: 0; border: none; background: none; font-size: large;"> Hint 1</button></li>
+                <li><button   id="hint2" style="padding: 0; border: none; background: none; font-size: large;"> Hint 2</button></li>
+                <li><button   id="hint3" style="padding: 0; border: none; background: none; font-size: large;"> Hint 3</button></li>
+            </ul>
+            <li style="display:flex;">
+                <h3>Hints Left :  </h3>
+                <h3 id="hints_left">{{g.user.hints}}</h3>
+            </li>
+            <div id="ten-countdown"></div>
+            
+        </div> 
+    </div>
+
+        <!-- Modal content -->      
+
+
+
+
     <div class="all" style="display: grid;">
-    <div class="back" style="background-color: rgb(150, 150, 150);">.</div>
+        <div class="back" style="background-color: rgb(150, 150, 150);">.</div>
     <!-- <p style="color: rgb(150, 150, 150);">You can .......asfqv</p> -->
 
-    <section class="image1">
-            <div class="left" style="background-color: rgb(150, 150, 150);">.</div>
-            <img class="key1-image" src="{{url_for('static',filename='Images/key1.png')}}" alt="img" >
-            <div class="right" style="background-color: rgb(150, 150, 150); color: rgb(150, 150, 150); text-transform: none;">People dont do what you expect but what you "INSPECT"</div>
-    </section>
+        <section class="image1">
+                <div class="left" style="background-color: rgb(150, 150, 150);">.</div>
+                <img class="key1-image" src="{{url_for('static',filename='Images/key11.png')}}" alt="img" >
+                <div class="right" style="background-color: rgb(150, 150, 150); color: rgb(150, 150, 150); text-transform: none;">People dont do what you expect but what you INSPECT</div>
+        </section>
     <div class="bot" style="background-color: rgb(150, 150, 150);">.</div>
-</div>
+    </div>
     
     <section class="ans">
         <form method="POST" action="" style="margin-bottom:2em ;">
@@ -48,6 +76,208 @@
         x.style.display = "block";
          }
 </script>
+
+
+<!-- <button id="myBtn" >Hints </button> -->
+<div class="hint-btn">
+<img id="myBtn"   src="{{url_for('static',filename='Images/hint.png')}}" alt="hints"></div>
+
+<!-- The Modal -->
+
+
+<script>
+
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////                Timer                    //////////////////////////////////////////////
+
+    function countdown( elementName, milliS ,hintid1, hintid2, hintid3 ){
+        var element, endTime, hours, mins, msLeft, time;
+
+        function twoDigits( n )
+        {
+            return (n <= 9 ? "0" + n : n);
+        }
+
+        function updateTimer()
+        {
+            msLeft = endTime - (+new Date);
+            if ( msLeft < 1000 ) {
+                element.innerHTML = "You can Choose a HINT!!";
+                window.location.reload();         
+                if("{{g.user.hint1}}" != null){hintid1.style.pointerEvents = 'none';
+                }else {hintid1.style.pointerEvents = 'auto';}
+                if("{{g.user.hint2}}" != null){hintid2.style.pointerEvents = 'none';
+                }else {hintid2.style.pointerEvents = 'auto';}
+                if("{{g.user.hint3}}" != null){hintid3.style.pointerEvents = 'none';
+                }else{hintid3.style.pointerEvents = 'auto';}
+                
+            } else {
+                hintid1.style.pointerEvents = 'none';
+                hintid2.style.pointerEvents = 'none';
+                hintid3.style.pointerEvents = 'none';
+                time = new Date( msLeft );
+                hours = time.getUTCHours();
+                mins = time.getUTCMinutes();
+                element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+            }
+        }
+
+        element = document.getElementById( elementName );
+        // endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+        endTime = (+new Date) + milliS;
+
+        
+        
+        updateTimer();
+}
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                  MODAL
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    
+    var hint1 = document.getElementById("hint1");
+    var hint2 = document.getElementById("hint2");
+    var hint3 = document.getElementById("hint3");
+
+    var hints_left = document.getElementById("hints_left");
+    let hint_count = Number("{{g.user.hints}}");
+    //Enter Hints database links here
+    var h1 = "{{g.user.r1h1}}";                             
+    var h2 = "{{g.user.r1h2}}";
+    var h3 = "{{g.user.r1h3}}";
+
+    
+    
+
+    function checkifUsed(hintname,hintID,main_hint){
+        if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
+            hintID.innerHTML = main_hint;
+            hintID.style.color = "red";
+            hintID.style.pointerEvents = 'none';
+        }
+    }
+
+    checkifUsed('r1h1', hint1,h1);
+    checkifUsed('r1h2', hint2,h2);
+    checkifUsed('r1h3', hint3,h3);
+
+
+
+    if(checkTimerNeeded()){
+                countdown( "ten-countdown", 10000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
+            }
+          
+            
+    
+
+
+    
+
+
+    function updateHint(hintID, hintleftID, hintname, url, mainHint ,hintid1, hintid2, hintid3 ) {
+        if(hint_count>0 ) {
+           
+            
+                countdown( "ten-countdown", 10000 ,hintid1, hintid2, hintid3 );
+                
+                let getTime = new Date().getTime();
+                hintID.innerHTML = mainHint;
+                hintID.style.color = "red";
+                hint_count=hint_count-1
+                hintleftID.innerHTML = hint_count;
+                hintID.style.pointerEvents = 'none';
+            
+                fetch(url, {
+
+                // Declare what type of data we're sending
+                headers: {
+                'Content-Type': 'application/json'
+                },
+
+                // Specify the method
+                method: 'POST',
+
+                // A JSON payload
+                body: JSON.stringify({
+                    "hint": hintname,
+                    "time" : getTime
+                })
+                }).then(function (response) { // At this point, Flask has printed our JSON
+                return response.text();
+                }).then(function (text) {
+
+                console.log('POST response: ');
+
+                // Should be 'OK' if everything was successful
+                console.log(text);
+                });
+            
+         
+        }
+        else{
+            hintleftID.style.color = "red"
+        }
+    }
+
+
+    hint1.onclick = function() {updateHint(hint1,hints_left,"r1h1",'/key1.html',h1,hint1,hint2,hint3);}
+    hint2.onclick = function() {updateHint(hint2,hints_left,"r1h2",'/key1.html',h2,hint1,hint2,hint3);}
+    hint3.onclick = function() {updateHint(hint3,hints_left,"r1h3",'/key1.html',h3,hint1,hint2,hint3);}
+
+
+
+    function checkTimerNeeded(){       
+        var lastRecivedTime = Number("{{g.user.time1}}");
+        var c_time = new Date().getTime();
+        if(lastRecivedTime!=null){ 
+            var elaspedTime = c_time-lastRecivedTime;
+            if(elaspedTime < 10000){
+                return true;
+            }
+        }
+        else {return true;}
+        
+     }  
+
+
+   
+
+   
+    </script>
+    
 
 
 

@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock and key</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/ammu_landing-page.css')}}">
+</head>
+<body>
+
+    <!-- <section class="top" >
+        <div class="top-logos">
+            <div class="define">
+                <a href="http://rsetiedc.in/define">
+                <img  src="/static/Images/Logo.png" alt="Define">
+            </a>
+            </div>
+            <div class="gulf">
+                <a href="https://www.gulfcareers.com/">
+                 <img src="/static/Images/gulf-careers-logo-light.png"  alt="Gulf Careers">
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    
+    <section class="hero">
+        <div class = "container">
+            <a href="#">
+            <img src="{{url_for('static',filename='Images/Lock_key.png')}}" >
+        </a> 
+        </div>
+    </section>
+
+    <div class="timer">
+        <h1 id="headline"></h1>
+        <div id="countdown">
+          <ul>
+            <li><span id="days"></span>days</li>
+            <li><span id="hours"></span>Hours</li>
+            <li><span id="minutes"></span>Minutes</li>
+            <li><span id="seconds"></span>Seconds</li>
+          </ul>
+        </div>
+    </div>
+    
+
+
+    <script>
+        (function () {
+         const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+        let deadline = "July 8, 2021 18:33:00",
+        countDown = new Date(deadline).getTime(),
+        x = setInterval(function() {    
+
+        let now = new Date().getTime(),
+            distance = countDown - now;
+
+        document.getElementById("days").innerText = Math.floor(distance / (day)),
+          document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+          document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+          document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+        //Do DO OD OD ODDODODODODO
+        if (distance < 0) {
+          let headline = document.getElementById("headline"),
+              countdown = document.getElementById("countdown"),
+              content = document.getElementById("content");
+
+            headline.innerText = "GOOOOO";
+            countdown.style.display = "none";
+            content.style.display = "block";
+
+            clearInterval(x);
+        }
+        //seconds
+      }, 0)
+  }());
+      </script>
+
+
+    <section class="user-data" id="user-data">
+        <a class="login" href="login.html">LogIn</a>
+        <a class="sign-up" href="register.html">Sign Up</a>
+    </section>
+
+    <section class="footer">
+        <div class="rule">
+            <a href="rules.html">Rules & Guidelines</a>
+        </div>
+        
+        <div class="contacts">
+            <a href="#">Contacts</a>
+        </div>    
+    </section>
+
+    
+    <div class="mid">
+        <div class="define"> <a href="http://rsetiedc.in/define"><img  src="{{ url_for('static',filename='Images/Logo.png') }}" alt="Define"></a></div>
+        <div class="rset"><a href="https://www.rajagiritech.ac.in/Home/Index.asp"><img  src="{{ url_for('static',filename='Images/AUTONOMUS LOGO1.png') }}" alt="rset"></a></div>
+        <div class="iedc"><a href="https://rsetiedc.in/home"><img  src="{{ url_for('static',filename='Images/RSET IEDC.png') }}" alt="Rset-iedc"></a></div>
+        <div class="iedc-grey"><a href="https://iedc.cet.ac.in/"><img  src="{{ url_for('static',filename='Images/iedc logo gray.png') }}" alt="iedc"></a></div>
+        <div class="gulf"><a href="https://www.gulfcareers.com/"><img src="{{ url_for('static',filename='Images/gulf-careers-logo-light.png') }}"  alt="Gulf Careers"></a></div>
+        
+    </div>
+    
+
+
+    
+</body>
+</html>
