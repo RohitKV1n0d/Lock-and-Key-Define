@@ -294,66 +294,6 @@ def before_request():
 
 
 
-# @jsf.use(app)
-# class APP:
-#     def __init__(self):
-#         self.count = 3
-        
-    
-#     def inc1(self, HINT):
-#         self.count = HINT
-#         if self.count > 0:
-#             self.count-=1
-#             # temp-=1
-#             user = User.query.filter_by(id = g.user.id).first()
-#             user.hints = self.count
-#             db.session.add(user)
-#             db.session.commit()
-            
-#             self.js.document.getElementById("hints_left").innerHTML = g.user.hints
-        #     self.js.document.getElementById("hint1").innerHTML = temp_data.r1_hint1
-        # else:
-        #     self.js.document.getElementById("hint1").innerHTML = temp_data.r1_hint1
-    
-    # def inc2(self, HINT):
-    #     self.count = HINT
-    #     if self.count > 0:
-    #         self.count-=1
-    #         user = User.query.filter_by(id = g.user.id).first()
-    #         user.hints = self.count
-    #         db.session.add(user)
-    #         db.session.commit()
-            
-    #         self.js.document.getElementById("hints_left").innerHTML = g.user.hints
-    #         self.js.document.getElementById("hint2").innerHTML = temp_data.r1_hint1
-    #     else:
-    #         self.js.document.getElementById("hint2").innerHTML = temp_data.r1_hint1
-
-    # def inc3(self, HINT):
-    #     self.count = HINT
-    #     if self.count > 0:
-    #         self.count-=1
-    #         user = User.query.filter_by(id = g.user.id).first()
-    #         user.hints = self.count
-    #         db.session.add(user)
-    #         db.session.commit()
-            
-    #         self.js.document.getElementById("hints_left").innerHTML = g.user.hints
-    #         self.js.document.getElementById("hint3").innerHTML = temp_data.r1_hint1
-    #     else:
-    #         self.js.document.getElementById("hint3").innerHTML = temp_data.r1_hint1
-            
-
-            
-        
-        
-
-
-
-
-
-
-
 
 
 
