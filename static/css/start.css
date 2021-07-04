@@ -182,10 +182,8 @@ li span {
 
 .mid {
   padding-top: 7em;
-  padding-left: 37em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  margin-bottom: 2em;
+  text-align: center;
 }
 
 .mid img {
@@ -194,15 +192,18 @@ li span {
 
 .mid .rset img {
   width: 6em;
+  padding-bottom: .8em;
 }
 
 .mid .iedc img {
-  margin-top: -.8em;
+  margin-top: -1.2em;
+  padding-top: 0em;
   width: 6em;
 }
 
 .mid .iedc-grey img {
   width: 10em;
   margin-top: -.3em;
+  padding-bottom: .6em;
 }
 /*# sourceMappingURL=start.css.map */

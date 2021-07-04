@@ -144,10 +144,10 @@ li span {
 
 .mid {
   padding-top: 6em;
-  padding-left: 23em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  padding-left: 0em;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+ 
 }
 
 .mid img {
@@ -155,9 +155,10 @@ li span {
   
 }
 
-.mid .rset img {
+.rset img {
   width: 8em;
-  margin-top: .8em;
+  margin-top: 2em;
+  padding-bottom: 1em;
   
   margin-right: 30px;
 }
@@ -165,13 +166,14 @@ li span {
 .mid .iedc img {
   margin-top: 0em;
   width: 7em;
+  padding-bottom: .5em;  
   
   margin-right: 30px;
 }
 
 .mid .iedc-grey img {
   width: 11.5em;
-  
+  padding-bottom: 1em;
   margin-top: .8em;
   margin-right: 30px;
 }
@@ -183,6 +185,7 @@ li span {
 }
 .mid .gulf img {
   width: 9em;
+  padding-bottom: 1em;
   
   margin-top: .5em;
   margin-right: 30px;

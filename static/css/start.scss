@@ -210,9 +210,9 @@ body {
 //////////////////////////////////////BOTTOM LOGO////////////////////////////////////////
 .mid{
   padding-top: 7em;
-  padding-left: 37em;
+  margin-bottom: 2em;
   
-  display: flex;
+  text-align: center;
 
   img{
     padding-right: .3em;
@@ -220,15 +220,18 @@ body {
   
   .rset img{
     width: 6em;
+    padding-bottom: .8em; 
     
   }
   .iedc img{
-   margin-top: -.8em;
+   margin-top: -1.2em;
+   padding-top: 0em;
    width: 6em;
   }
   .iedc-grey img{
     width: 10em; 
     margin-top: -.3em;
+    padding-bottom: .6em; 
   }
   
 }
