@@ -31,17 +31,22 @@
         </div> 
     </div>
 
-        <!-- Modal content -->      
+        <!-- Modal content -->     
+        
 
-
-    <div class="clock">
-        <div class="wrap">
-          <span class="hour"></span>
-          <span class="minute"></span>
-          <span class="second"></span>
-          <span class="dot"></span>
-        </div>
+    <div class="wdiv">
+        <img  class="watch" src="{{url_for('static',filename='Images/watch.gif')}}" alt="">
     </div>
+        
+  
+        
+    <div class="mp3" style="text-align: center; margin-top: -9em;" >
+        <audio  style="width: 10em; height: 20px; " src="{{url_for('static',filename='Images/round2.mp3')}}" controls autoplay>
+        </audio>
+    </div>
+
+
+
     <section class="ans">
         <form action="" method="POST">
             {{ form.hidden_tag() }}
@@ -51,34 +56,15 @@
             
             <input type="submit" name="enter" id="enter" value="enter">
         </form>
+        <a id="homepage" href="unlock" >HomePage</a>
     </section>
 
+    <!-- <embed src="" loop="true" autostart="true" width="2" height="0"> -->
 
 
-    <script>
-        var inc = 1000;
-
-        clock();
-
-    function clock() {
-        const date = new Date();
-
-        const hours = ((date.getHours() + 11) % 12 + 1);
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
         
-        const hour = hours * 30;
-        const minute = minutes * 6;
-        const second = seconds * 6;
-        
-        document.querySelector('.hour').style.transform = `rotate(${hour}deg)`
-        document.querySelector('.minute').style.transform = `rotate(${minute}deg)`
-        document.querySelector('.second').style.transform = `rotate(${second}deg)`
-    }
 
-    setInterval(clock, inc);
 
-    </script>
 
 
 <section class="next-clue" >

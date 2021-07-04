@@ -1,100 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&display=swap');
 body {
     display: grid;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: #D9D7DD;
-  }
-  
-  .clock {
-    border-radius: 100%;
-    background: #ffffff;
-    font-family: "Montserrat";
-    border: 5px solid white;
-    box-shadow: inset 2px 3px 8px 0 rgba(0, 0, 0, 0.1);
-  }
-  
-  .wrap {
-    overflow: hidden;
-    position: relative;
-    width: 350px;
-    height: 350px;
-    border-radius: 100%;
-  }
-  
-  .minute,
-  .hour {
-    position: absolute;
-    height: 100px;
-    width: 6px;
-    margin: auto;
-    top: -27%;
-    left: 0;
-    bottom: 0;
-    right: 0;
     background: black;
-    transform-origin: bottom center;
-    transform: rotate(0deg);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    font-family:Cinzel ;
   }
   
-  .minute {
-    position: absolute;
-    height: 130px;
-    width: 4px;
-    top: -38%;
-    left: 0;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
-    transform: rotate(90deg);
-  }
-  
-  .second {
-    position: absolute;
-    height: 90px;
-    width: 2px;
-    margin: auto;
-    top: -26%;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    border-radius: 4px;
-    background: #FF4B3E;
-    transform-origin: bottom center;
-    transform: rotate(180deg);
-    z-index: 1;
-  }
-  
-  .dot {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 100px;
-    background: white;
-    border: 2px solid #1b1b1b;
-    border-radius: 100px;
-    margin: auto;
-    z-index: 1;
-  }
+.wdiv{
+  text-align: center;
+  margin-top: -5em;
+}
+
+.watch{
+
+  width: 70%;
+ 
+}
+.mp3 audio { 
+  background-color: #000;
+}
+
+
 
   .ans{
     text-align: center;
-    margin: 0em;
+    margin-top: -7em;
+    margin-left: 2em;
+    
 
 
     input[name="answer"]{
         padding-right: 4em;
         padding-top: .5em;
+        font-size:large;
+        border: 3px solid #535353;
     }
     
     input[type="submit"]{
+      font-family:Cinzel ;
         color: black;
         margin-top: 1em;
         border: 3px solid #535353;
+        font-size:large;
 
         &:hover{
             background-color: #535353;
@@ -112,13 +61,13 @@ body {
   word-spacing: 2em;
   a{
       text-decoration: none;
-      border: 2px solid black;
-      color:black;
+      border: 2px solid whitesmoke;
+      color:whitesmoke;
       padding: .2em;
       border-radius: .6em;
       &:hover{
-          background-color: black;
-          color: whitesmoke;
+          background-color: whitesmoke;
+          color: black;
       }
   }
   

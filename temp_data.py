@@ -10,7 +10,7 @@ key8 = 54
 
 
 ans_round1 = "NotHiNG00"
-ans_round2 = "answer"
+ans_round2 = "love"
 ans_round3 = "answer"   #bonus round
 ans_round4 = "answer"
 ans_round5 = ['0','0','0','0','0','0','0','0','0','0','0','0']

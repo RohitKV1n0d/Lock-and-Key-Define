@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
+body {
+  background-color: black;
+  margin: 1em;
+  font-family: Cinzel;
+}
+
+/* .top-logos {
+  display: -ms-grid;
+  display: grid;
+  position: fixed;
+  top: 1em;
+  margin: 1em;
+}
+.top-logos img {
+  width: 10em;
+}
+.top-logos .gulf {
+  position: fixed;
+  right: 0;
+  padding-right: 1em;
+}
+.top-logos .define {
+  right: -4em;
+} */
+
+.hero {
+  padding: 0em;
+}
+
+.hero .container {
+  text-align: center;
+  margin-top: 8em;
+  margin-bottom: 0em;
+}
+
+html, body {
+  height: 38em;
+  margin: 0;
+}
+
+.timer {
+  font-family: Orbitron;
+  color: #8d4123;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-weight: normal;
+  letter-spacing: .125rem;
+  text-transform: uppercase;
+}
+
+li {
+  display: inline-block;
+  font-size: 1.5em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+}
+
+li span {
+  display: block;
+  font-size: 4.5rem;
+}
+
+@media all and (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  li {
+    font-size: 1.125rem;
+    padding: .75rem;
+  }
+  li span {
+    font-size: 3.375rem;
+  }
+}
+
+.user-data {
+  text-align: center;
+  padding-top: 2em;
+}
+
+.user-data .login {
+  text-decoration: none;
+  font-size: 1.8em;
+  color: black;
+  background-color: gray;
+  font-family: Cinzel;
+  padding: .1em;
+  border-radius: 1.5em;
+  margin-right: 4em;
+  display: inline-block;
+  border: 3px solid #8d4123;
+}
+
+.user-data .login:hover {
+  background-color: #8d4123;
+}
+
+.user-data .sign-up {
+  text-decoration: none;
+  font-size: 1.8em;
+  color: black;
+  background-color: gray;
+  font-family: Cinzel;
+  padding: .05em;
+  border-radius: 1.2em;
+  display: inline-block;
+  width: unset;
+  border: 3px solid #8d4123;
+}
+
+.user-data .sign-up:hover {
+  background-color: #8d4123;
+}
+
+.footer {
+  display: -ms-grid;
+  display: grid;
+  position: fixed;
+  padding-top: 100px;
+  bottom: 1em;
+  margin: 1em;
+}
+
+.footer a {
+  color: brown;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: red;
+}
+
+.footer .contacts {
+  position: fixed;
+  right: 0em;
+  padding-right: 1em;
+}
+
+.mid {
+  padding-top: 6em;
+  padding-left: 23em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mid img {
+  padding-right: .3em;
+  
+}
+
+.mid .rset img {
+  width: 8em;
+  margin-top: .8em;
+  
+  margin-right: 30px;
+}
+
+.mid .iedc img {
+  margin-top: 0em;
+  width: 7em;
+  
+  margin-right: 30px;
+}
+
+.mid .iedc-grey img {
+  width: 11.5em;
+  
+  margin-top: .8em;
+  margin-right: 30px;
+}
+.mid .define img {
+  width: 8.5em;
+  margin-top: -.3em;
+  margin-right: 30px;
+
+}
+.mid .gulf img {
+  width: 9em;
+  
+  margin-top: .5em;
+  margin-right: 30px;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
