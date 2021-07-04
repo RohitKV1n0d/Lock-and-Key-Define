@@ -65,7 +65,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 #https://lockandkey-define.in/admin/
 
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev' :
     app.debug = True
@@ -157,6 +157,10 @@ class User(UserMixin, db.Model):
     r7h1 = db.Column(db.String(256))
     r7h2 = db.Column(db.String(256))
     r7h3 = db.Column(db.String(256))
+
+    r8h1 = db.Column(db.String(256))
+    r8h2 = db.Column(db.String(256))
+    r8h3 = db.Column(db.String(256))
     
 
 
@@ -211,6 +215,15 @@ class round5_ans(FlaskForm):
     a11 = StringField('key11', validators=[InputRequired()] )
     a12 = StringField('key12', validators=[InputRequired()] )
 
+class round8_ans(FlaskForm):
+    r1 = StringField('rkey1', validators=[InputRequired()] )
+    r2 = StringField('rkey2', validators=[InputRequired()] )
+    r3 = StringField('rkey3', validators=[InputRequired()] )
+    r4 = StringField('rkey4', validators=[InputRequired()] )
+    r5 = StringField('rkey5', validators=[InputRequired()] )
+    r6 = StringField('rkey6', validators=[InputRequired()] )
+
+
     
 
 
@@ -263,7 +276,8 @@ if check_admin== None :
                          r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
-                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3)        
+                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3)        
     db.session.add(admin_user)
     db.session.commit()
 
@@ -390,7 +404,8 @@ def register():
                          r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
-                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3)#hashed_password)
+                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3)#hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -729,10 +744,59 @@ def round7():
 
 
 
-@app.route('/key8.html')                                                                                     #######    round 8
+@app.route('/key8.html',  methods=['GET', 'POST'])                                                                                     #######    round 8
 @login_required
 def round8():
-    return render_template("round8.html")
+    if g.user.key7 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:   
+        nextKey = temp_data.key8    
+        form = round8_ans()
+        user = User.query.filter_by(id = g.user.id).first()
+        if form.validate_on_submit():
+            if form.r1.data == str(temp_data.ans_round8[0]):
+                if form.r2.data == str(temp_data.ans_round8[1]):
+                    if form.r3.data == str(temp_data.ans_round8[2]):
+                        if form.r4.data == str(temp_data.ans_round8[3]):
+                            if form.r5.data == str(temp_data.ans_round8[4]):
+                                if form.r6.data == str(temp_data.ans_round8[5]):
+                                    user.key8 = '1'                   
+                                    db.session.add(user)
+                                    db.session.commit()
+        elif request.method == 'POST':
+            print('Incoming..')
+            print(request.get_json())  # parse as JSON 
+            tempdata = request.get_json()
+            if g.user.hint1 == None:
+                user.hint1 = tempdata['hint'] 
+                #user.time1 = tempdata['time']
+            elif g.user.hint2 == None:
+                user.hint2 = tempdata['hint']
+                #user.time2 = tempdata['time']
+            elif g.user.hint3 == None:
+                user.hint3 = tempdata['hint']
+                #user.time3 = tempdata['time']
+            elif g.user.hint4 == None:
+                user.hint4 = tempdata['hint']
+                #user.time4 = tempdata['time']
+            elif g.user.hint5 == None:
+                user.hint5 = tempdata['hint']
+                #user.time5 = tempdata['time']
+            elif g.user.hint6 == None:
+                user.hint6 = tempdata['hint']
+                #user.time6 = tempdata['time']
+            elif g.user.hint7 == None:
+                user.hint7 = tempdata['hint']
+                #user.time7 = tempdata['time']
+   
+            user.time1 = tempdata['time']
+            user.hints =   int(g.user.hints) - 1                 
+            db.session.add(user)
+            db.session.commit()
+            return 'OK', 200  
+        
+        return render_template("round8.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
+    
 
 
 

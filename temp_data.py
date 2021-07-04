@@ -9,14 +9,14 @@ key8 = 54
 
 
 
-ans_round1 = "hint"
+ans_round1 = "NotHiNG00"
 ans_round2 = "answer"
 ans_round3 = "answer"   #bonus round
 ans_round4 = "answer"
 ans_round5 = ['0','0','0','0','0','0','0','0','0','0','0','0']
 ans_round6 = "answer"
 ans_round7 = "answer"
-ans_round8 = "answer"
+ans_round8 = ['2','5','2','4','6','9']
 
 
                                 #hints
