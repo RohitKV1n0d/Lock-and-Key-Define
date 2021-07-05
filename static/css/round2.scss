@@ -1,77 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&display=swap');
-body {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: black;
-    font-family:Cinzel ;
-  }
-  
-.wdiv{
-  text-align: center;
-  margin-top: -5em;
+body{
+    margin: 0;
 }
 
-.watch{
-
-  width: 70%;
- 
-}
-.mp3 audio { 
-  background-color: #000;
-}
-
-
-
-  .ans{
+.key8-img{
     text-align: center;
-    margin-top: -7em;
-    margin-left: 2em;
-    
-
-
-    input[name="answer"]{
-        padding-right: 4em;
-        padding-top: .5em;
-        font-size:large;
-        border: 3px solid #535353;
+    z-index: -99;
+    img{
+    width: 89%;
     }
-    
-    input[type="submit"]{
-      font-family:Cinzel ;
-        color: black;
-        margin-top: 1em;
-        border: 3px solid #535353;
-        font-size:large;
-
-        &:hover{
-            background-color: #535353;
-            color: white;
-        }
-
-        
-
-    }
-
 }
+
+
+.key-answers{
+
+    text-align: center;
+    margin-top: -13em;
+    margin-left:1.65em ;
+    word-spacing: .55em;
+
+     input{
+         width: 7px;
+         text-align: center;
+         font-size:small;
+         border-radius: .5em;
+         padding: .2em;
+ 
+     }
+     margin-bottom: 5em;
+   
+ }
+
+ #r1{
+    background-color: red;
+}
+#r2{
+    background-color:green;
+}
+#r3{
+    background-color:red;
+}
+#r4{
+    background-color:yellow;
+}
+#r5{
+    background-color:blue
+}
+#r6{
+    background-color:whitesmoke;
+}
+
+
+
+button{
+    font-size: xx-large;
+    color: black;
+    margin-top: -3em;
+    
+    
+    font-family: Cinzel;
+    border-radius: .5em;
+    
+    border: 3px solid #535353;
+
+    &:hover{
+        background-color: #535353;
+        color: white;
+    }
+}
+.enter{
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+
+
 
 .next-clue{
-  text-align: center;
-  word-spacing: 2em;
-  a{
-      text-decoration: none;
-      border: 2px solid whitesmoke;
-      color:whitesmoke;
-      padding: .2em;
-      border-radius: .6em;
-      &:hover{
-          background-color: whitesmoke;
-          color: black;
-      }
-  }
-  
+    
+    margin-top: -30em;
+    text-align: center;
+    word-spacing: 2em;
+    a{
+        
+        text-decoration: none;
+        border: 2px solid black;
+        color:black;
+        padding: .2em;
+        border-radius: .6em;
+        &:hover{
+            background-color: black;
+            color: whitesmoke;
+        }
+    }
+    
 }
+
+
+#homepage{
+    color: black;
+    margin-top: 3em;
+    text-decoration: none;
+    
+    
+    font-family: Cinzel;
+    border-radius: .5em;
+    
+    border: 3px solid #535353;
+
+    &:hover{
+        background-color: #535353;
+        color: white;
+    }
+
+}
+
+
 
 .modal {
     display: none; /* Hidden by default */
@@ -141,7 +184,7 @@ body {
 .hints{
     li{
     &:hover{
-        font-weight: bolder;
+        font-weight: bold;
         color: black;
     }
 }

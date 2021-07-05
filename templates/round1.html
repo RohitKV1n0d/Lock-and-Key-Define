@@ -105,11 +105,13 @@
                 element.innerHTML = "You can Choose a HINT!!";
                 window.location.reload();         
                 if("{{g.user.hint1}}" != null){hintid1.style.pointerEvents = 'none';
-                }else {hintid1.style.pointerEvents = 'auto';}
+                }else {hintid1.style.pointerEvents = 'auto';}      
                 if("{{g.user.hint2}}" != null){hintid2.style.pointerEvents = 'none';
                 }else {hintid2.style.pointerEvents = 'auto';}
                 if("{{g.user.hint3}}" != null){hintid3.style.pointerEvents = 'none';
                 }else{hintid3.style.pointerEvents = 'auto';}
+
+
                 
             } else {
                 hintid1.style.pointerEvents = 'none';
@@ -179,6 +181,40 @@
     var h2 = "{{g.user.r1h2}}";
     var h3 = "{{g.user.r1h3}}";
 
+    var rh1 = "r1h1";
+    var rh2 = "r1h2";
+    var rh3 = "r1h3"; 
+
+    hint1.style.cursor = 'pointer';
+    hint1.style.fontWeight = 'bold';
+    hint1.style.color = 'black'
+    hint1.onmouseover = function(){ hint1.style.fontWeight = 'bolder';}
+
+    hint2.style.pointerEvents = 'none';
+    hint2.style.color = 'grey'
+    hint3.style.pointerEvents = 'none';
+    hint3.style.color = 'grey'
+    
+    if( ("{{g.user.hint1}}"  == rh1) || "{{g.user.hint2}}" == rh1 || "{{g.user.hint3}}" == rh1 || "{{g.user.hint4}}" == rh1 || "{{g.user.hint5}}" == rh1 || "{{g.user.hint6}}" == rh1 || "{{g.user.hint7}}" == rh1){ 
+            hint2.style.pointerEvents = 'auto';
+            hint2.style.cursor = 'pointer';
+            hint2.style.fontWeight = 'bold';
+            hint2.style.color = 'black'
+            hint2.onmouseover = function(){ hint2.style.fontWeight = 'bolder';}
+
+            hint3.style.pointerEvents = 'none';
+            hint3.style.color = 'grey'
+            
+        }
+    if("{{g.user.hint1}}" == rh2 || "{{g.user.hint2}}" == rh2 || "{{g.user.hint3}}" == rh2 || "{{g.user.hint4}}" == rh2 || "{{g.user.hint5}}" == rh2 || "{{g.user.hint6}}" == rh2|| "{{g.user.hint7}}" == rh2){
+            hint3.style.pointerEvents = 'auto';
+            hint3.style.cursor = 'pointer';
+            hint3.style.fontWeight = 'bold';
+            hint3.style.color = 'black'
+            hint3.onmouseover = function(){ hint3.style.fontWeight = 'bolder';}
+            }
+
+            
     
     
 
@@ -186,18 +222,19 @@
         if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
             hintID.innerHTML = main_hint;
             hintID.style.color = "red";
+            hintID.onmouseover = function(){ hintID.style.fontWeight = 'normal';}
             hintID.style.pointerEvents = 'none';
         }
     }
 
-    checkifUsed('r1h1', hint1,h1);
-    checkifUsed('r1h2', hint2,h2);
-    checkifUsed('r1h3', hint3,h3);
+    checkifUsed(rh1, hint1,h1);
+    checkifUsed(rh2, hint2,h2);
+    checkifUsed(rh3, hint3,h3);
 
 
 
     if(checkTimerNeeded()){
-                countdown( "ten-countdown", 120000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
+                countdown( "ten-countdown", 10000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
             }
           
             
@@ -211,7 +248,7 @@
         if(hint_count>0 ) {
            
             
-                countdown( "ten-countdown", 120000 ,hintid1, hintid2, hintid3 );
+                countdown( "ten-countdown", 10000 ,hintid1, hintid2, hintid3 );
                 
                 let getTime = new Date().getTime();
                 hintID.innerHTML = mainHint;
@@ -253,9 +290,9 @@
     }
 
 
-    hint1.onclick = function() {updateHint(hint1,hints_left,"r1h1",'/key1.html',h1,hint1,hint2,hint3);}
-    hint2.onclick = function() {updateHint(hint2,hints_left,"r1h2",'/key1.html',h2,hint1,hint2,hint3);}
-    hint3.onclick = function() {updateHint(hint3,hints_left,"r1h3",'/key1.html',h3,hint1,hint2,hint3);}
+    hint1.onclick = function() {updateHint(hint1,hints_left,rh1,'/key1.html',h1,hint1,hint2,hint3);}
+    hint2.onclick = function() {updateHint(hint2,hints_left,rh2,'/key1.html',h2,hint1,hint2,hint3);}
+    hint3.onclick = function() {updateHint(hint3,hints_left,rh3,'/key1.html',h3,hint1,hint2,hint3);}
 
 
 
@@ -264,7 +301,7 @@
         var c_time = new Date().getTime();
         if(lastRecivedTime!=null){ 
             var elaspedTime = c_time-lastRecivedTime;
-            if(elaspedTime < 120000){
+            if(elaspedTime < 10000){
                 return true;
             }
         }

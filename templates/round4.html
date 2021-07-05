@@ -34,7 +34,17 @@
         <!-- Modal content -->    
 
 
-    <h2>Clue to sponser webpage here</h2> 
+    <h2>diplomatic relations    </h2> 
+    <h2>AED</h2> 
+    <h2>OMR</h2> 
+    <h2>QAR</h2> 
+    <h2>KWD</h2> 
+    <h2>BHD</h2> 
+    <h2>SAR</h2> 
+    
+
+
+    <a style="margin-top: -2em;" href="https://www.gulfcareers.com/about-us/">https://www.gulfcareers.com/about-us/</a>
     <form action="" , method="POST">
         <div class="answer">
         {{ form.hidden_tag() }}                
@@ -164,22 +174,58 @@
         var h1 = "{{g.user.r4h1}}";                             
         var h2 = "{{g.user.r4h2}}";
         var h3 = "{{g.user.r4h3}}";
-    
+
         
-        
+    var rh1 = "r4h1";
+    var rh2 = "r4h2";
+    var rh3 = "r4h3"; 
+
+    hint1.style.cursor = 'pointer';
+    hint1.style.fontWeight = 'bold';
+    hint1.style.color = 'black'
+    hint1.onmouseover = function(){ hint1.style.fontWeight = 'bolder';}
+
+    hint2.style.pointerEvents = 'none';
+    hint2.style.color = 'grey'
+    hint3.style.pointerEvents = 'none';
+    hint3.style.color = 'grey'
     
-        function checkifUsed(hintname,hintID,main_hint){
-            if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
-                hintID.innerHTML = main_hint;
-                hintID.style.color = "red";
-                hintID.style.pointerEvents = 'none';
-            }
+    if( ("{{g.user.hint1}}"  == rh1) || "{{g.user.hint2}}" == rh1 || "{{g.user.hint3}}" == rh1 || "{{g.user.hint4}}" == rh1 || "{{g.user.hint5}}" == rh1 || "{{g.user.hint6}}" == rh1 || "{{g.user.hint7}}" == rh1){ 
+            hint2.style.pointerEvents = 'auto';
+            hint2.style.cursor = 'pointer';
+            hint2.style.fontWeight = 'bold';
+            hint2.style.color = 'black'
+            hint2.onmouseover = function(){ hint2.style.fontWeight = 'bolder';}
+
+            hint3.style.pointerEvents = 'none';
+            hint3.style.color = 'grey'
+            
         }
-        
+    if("{{g.user.hint1}}" == rh2 || "{{g.user.hint2}}" == rh2 || "{{g.user.hint3}}" == rh2 || "{{g.user.hint4}}" == rh2 || "{{g.user.hint5}}" == rh2 || "{{g.user.hint6}}" == rh2|| "{{g.user.hint7}}" == rh2){
+            hint3.style.pointerEvents = 'auto';
+            hint3.style.cursor = 'pointer';
+            hint3.style.fontWeight = 'bold';
+            hint3.style.color = 'black'
+            hint3.onmouseover = function(){ hint3.style.fontWeight = 'bolder';}
+            }
+
+            
+    
+    
+
+    function checkifUsed(hintname,hintID,main_hint){
+        if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
+            hintID.innerHTML = main_hint;
+            hintID.style.color = "red";
+            hintID.onmouseover = function(){ hintID.style.fontWeight = 'normal';}
+            hintID.style.pointerEvents = 'none';
+        }
+    }
+
         //Enter Hints database links here
-        checkifUsed('r4h1', hint1,h1);
-        checkifUsed('r4h2', hint2,h2);
-        checkifUsed('r4h3', hint3,h3);
+        checkifUsed(rh1, hint1,h1);
+        checkifUsed(rh2, hint2,h2);
+        checkifUsed(rh3, hint3,h3);
     
     
     
@@ -240,9 +286,9 @@
         }
         
         //Enter here too
-        hint1.onclick = function() {updateHint(hint1,hints_left,"r4h1",'/key4.html',h1,hint1,hint2,hint3);}
-        hint2.onclick = function() {updateHint(hint2,hints_left,"r4h2",'/key4.html',h2,hint1,hint2,hint3);}
-        hint3.onclick = function() {updateHint(hint3,hints_left,"r4h3",'/key4.html',h3,hint1,hint2,hint3);}
+        hint1.onclick = function() {updateHint(hint1,hints_left,rh1,'/key4.html',h1,hint1,hint2,hint3);}
+        hint2.onclick = function() {updateHint(hint2,hints_left,rh2,'/key4.html',h2,hint1,hint2,hint3);}
+        hint3.onclick = function() {updateHint(hint3,hints_left,rh3,'/key4.html',h3,hint1,hint2,hint3);}
     
     
     

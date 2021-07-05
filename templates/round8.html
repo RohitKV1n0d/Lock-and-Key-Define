@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key 9</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/round8.css')}}">
-
-    <title>Key 8</title>
 </head>
 <body>
+                                                        <!-- THIS IS ROUND 9 -->
+                                                        <!-- THIS IS ROUND 9 -->
+                                                        <!-- THIS IS ROUND 9 -->
+                                                        <!-- THIS IS ROUND 9 -->
+                                                        <!-- THIS IS ROUND 9 -->
+                                                        <!-- THIS IS ROUND 9 -->
+                                                        <!-- THIS IS ROUND 9 -->
     
     <div id="myModal" class="modal">
         <!-- Modal content -->
@@ -31,57 +37,56 @@
         </div> 
     </div>
 
-        <!-- Modal content -->      
+        <!-- Modal content -->     
+        
 
-    <div class="key8-img">
-    <img  src="{{url_for('static',filename='Images/key8.png')}}" alt="key8">
-</div>
-    
-<section class="key-answers">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <ul>
+    <div class="wdiv">
+        <img  class="watch" src="{{url_for('static',filename='Images/watch.gif')}}" alt="">
+    </div>
+        
+  
+        
+    <div class="mp3" style="text-align: center; margin-top: -9em;" >
+        <audio  style="width: 10em; height: 20px; " src="{{url_for('static',filename='Images/round2.mp3')}}" controls autoplay loop>
+        </audio>
+    </div>
 
-            {{form.r1}}
-            {{form.r2}}
-            {{form.r3}}
-            {{form.r4}}
-            {{form.r5}}
-            {{form.r6}}
-         
+
+
+    <section class="ans">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
             
-        </ul>
-        <div class="enter" style="margin-top: 5em;">
-            <button  id="enter">Enter</button>
-        </div>
-    </form>
+                <label for="answer"></label>
+                {{ form.answer }}
+            
+            <input type="submit" name="enter" id="enter" value="enter">
+        </form>
+        <a id="homepage" href="unlock" >HomePage</a>
+    </section>
 
-    <a id="homepage" href="unlock">HomePage</a>
-</section>
+    <!-- <embed src="" loop="true" autostart="true" width="2" height="0"> -->
 
 
+        
 
-
-    
 
 
 
 <section class="next-clue" >
-    <div id="Myid" style="display: none;" >
-    <ul>
+    <ul class="click" style="display: none;" id="Myid">
         <a href="unlock">{{nextKey}}</a>
-        <a href="unlock ">NextClue</a>
+        <a href="unlock">NextClue</a>
     </ul>
-</div>
 </section>
 
-
 <script>
-    var x = document.getElementById("Myid");
-    if ( "{{g.user.key8}}" == "1" ) {
-    x.style.display = "block";
-     }
-  
+     var x = document.getElementById("Myid");
+    
+    if ( "{{g.user.key9}}" == "1" ) {
+        x.style.display = "block";
+         }
+
 </script>
 
 
@@ -184,25 +189,61 @@
         var hints_left = document.getElementById("hints_left");
         let hint_count = Number("{{g.user.hints}}");
         //Enter Hints database links here
-        var h1 = "{{g.user.r8h1}}";                             
-        var h2 = "{{g.user.r8h2}}";
-        var h3 = "{{g.user.r8h3}}";
-    
+        var h1 = "{{g.user.r9h1}}";                             
+        var h2 = "{{g.user.r9h2}}";
+        var h3 = "{{g.user.r9h3}}";
+
         
-        
+    var rh1 = "r9h1";
+    var rh2 = "r9h2";
+    var rh3 = "r9h3"; 
+
+    hint1.style.cursor = 'pointer';
+    hint1.style.fontWeight = 'bold';
+    hint1.style.color = 'black'
+    hint1.onmouseover = function(){ hint1.style.fontWeight = 'bolder';}
+
+    hint2.style.pointerEvents = 'none';
+    hint2.style.color = 'grey'
+    hint3.style.pointerEvents = 'none';
+    hint3.style.color = 'grey'
     
-        function checkifUsed(hintname,hintID,main_hint){
-            if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
-                hintID.innerHTML = main_hint;
-                hintID.style.color = "red";
-                hintID.style.pointerEvents = 'none';
-            }
+    if( ("{{g.user.hint1}}"  == rh1) || "{{g.user.hint2}}" == rh1 || "{{g.user.hint3}}" == rh1 || "{{g.user.hint4}}" == rh1 || "{{g.user.hint5}}" == rh1 || "{{g.user.hint6}}" == rh1 || "{{g.user.hint7}}" == rh1){ 
+            hint2.style.pointerEvents = 'auto';
+            hint2.style.cursor = 'pointer';
+            hint2.style.fontWeight = 'bold';
+            hint2.style.color = 'black'
+            hint2.onmouseover = function(){ hint2.style.fontWeight = 'bolder';}
+
+            hint3.style.pointerEvents = 'none';
+            hint3.style.color = 'grey'
+            
         }
-        
+    if("{{g.user.hint1}}" == rh2 || "{{g.user.hint2}}" == rh2 || "{{g.user.hint3}}" == rh2 || "{{g.user.hint4}}" == rh2 || "{{g.user.hint5}}" == rh2 || "{{g.user.hint6}}" == rh2|| "{{g.user.hint7}}" == rh2){
+            hint3.style.pointerEvents = 'auto';
+            hint3.style.cursor = 'pointer';
+            hint3.style.fontWeight = 'bold';
+            hint3.style.color = 'black'
+            hint3.onmouseover = function(){ hint3.style.fontWeight = 'bolder';}
+            }
+
+            
+    
+    
+
+    function checkifUsed(hintname,hintID,main_hint){
+        if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
+            hintID.innerHTML = main_hint;
+            hintID.style.color = "red";
+            hintID.onmouseover = function(){ hintID.style.fontWeight = 'normal';}
+            hintID.style.pointerEvents = 'none';
+        }
+    }
+
         //Enter Hints database links here
-        checkifUsed('r8h1', hint1,h1);
-        checkifUsed('r8h2', hint2,h2);
-        checkifUsed('r8h3', hint3,h3);
+        checkifUsed(rh1, hint1,h1);
+        checkifUsed(rh2, hint2,h2);
+        checkifUsed(rh3, hint3,h3);
     
     
     
@@ -263,9 +304,9 @@
         }
         
         //Enter here too
-        hint1.onclick = function() {updateHint(hint1,hints_left,"r8h1",'/key8.html',h1,hint1,hint2,hint3);}
-        hint2.onclick = function() {updateHint(hint2,hints_left,"r8h2",'/key8.html',h2,hint1,hint2,hint3);}
-        hint3.onclick = function() {updateHint(hint3,hints_left,"r8h3",'/key8.html',h3,hint1,hint2,hint3);}
+        hint1.onclick = function() {updateHint(hint1,hints_left,rh1,'/key9.html',h1,hint1,hint2,hint3);}
+        hint2.onclick = function() {updateHint(hint2,hints_left,rh2,'/key9.html',h2,hint1,hint2,hint3);}
+        hint3.onclick = function() {updateHint(hint3,hints_left,rh3,'/key9.html',h3,hint1,hint2,hint3);}
     
     
     
@@ -282,14 +323,12 @@
             
          }  
     
-    
-       
-    
-       
+
         </script>
         
     
-
+    
+    
     
 </body>
 </html>

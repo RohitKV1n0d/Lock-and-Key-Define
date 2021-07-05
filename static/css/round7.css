@@ -11,7 +11,7 @@ body {
   justify-items: center;
   /* margin: 0;
     padding: 10px; */
-  background-color: #969696;
+  background-color: #cac3c3;
 }
 
 h2 {
@@ -149,7 +149,7 @@ a {
 }
 
 .hints li:hover {
-  font-weight: normal;
+  font-weight: bolder;
   color: black;
 }
 
@@ -163,4 +163,4 @@ a {
   font-weight: bold;
   text-decoration: none;
 }
-/*# sourceMappingURL=round4.css.map */
+/*# sourceMappingURL=round7.css.map */

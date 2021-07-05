@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/round7.css">
-    <title>Key 7</title>
+    <link rel="stylesheet" href="/static/css/scavenger.css">
+    <title>Key 8</title>
 </head>
 <body>
-    
     <div id="myModal" class="modal">
         <!-- Modal content -->
         
@@ -17,7 +16,7 @@
             <h1 style="text-align: center;">Hints</h2>
 
             <ul class="hints">
-                <li><button   id="hint1" style="padding: 0; border: none; background: none; font-size: large;"> Hint 1 (if you havent Recived the Textbook)</button></li>
+                <li><button   id="hint1" style="padding: 0; border: none; background: none; font-size: large;"> Hint 1</button></li>
                 <li><button   id="hint2" style="padding: 0; border: none; background: none; font-size: large;"> Hint 2</button></li>
                 <li><button   id="hint3" style="padding: 0; border: none; background: none; font-size: large;"> Hint 3</button></li>
             </ul>
@@ -37,8 +36,9 @@
 
 
 
-    <h2>Clue headers</h2> 
-    <a id="riddle" style="text-decoration: none; cursor:text;" href="#">the more i am the less you see</a>
+    <h2>He typed "12312 1" in 1990</h2> 
+    <p>nokia hands</p>
+  
 
 
     <form action="" , method="POST">
@@ -53,14 +53,14 @@
     <section class="next-clue" >
             <ul class="click" style="display: none;" id="Myid">
             <a href="unlock">{{nextKey}}</a>
-            <a href="key8.html">NextClue</a>
+            <a href="key9.html">NextClue</a>
         </ul>
     </section>
 
     <script>
         var x = document.getElementById("Myid");
        
-       if ( "{{g.user.key7}}" == "1" ) {
+       if ( "{{g.user.key8}}" == "1" ) {
            x.style.display = "block";
             }
    
@@ -167,17 +167,16 @@
         var hints_left = document.getElementById("hints_left");
         let hint_count = Number("{{g.user.hints}}");
         //Enter Hints database links here
-        var h1 = "{{g.user.r7h1}}";                             
-        var h2 = "{{g.user.r7h2}}";
-        var h3 = "{{g.user.r7h3}}";
+        var h1 = "{{g.user.r8h1}}";                             
+        var h2 = "{{g.user.r8h2}}";
+        var h3 = "{{g.user.r8h3}}";
 
-        
-    var rh1 = "r7h1";
-    var rh2 = "r7h2";
-    var rh3 = "r7h3"; 
+        var rh1 = "r8h1";
+    var rh2 = "r8h2";
+    var rh3 = "r8h3"; 
 
 
-    hint1.style.cursor = 'pointer';
+        hint1.style.cursor = 'pointer';
     hint1.style.fontWeight = 'bold';
     hint1.style.color = 'black'
     hint1.onmouseover = function(){ hint1.style.fontWeight = 'bolder';}
@@ -219,6 +218,17 @@
         }
     }
 
+    
+        
+        
+    
+        function checkifUsed(hintname,hintID,main_hint){
+            if("{{g.user.hint1}}"== hintname || "{{g.user.hint2}}"== hintname || "{{g.user.hint3}}"== hintname|| "{{g.user.hint4}}"== hintname|| "{{g.user.hint5}}"== hintname|| "{{g.user.hint6}}"== hintname|| "{{g.user.hint7}}"== hintname){
+                hintID.innerHTML = main_hint;
+                hintID.style.color = "red";
+                hintID.style.pointerEvents = 'none';
+            }
+        }
         
         //Enter Hints database links here
         checkifUsed(rh1, hint1,h1);
@@ -284,9 +294,9 @@
         }
         
         //Enter here too
-        hint1.onclick = function() {updateHint(hint1,hints_left,rh1,'/key7.html',h1,hint1,hint2,hint3);}
-        hint2.onclick = function() {updateHint(hint2,hints_left,rh2,'/key7.html',h2,hint1,hint2,hint3);}
-        hint3.onclick = function() {updateHint(hint3,hints_left,rh3,'/key7.html',h3,hint1,hint2,hint3);}
+        hint1.onclick = function() {updateHint(hint1,hints_left,rh1,'/key8.html',h1,hint1,hint2,hint3);}
+        hint2.onclick = function() {updateHint(hint2,hints_left,rh2,'/key8.html',h2,hint1,hint2,hint3);}
+        hint3.onclick = function() {updateHint(hint3,hints_left,rh3,'/key8.html',h3,hint1,hint2,hint3);}
     
     
     
@@ -305,7 +315,5 @@
     
         </script>
         
-
-    
 </body>
 </html>

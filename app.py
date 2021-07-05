@@ -65,7 +65,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 #https://lockandkey-define.in/admin/
 
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev' :
     app.debug = True
@@ -115,6 +115,8 @@ class User(UserMixin, db.Model):
     key6= db.Column(db.String(256))
     key7= db.Column(db.String(256))
     key8= db.Column(db.String(256))
+    key9= db.Column(db.String(256))
+
     unlcok_time = db.Column(db.String(256))
     
     hints = db.Column(db.String(256))
@@ -161,6 +163,10 @@ class User(UserMixin, db.Model):
     r8h1 = db.Column(db.String(256))
     r8h2 = db.Column(db.String(256))
     r8h3 = db.Column(db.String(256))
+
+    r9h1 = db.Column(db.String(256))
+    r9h2 = db.Column(db.String(256))
+    r9h3 = db.Column(db.String(256))
     
 
 
@@ -224,6 +230,17 @@ class round8_ans(FlaskForm):
     r6 = StringField('rkey6', validators=[InputRequired()] )
 
 
+class unlock(FlaskForm):
+    key_1 = StringField('key_1', validators=[InputRequired()] )
+    key_2 = StringField('key_2', validators=[InputRequired()] )
+    key_3 = StringField('key_3', validators=[InputRequired()] )
+    key_4 = StringField('key_4', validators=[InputRequired()] )
+    key_5 = StringField('key_5', validators=[InputRequired()] )
+    key_6 = StringField('key_6', validators=[InputRequired()] )
+    key_7 = StringField('key_7', validators=[InputRequired()] )
+    key_8 = StringField('key_8', validators=[InputRequired()] )
+
+
     
 
 
@@ -277,7 +294,8 @@ if check_admin== None :
                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
                          r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
-                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3)        
+                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+                         r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
     db.session.add(admin_user)
     db.session.commit()
 
@@ -345,7 +363,8 @@ def register():
                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
                          r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
-                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3)#hashed_password)
+                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+                         r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)#hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -360,6 +379,7 @@ def register():
 #######################################################################################################
 
 hinttimer = 10000
+
 
 
 @app.route('/rules.html')
@@ -385,8 +405,6 @@ def unlock():
         return render_template("unlock.html")
 
 
-
-
 @app.route('/key1.html', methods=['GET', 'POST'])                           #######    round 1
 @login_required
 def round1():
@@ -404,28 +422,33 @@ def round1():
         print('Incoming..')
         print(request.get_json())  # parse as JSON 
         tempdata = request.get_json()
-        if g.user.hint1 == None:
+        HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+        if HINT[0] == None:
             user.hint1 = tempdata['hint'] 
             #user.time1 = tempdata['time']
-        elif g.user.hint2 == None:
+        elif HINT[1] == None:
             user.hint2 = tempdata['hint']
             #user.time2 = tempdata['time']
-        elif g.user.hint3 == None:
+        elif HINT[2] == None:
             user.hint3 = tempdata['hint']
             #user.time3 = tempdata['time']
-        elif g.user.hint4 == None:
+        elif HINT[3] == None:
             user.hint4 = tempdata['hint']
             #user.time4 = tempdata['time']
-        elif g.user.hint5 == None:
+        elif HINT[4] == None:
             user.hint5 = tempdata['hint']
             #user.time5 = tempdata['time']
-        elif g.user.hint6 == None:
+        elif HINT[5] == None:
             user.hint6 = tempdata['hint']
             #user.time6 = tempdata['time']
-        elif g.user.hint7 == None:
+        elif HINT[6] == None:
             user.hint7 = tempdata['hint']
             #user.time7 = tempdata['time']
-
+        
+        
+        
+        
+ 
             
         user.time1 = tempdata['time']
         user.hints =   int(g.user.hints) - 1                 
@@ -437,53 +460,68 @@ def round1():
 
 
 
-@app.route('/key2.html', methods=['GET', 'POST'])                                                     #######    round 2
+
+
+
+
+
+
+@app.route('/key2.html',  methods=['GET', 'POST'])                                                            #######    round 2
 @login_required
 def round2():
     if g.user.key1 != '1':
         return "Finish the last round you sneaky KID!"
-    else:
-        nextKey = temp_data.key2
-        form = GetAnswer()
+    else:   
+        nextKey = temp_data.key2    
+        form = round8_ans()
         user = User.query.filter_by(id = g.user.id).first()
         if form.validate_on_submit():
-            if form.answer.data == temp_data.ans_round2:
-                user.key2 = '1'                   
-                db.session.add(user)
-                db.session.commit()
+            if form.r1.data == str(temp_data.ans_round2[0]):
+                if form.r2.data == str(temp_data.ans_round2[1]):
+                    if form.r3.data == str(temp_data.ans_round2[2]):
+                        if form.r4.data == str(temp_data.ans_round2[3]):
+                            if form.r5.data == str(temp_data.ans_round2[4]):
+                                if form.r6.data == str(temp_data.ans_round2[5]):
+                                    user.key2 = '1'                   
+                                    db.session.add(user)
+                                    db.session.commit()
         elif request.method == 'POST':
             print('Incoming..')
             print(request.get_json())  # parse as JSON 
             tempdata = request.get_json()
-            if g.user.hint1 == None:
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
                 #user.time1 = tempdata['time']
-            elif g.user.hint2 == None:
+            elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
                 #user.time2 = tempdata['time']
-            elif g.user.hint3 == None:
+            elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
                 #user.time3 = tempdata['time']
-            elif g.user.hint4 == None:
+            elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
                 #user.time4 = tempdata['time']
-            elif g.user.hint5 == None:
+            elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
                 #user.time5 = tempdata['time']
-            elif g.user.hint6 == None:
+            elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
                 #user.time6 = tempdata['time']
-            elif g.user.hint7 == None:
+            elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
                 #user.time7 = tempdata['time']
-
-                
+   
             user.time1 = tempdata['time']
             user.hints =   int(g.user.hints) - 1                 
             db.session.add(user)
             db.session.commit()
-            return 'OK', 200
+            return 'OK', 200  
+        
         return render_template("round2.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
+    
+
+
 
 
 
@@ -519,25 +557,26 @@ def round4():
             print('Incoming..')
             print(request.get_json())  # parse as JSON 
             tempdata = request.get_json()
-            if g.user.hint1 == None:
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
                 #user.time1 = tempdata['time']
-            elif g.user.hint2 == None:
+            elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
                 #user.time2 = tempdata['time']
-            elif g.user.hint3 == None:
+            elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
                 #user.time3 = tempdata['time']
-            elif g.user.hint4 == None:
+            elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
                 #user.time4 = tempdata['time']
-            elif g.user.hint5 == None:
+            elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
                 #user.time5 = tempdata['time']
-            elif g.user.hint6 == None:
+            elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
                 #user.time6 = tempdata['time']
-            elif g.user.hint7 == None:
+            elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
                 #user.time7 = tempdata['time']
 
@@ -595,25 +634,26 @@ def round5():
             print('Incoming..')
             print(request.get_json())  # parse as JSON 
             tempdata = request.get_json()
-            if g.user.hint1 == None:
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
                 #user.time1 = tempdata['time']
-            elif g.user.hint2 == None:
+            elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
                 #user.time2 = tempdata['time']
-            elif g.user.hint3 == None:
+            elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
                 #user.time3 = tempdata['time']
-            elif g.user.hint4 == None:
+            elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
                 #user.time4 = tempdata['time']
-            elif g.user.hint5 == None:
+            elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
                 #user.time5 = tempdata['time']
-            elif g.user.hint6 == None:
+            elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
                 #user.time6 = tempdata['time']
-            elif g.user.hint7 == None:
+            elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
                 #user.time7 = tempdata['time']
 
@@ -627,7 +667,7 @@ def round5():
         return render_template("round5-answer.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
 
 
-@app.route('/key6.html', methods=['GET', 'POST'])                                                                                     #######    round 6
+@app.route('/key6.html', methods=['GET', 'POST'])                                        #######    round 6
 @login_required
 def round6():
     if g.user.key5 != '1':
@@ -645,25 +685,26 @@ def round6():
             print('Incoming..')
             print(request.get_json())  # parse as JSON 
             tempdata = request.get_json()
-            if g.user.hint1 == None:
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
                 #user.time1 = tempdata['time']
-            elif g.user.hint2 == None:
+            elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
                 #user.time2 = tempdata['time']
-            elif g.user.hint3 == None:
+            elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
                 #user.time3 = tempdata['time']
-            elif g.user.hint4 == None:
+            elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
                 #user.time4 = tempdata['time']
-            elif g.user.hint5 == None:
+            elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
                 #user.time5 = tempdata['time']
-            elif g.user.hint6 == None:
+            elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
                 #user.time6 = tempdata['time']
-            elif g.user.hint7 == None:
+            elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
                 #user.time7 = tempdata['time']
 
@@ -676,67 +717,163 @@ def round6():
         return render_template("round6.html",  form=form ,nextKey=nextKey,hinttimer=hinttimer)
 
 
-@app.route('/key7.html')                                                                                     #######    round 7
+@app.route('/key7.html', methods=['GET', 'POST'])                                          #######    round 7
 @login_required
 def round7():
-    return render_template("round7.html")
-
-
-
-
-@app.route('/key8.html',  methods=['GET', 'POST'])                                                                                     #######    round 8
-@login_required
-def round8():
-    if g.user.key7 != '1':
+    if g.user.key6 != '1':
         return "Finish the last round you sneaky KID!"
-    else:   
-        nextKey = temp_data.key8    
-        form = round8_ans()
+    else:
+        nextKey = temp_data.key7
+        form = GetAnswer()
         user = User.query.filter_by(id = g.user.id).first()
-        if form.validate_on_submit():
-            if form.r1.data == str(temp_data.ans_round8[0]):
-                if form.r2.data == str(temp_data.ans_round8[1]):
-                    if form.r3.data == str(temp_data.ans_round8[2]):
-                        if form.r4.data == str(temp_data.ans_round8[3]):
-                            if form.r5.data == str(temp_data.ans_round8[4]):
-                                if form.r6.data == str(temp_data.ans_round8[5]):
-                                    user.key8 = '1'                   
-                                    db.session.add(user)
-                                    db.session.commit()
+        if form.validate_on_submit():           
+            if form.answer.data == temp_data.ans_round7:
+                user.key7 = '1'                   
+                db.session.add(user)
+                db.session.commit()
         elif request.method == 'POST':
             print('Incoming..')
             print(request.get_json())  # parse as JSON 
             tempdata = request.get_json()
-            if g.user.hint1 == None:
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
                 #user.time1 = tempdata['time']
-            elif g.user.hint2 == None:
+            elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
                 #user.time2 = tempdata['time']
-            elif g.user.hint3 == None:
+            elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
                 #user.time3 = tempdata['time']
-            elif g.user.hint4 == None:
+            elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
                 #user.time4 = tempdata['time']
-            elif g.user.hint5 == None:
+            elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
                 #user.time5 = tempdata['time']
-            elif g.user.hint6 == None:
+            elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
                 #user.time6 = tempdata['time']
-            elif g.user.hint7 == None:
+            elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
                 #user.time7 = tempdata['time']
-   
+
+                
             user.time1 = tempdata['time']
             user.hints =   int(g.user.hints) - 1                 
             db.session.add(user)
             db.session.commit()
-            return 'OK', 200  
-        
-        return render_template("round8.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
+            return 'OK', 200
+
+        return render_template("round7.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
+
+
+
+
+@app.route('/key8.html', methods=['GET', 'POST'])                      #######    round 8
+@login_required
+def round8():
+    if g.user.key7 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:
+        nextKey = temp_data.key8
+        form = GetAnswer()
+        user = User.query.filter_by(id = g.user.id).first()
+        if form.validate_on_submit():           
+            if form.answer.data == temp_data.ans_round8:
+                user.key8 = '1'                   
+                db.session.add(user)
+                db.session.commit()
+        elif request.method == 'POST':
+            print('Incoming..')
+            print(request.get_json())  # parse as JSON 
+            tempdata = request.get_json()
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
+                user.hint1 = tempdata['hint'] 
+                #user.time1 = tempdata['time']
+            elif HINT[1] == None:
+                user.hint2 = tempdata['hint']
+                #user.time2 = tempdata['time']
+            elif HINT[2] == None:
+                user.hint3 = tempdata['hint']
+                #user.time3 = tempdata['time']
+            elif HINT[3] == None:
+                user.hint4 = tempdata['hint']
+                #user.time4 = tempdata['time']
+            elif HINT[4] == None:
+                user.hint5 = tempdata['hint']
+                #user.time5 = tempdata['time']
+            elif HINT[5] == None:
+                user.hint6 = tempdata['hint']
+                #user.time6 = tempdata['time']
+            elif HINT[6] == None:
+                user.hint7 = tempdata['hint']
+                #user.time7 = tempdata['time']
+
+                
+            user.time1 = tempdata['time']
+            user.hints =   int(g.user.hints) - 1                 
+            db.session.add(user)
+            db.session.commit()
+            return 'OK', 200
+
+        return render_template("scavenger.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
     
+
+
+
+
+
+@app.route('/key9.html', methods=['GET', 'POST'])                                                     #######    round 9
+@login_required
+def round9():
+    if g.user.key8 != '1':
+        return "Finish the last round you sneaky KID!"
+    else:
+        nextKey = temp_data.key9
+        form = GetAnswer()
+        user = User.query.filter_by(id = g.user.id).first()
+        if form.validate_on_submit():
+            if form.answer.data == temp_data.ans_round9:
+                user.key9 = '1'                   
+                db.session.add(user)
+                db.session.commit()
+        elif request.method == 'POST':
+            print('Incoming..')
+            print(request.get_json())  # parse as JSON 
+            tempdata = request.get_json()
+            HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
+            if HINT[0] == None:
+                user.hint1 = tempdata['hint'] 
+                #user.time1 = tempdata['time']
+            elif HINT[1] == None:
+                user.hint2 = tempdata['hint']
+                #user.time2 = tempdata['time']
+            elif HINT[2] == None:
+                user.hint3 = tempdata['hint']
+                #user.time3 = tempdata['time']
+            elif HINT[3] == None:
+                user.hint4 = tempdata['hint']
+                #user.time4 = tempdata['time']
+            elif HINT[4] == None:
+                user.hint5 = tempdata['hint']
+                #user.time5 = tempdata['time']
+            elif HINT[5] == None:
+                user.hint6 = tempdata['hint']
+                #user.time6 = tempdata['time']
+            elif HINT[6] == None:
+                user.hint7 = tempdata['hint']
+                #user.time7 = tempdata['time']
+
+                
+            user.time1 = tempdata['time']
+            user.hints =   int(g.user.hints) - 1                 
+            db.session.add(user)
+            db.session.commit()
+            return 'OK', 200
+        return render_template("round8.html", form=form ,nextKey=nextKey,hinttimer=hinttimer)
+
 
 
 

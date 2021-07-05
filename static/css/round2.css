@@ -1,73 +1,106 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&display=swap");
 body {
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 100vh;
-  background: black;
-  font-family: Cinzel;
+  margin: 0;
 }
 
-.wdiv {
+.key8-img {
   text-align: center;
-  margin-top: -5em;
+  z-index: -99;
 }
 
-.watch {
-  width: 70%;
+.key8-img img {
+  width: 89%;
 }
 
-.mp3 audio {
-  background-color: #000;
-}
-
-.ans {
+.key-answers {
   text-align: center;
-  margin-top: -7em;
-  margin-left: 2em;
+  margin-top: -13em;
+  margin-left: 1.65em;
+  word-spacing: .55em;
+  margin-bottom: 5em;
 }
 
-.ans input[name="answer"] {
-  padding-right: 4em;
-  padding-top: .5em;
-  font-size: large;
-  border: 3px solid #535353;
+.key-answers input {
+  width: 7px;
+  text-align: center;
+  font-size: small;
+  border-radius: .5em;
+  padding: .2em;
 }
 
-.ans input[type="submit"] {
-  font-family: Cinzel;
+#r1 {
+  background-color: red;
+}
+
+#r2 {
+  background-color: green;
+}
+
+#r3 {
+  background-color: red;
+}
+
+#r4 {
+  background-color: yellow;
+}
+
+#r5 {
+  background-color: blue;
+}
+
+#r6 {
+  background-color: whitesmoke;
+}
+
+button {
+  font-size: xx-large;
   color: black;
-  margin-top: 1em;
+  margin-top: -3em;
+  font-family: Cinzel;
+  border-radius: .5em;
   border: 3px solid #535353;
-  font-size: large;
 }
 
-.ans input[type="submit"]:hover {
+button:hover {
   background-color: #535353;
   color: white;
 }
 
+.enter {
+  text-align: center;
+  padding-bottom: 1em;
+}
+
 .next-clue {
+  margin-top: -30em;
   text-align: center;
   word-spacing: 2em;
 }
 
 .next-clue a {
   text-decoration: none;
-  border: 2px solid whitesmoke;
-  color: whitesmoke;
+  border: 2px solid black;
+  color: black;
   padding: .2em;
   border-radius: .6em;
 }
 
 .next-clue a:hover {
-  background-color: whitesmoke;
+  background-color: black;
+  color: whitesmoke;
+}
+
+#homepage {
   color: black;
+  margin-top: 3em;
+  text-decoration: none;
+  font-family: Cinzel;
+  border-radius: .5em;
+  border: 3px solid #535353;
+}
+
+#homepage:hover {
+  background-color: #535353;
+  color: white;
 }
 
 .modal {
@@ -138,7 +171,7 @@ body {
 }
 
 .hints li:hover {
-  font-weight: bolder;
+  font-weight: bold;
   color: black;
 }
 

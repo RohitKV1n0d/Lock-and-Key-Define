@@ -34,6 +34,7 @@
                     <li><a href="key6.html" id="nav_key6" >Key 6</a></li>
                     <li><a href="key7.html" id="nav_key7" >Key 7</a></li>
                     <li><a href="key8.html" id="nav_key8" >Key 8</a></li>
+                    <li><a href="key9.html" id="nav_key9" >Key 9</a></li>
 
                     
                     
@@ -163,6 +164,7 @@
       var nav_key6 = document.getElementById("nav_key6");
       var nav_key7 = document.getElementById("nav_key7");
       var nav_key8 = document.getElementById("nav_key8");
+      var nav_key9 = document.getElementById("nav_key9");
 
       if ( role_var != "admin" ){
         x.style.display = "none";
@@ -175,6 +177,8 @@
         if ( "{{g.user.key6}}" != '1' ) {nav_key6.style.display = "none";}
         if ( "{{g.user.key7}}" != '1' ) {nav_key7.style.display = "none";}
         if ( "{{g.user.key8}}" != '1' ) {nav_key8.style.display = "none";}
+        if ( "{{g.user.key9}}" != '1' ) {nav_key9.style.display = "none";}
+
                             
       }
 
