@@ -66,7 +66,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 #https://lockandkey-define.in/admin/
 
 
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev' :
     app.debug = True
