@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/round4.css">
-    <title>Key 4</title>
+    <title>Key 4 (Sponsor round)</title>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
             <h1 style="text-align: center;">Hints</h2>
 
             <ul class="hints">
-                <li><button   id="hint1" style="padding: 0; border: none; background: none; font-size: large;"> Hint 1</button></li>
+                <li><button   id="hint1" style="padding: 0; border: none; background: none; font-size: large;"> Hint 1  (Answers are case sensitve)</button></li>
                 <li><button   id="hint2" style="padding: 0; border: none; background: none; font-size: large;"> Hint 2</button></li>
                 <li><button   id="hint3" style="padding: 0; border: none; background: none; font-size: large;"> Hint 3</button></li>
             </ul>
@@ -34,22 +34,28 @@
         <!-- Modal content -->    
 
 
-    <h2>diplomatic relations    </h2> 
-    <h2>AED</h2> 
-    <h2>OMR</h2> 
-    <h2>QAR</h2> 
-    <h2>KWD</h2> 
-    <h2>BHD</h2> 
-    <h2>SAR</h2> 
-    
+    <h2>Diplomatic relations</h2> 
+   
 
 
     <a style="margin-top: -2em;" href="https://www.gulfcareers.com/about-us/">https://www.gulfcareers.com/about-us/</a>
-    <form action="" , method="POST">
+    <form action="" , method="POST" style="display: grid;">
         <div class="answer">
         {{ form.hidden_tag() }}                
     </div>
-        {{form.answer}}
+    
+        <label for="skey1" >AED  
+         {{form.s1}}</label>
+        <label for="skey2">OMR
+        {{form.s2}}</label>
+        <label for="skey3">QAR
+        {{form.s3}}</label>
+        <label for="skey4">KWD
+        {{form.s4}}</label>
+        <label for="skey5">BHD
+        {{form.s5}}</label>
+        <label for="skey6">SAR
+        {{form.s6}}</label>
         <button type="submit">Enter</button>
     </form>
     <a id="homepage" href="unlock">HomePage</a>

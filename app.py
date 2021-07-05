@@ -246,6 +246,17 @@ class unlock_round(FlaskForm):
     key_8 = StringField('key_8', validators=[InputRequired()] )
 
 
+class round4_ans(FlaskForm):
+    s1 = StringField('skey1', validators=[InputRequired()] )
+    s2 = StringField('skey2', validators=[InputRequired()] )
+    s3 = StringField('skey3', validators=[InputRequired()] )
+    s4 = StringField('skey4', validators=[InputRequired()] )
+    s5 = StringField('skey5', validators=[InputRequired()] )
+    s6 = StringField('skey6', validators=[InputRequired()] )
+
+
+
+
     
 
 
@@ -289,20 +300,20 @@ admin_status(0)
     
 
 
-check_admin = User.query.filter_by(username='Admin@user').first()
-if check_admin== None :
-    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword,hints=5,penalty='0',
-                         r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
-                         r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
-                         r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
-                         r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
-                         r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
-                         r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
-                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
-                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
-                         r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
-    db.session.add(admin_user)
-    db.session.commit()
+# check_admin = User.query.filter_by(username='Admin@user').first()
+# if check_admin== None :
+#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword,hints=5,penalty='0',
+#                          r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
+#                          r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
+#                          r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
+#                          r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
+#                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
+#                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
+#                          r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+#                          r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+#                          r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
+#     db.session.add(admin_user)
+#     db.session.commit()
 
 
 
@@ -421,7 +432,7 @@ def unlock():
                                             user.final_time =  time.time() + int(g.user.penalty)*3600000    
                                             db.session.add(user)
                                             db.session.commit()
-                                            return '<h1>Winner Page</h1>'
+                                            return render_template("yay.html")
   
         return render_template("unlock.html", form=form)
 
@@ -620,13 +631,18 @@ def round4():
         return "Finish the last round you sneaky KID!"
     else:
         nextKey = temp_data.key4
-        form = GetAnswer()
+        form = round4_ans()
         user = User.query.filter_by(id = g.user.id).first()
         if form.validate_on_submit():           
-            if form.answer.data == temp_data.ans_round4:
-                user.key4 = '1'                   
-                db.session.add(user)
-                db.session.commit()
+            if form.s1.data == str(temp_data.ans_round4[0]):
+                if form.s2.data == str(temp_data.ans_round4[1]):
+                    if form.s3.data == str(temp_data.ans_round4[2]):
+                        if form.s4.data == str(temp_data.ans_round4[3]):
+                            if form.s5.data == str(temp_data.ans_round4[4]):
+                                if form.s6.data == str(temp_data.ans_round4[5]):
+                                    user.key4 = '1'                   
+                                    db.session.add(user)
+                                    db.session.commit()
         elif request.method == 'POST':
             print('Incoming..')
             print(request.get_json())  # parse as JSON 
