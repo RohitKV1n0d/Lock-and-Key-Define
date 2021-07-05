@@ -13,22 +13,23 @@ h1 {
   color: red;
 }
 
-.rules ul {
+.rules {
   text-align: left;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
-.rules ul li {
+.rules li {
   padding-bottom: .5em;
 }
 
-.rules ul li:hover {
+.rules li:hover {
   color: red;
   font-weight: bolder;
 }
 
 .okay-btn {
   text-align: center;
+  margin: 3em;
   font-family: Cinzel;
 }
 

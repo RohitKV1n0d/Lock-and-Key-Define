@@ -54,7 +54,7 @@
         hour = minute * 60,
         day = hour * 24;
 
-        let deadline = "July 8, 2021 18:33:00",
+        let deadline = "July 6, 2021 10:30:00",
         countDown = new Date(deadline).getTime(),
         x = setInterval(function() {    
 
@@ -71,10 +71,12 @@
           let headline = document.getElementById("headline"),
               countdown = document.getElementById("countdown"),
               content = document.getElementById("content");
+             
 
             headline.innerText = "GOOOOO";
             countdown.style.display = "none";
             content.style.display = "block";
+
 
             clearInterval(x);
         }
@@ -158,12 +160,45 @@ typewriter();
         var with_x = document.getElementById("withAdmin");
         var start_btn = document.getElementById("start-btn");
 
+        let deadline = "July 6, 2021 10:30:00";
+        var countDown = new Date(deadline).getTime();
+        var now = new Date().getTime();
+        
+
         if ( role_var != "admin" )
             {
             x.style.display = "none";
             with_x.style.display = "none";
             start_btn.innerHTML = "Coming Soon...!!";
             start_btn.href ="#"; 
+        }
+        if (now > countDown){
+            start_btn.innerHTML = "Start The Hunt";
+            start_btn.href ="{{ url_for('unlock') }}"; 
+            
+            fetch("/start.html", {
+
+        // Declare what type of data we're sending
+        headers: {
+        'Content-Type': 'application/json'
+        },
+
+        // Specify the method
+        method: 'POST',
+
+        // A JSON payload
+        body: JSON.stringify({
+            "unlock": '1'
+        })
+        }).then(function (response) { // At this point, Flask has printed our JSON
+        return response.text();
+        }).then(function (text) {
+
+        console.log('POST response: ');
+
+        // Should be 'OK' if everything was successful
+        console.log(text);
+        });
         }
         
 

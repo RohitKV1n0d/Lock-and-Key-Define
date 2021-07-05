@@ -16,23 +16,21 @@ h1{
 
 
 .rules{
-   ul{
-       text-align: left;
-       font-size: 2em;
-       li{
-           padding-bottom: .5em;
+    text-align: left;
+    font-size: 1.5em;
+    li{padding-bottom: .5em;
         &:hover{
             color: red;
             font-weight: bolder;
-        }
-       }
-       
-   }
+    }}
+    
+    
+    
 }
 
 .okay-btn{
     text-align: center;
-    
+    margin: 3em;
     font-family: Cinzel;
     
         a{

@@ -234,7 +234,7 @@
 
 
     if(checkTimerNeeded()){
-                countdown( "ten-countdown", 10000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
+                countdown( "ten-countdown", 120000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
             }
           
             
@@ -248,7 +248,7 @@
         if(hint_count>0 ) {
            
             
-                countdown( "ten-countdown", 10000 ,hintid1, hintid2, hintid3 );
+                countdown( "ten-countdown", 120000 ,hintid1, hintid2, hintid3 );
                 
                 let getTime = new Date().getTime();
                 hintID.innerHTML = mainHint;
@@ -301,7 +301,7 @@
         var c_time = new Date().getTime();
         if(lastRecivedTime!=null){ 
             var elaspedTime = c_time-lastRecivedTime;
-            if(elaspedTime < 10000){
+            if(elaspedTime < 120000){
                 return true;
             }
         }

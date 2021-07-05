@@ -402,19 +402,42 @@ hinttimer = 10000
 def rules():
     return render_template("rules.html")
 
-@app.route('/start.html')
+
+
+
+
+
+@app.route('/start.html',  methods=['GET', 'POST'])
 @login_required
 def start():
+    user = User.query.filter_by(id = g.user.id).first()
+    if request.method == 'POST':
+        tempdata = request.get_json()
+        user.unlock = tempdata['unlock']
+        db.session.add(user)
+        db.session.commit()
+
+
+
     return render_template("start-page.html")
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/unlock',  methods=['GET', 'POST'])                   #Unlock
 @login_required
 def unlock():
-    if g.user.role != 'admin': 
+    if g.user.role != 'admin' and g.user.unlock != '1': 
         return render_template("early_vistors.html")
-    else:
-        user = User.query.filter_by(id = g.user.id).first()
-        user.unlock = '1'      
+    elif  g.user.unlock == '1':
+        user = User.query.filter_by(id = g.user.id).first()           
         db.session.add(user)
         db.session.commit()
         form = unlock_round()  
