@@ -23,7 +23,7 @@
                 <img id="mobile-exit" class="mobile-menu-exit" src="{{url_for('static',filename='Images/exit.svg')}}" alt="Close Navigation">
                 
                 <ul class="primary-nav">
-                    <li class="current"><a href="unlock.html">Home</a></li> 
+                    <li class="current"><a href="unlock">Home</a></li> 
                     <li><a href="rules.html" >Rules & Guidelines</a></li>
                     <li class="admin" id="admin"><a href="https://www.lockandkey-define.in/admin/">Admin</a></li>
                     <li><a href="key1.html" id="nav_key1" >Key 1</a></li>
@@ -82,24 +82,26 @@
 </section>
 
 <section class="key-answers">
-    <form action="">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
         <ul>
-            <input type="text" name="key1" id="key1">
-            <input type="text" name="key2" id="key2">
-            <input type="text" name="key3" id="key3">
-            <input type="text" name="key4" id="key4">
-            <input type="text" name="key5" id="key5">
-            <input type="text" name="key6" id="key6">
-            <input type="text" name="key6" id="key7">
-            <input type="text" name="key6" id="key8">
-            <input type="text" name="key6" id="key9">
+                {{form.key_1}}
+                {{form.key_2}}
+                {{form.key_3}}
+                {{form.key_4}}
+                {{form.key_5}}
+                {{form.key_6}}
+                {{form.key_7}}
+                {{form.key_8}}
+
+    
         </ul>
+        
+        <button class="unlock-btn" id="unlock-btn" type="submit">Unlock</button>
     </form>
 </section>
 
-<section class="unlock-btn">
-    <input type="submit" name="unlock-btn" value="Unlock" id="unlock-btn">
-</section>
+
 
 <div class="timer">
     <h1 id="headline"></h1>
@@ -112,6 +114,14 @@
       </ul>
     </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 

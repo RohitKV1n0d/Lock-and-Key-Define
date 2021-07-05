@@ -1,6 +1,6 @@
 key1 = 26
 key2 = 21
-key3 = 12
+key3 = 12# NOT USED
 key4 = 54
 key5 = 76
 key6 = 43

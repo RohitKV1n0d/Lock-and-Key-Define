@@ -3,6 +3,7 @@
 import os
 import re
 import string
+import time
 import datetime
 
 # import xlrd
@@ -132,6 +133,10 @@ class User(UserMixin, db.Model):
     hint7 = db.Column(db.String(256))
     hint8 = db.Column(db.String(256))
 
+    penalty = db.Column(db.String(256))
+
+    final_time = db.Column(db.String(256))
+
     r1h1 = db.Column(db.String(256))
     r1h2 = db.Column(db.String(256))
     r1h3 = db.Column(db.String(256))
@@ -230,7 +235,7 @@ class round8_ans(FlaskForm):
     r6 = StringField('rkey6', validators=[InputRequired()] )
 
 
-class unlock(FlaskForm):
+class unlock_round(FlaskForm):
     key_1 = StringField('key_1', validators=[InputRequired()] )
     key_2 = StringField('key_2', validators=[InputRequired()] )
     key_3 = StringField('key_3', validators=[InputRequired()] )
@@ -284,20 +289,20 @@ admin_status(0)
     
 
 
-check_admin = User.query.filter_by(username='Admin@user').first()
-if check_admin== None :
-    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword,hints=5,
-                         r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
-                         r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
-                         r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
-                         r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
-                         r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
-                         r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
-                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
-                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
-                         r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
-    db.session.add(admin_user)
-    db.session.commit()
+# check_admin = User.query.filter_by(username='Admin@user').first()
+# if check_admin== None :
+#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword,hints=5,penalty='0',
+#                          r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
+#                          r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
+#                          r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
+#                          r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
+#                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
+#                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
+#                          r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+#                          r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+#                          r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
+#     db.session.add(admin_user)
+#     db.session.commit()
 
 
 
@@ -354,8 +359,8 @@ def register():
     
     if form.validate_on_submit():
        # hashed_password = generate_password_hash(form.password.data, method='sha256')
-        time =str(datetime.datetime.now())
-        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, hints=5,
+        # time =str(datetime.datetime.now())
+        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, hints=5,penalty='0',
                          r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
                          r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
                          r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
@@ -391,18 +396,34 @@ def rules():
 def start():
     return render_template("start-page.html")
 
-@app.route('/unlock')
+@app.route('/unlock',  methods=['GET', 'POST'])                   #Unlock
 @login_required
 def unlock():
-    if g.user.role != 'admin':
+    if g.user.role != 'admin': 
         return render_template("early_vistors.html")
     else:
         user = User.query.filter_by(id = g.user.id).first()
-        user.unlock = '1'                   
+        user.unlock = '1'      
         db.session.add(user)
         db.session.commit()
-        
-        return render_template("unlock.html")
+        form = unlock_round()  
+        if form.validate_on_submit() :
+            if form.key_1.data == str(temp_data.key1):
+                if form.key_2.data == str(temp_data.key2):
+                    if form.key_3.data == str(temp_data.key4):
+                        if form.key_4.data == str(temp_data.key5):
+                            if form.key_5.data == str(temp_data.key6):
+                                if form.key_6.data == str(temp_data.key7):
+                                    if form.key_7.data == str(temp_data.key8):
+                                        if form.key_8.data == str(temp_data.key9):
+                                            
+                                            user.unlcok_time =  datetime.datetime.now()
+                                            user.final_time =  time.time() + int(g.user.penalty)*3600000    
+                                            db.session.add(user)
+                                            db.session.commit()
+                                            return '<h1>Winner Page</h1>'
+  
+        return render_template("unlock.html", form=form)
 
 
 @app.route('/key1.html', methods=['GET', 'POST'])                           #######    round 1
@@ -425,31 +446,55 @@ def round1():
         HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
         if HINT[0] == None:
             user.hint1 = tempdata['hint'] 
-            #user.time1 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
         elif HINT[1] == None:
             user.hint2 = tempdata['hint']
-            #user.time2 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
+            elif tempdata['hint'][-2:] == 'h2' :
+                user.penalty = int(g.user.penalty) + 2
         elif HINT[2] == None:
             user.hint3 = tempdata['hint']
-            #user.time3 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
+            elif tempdata['hint'][-2:] == 'h2' :
+                user.penalty = int(g.user.penalty) + 2
+            elif tempdata['hint'][-2:] == 'h3' :
+                user.penalty = int(g.user.penalty) + 3
         elif HINT[3] == None:
             user.hint4 = tempdata['hint']
-            #user.time4 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
+            elif tempdata['hint'][-2:] == 'h2' :
+                user.penalty = int(g.user.penalty) + 2
+            elif tempdata['hint'][-2:] == 'h3' :
+                user.penalty = int(g.user.penalty) + 3
         elif HINT[4] == None:
             user.hint5 = tempdata['hint']
-            #user.time5 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
+            elif tempdata['hint'][-2:] == 'h2' :
+                user.penalty = int(g.user.penalty) + 2
+            elif tempdata['hint'][-2:] == 'h3' :
+                user.penalty = int(g.user.penalty) + 3
         elif HINT[5] == None:
             user.hint6 = tempdata['hint']
-            #user.time6 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
+            elif tempdata['hint'][-2:] == 'h2' :
+                user.penalty = int(g.user.penalty) + 2
+            elif tempdata['hint'][-2:] == 'h3' :
+                user.penalty = int(g.user.penalty) + 3
         elif HINT[6] == None:
             user.hint7 = tempdata['hint']
-            #user.time7 = tempdata['time']
+            if tempdata['hint'][-2:] == 'h1' :
+                user.penalty = int(g.user.penalty) + 1
+            elif tempdata['hint'][-2:] == 'h2' :
+                user.penalty = int(g.user.penalty) + 2
+            elif tempdata['hint'][-2:] == 'h3' :
+                user.penalty = int(g.user.penalty) + 3
         
-        
-        
-        
- 
-            
         user.time1 = tempdata['time']
         user.hints =   int(g.user.hints) - 1                 
         db.session.add(user)
@@ -492,26 +537,55 @@ def round2():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
-   
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
+    
             user.time1 = tempdata['time']
             user.hints =   int(g.user.hints) - 1                 
             db.session.add(user)
@@ -560,25 +634,54 @@ def round4():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
 
                 
             user.time1 = tempdata['time']
@@ -637,25 +740,54 @@ def round5():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
 
                 
             user.time1 = tempdata['time']
@@ -688,25 +820,54 @@ def round6():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
 
                 
             user.time1 = tempdata['time']
@@ -738,25 +899,54 @@ def round7():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
 
                 
             user.time1 = tempdata['time']
@@ -791,25 +981,54 @@ def round8():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
 
                 
             user.time1 = tempdata['time']
@@ -846,25 +1065,54 @@ def round9():
             HINT = [g.user.hint1, g.user.hint2, g.user.hint3, g.user.hint4, g.user.hint5, g.user.hint6, g.user.hint7]
             if HINT[0] == None:
                 user.hint1 = tempdata['hint'] 
-                #user.time1 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
             elif HINT[1] == None:
                 user.hint2 = tempdata['hint']
-                #user.time2 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
             elif HINT[2] == None:
                 user.hint3 = tempdata['hint']
-                #user.time3 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[3] == None:
                 user.hint4 = tempdata['hint']
-                #user.time4 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[4] == None:
                 user.hint5 = tempdata['hint']
-                #user.time5 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[5] == None:
                 user.hint6 = tempdata['hint']
-                #user.time6 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
             elif HINT[6] == None:
                 user.hint7 = tempdata['hint']
-                #user.time7 = tempdata['time']
+                if tempdata['hint'][-2:] == 'h1' :
+                    user.penalty = int(g.user.penalty) + 1
+                elif tempdata['hint'][-2:] == 'h2' :
+                    user.penalty = int(g.user.penalty) + 2
+                elif tempdata['hint'][-2:] == 'h3' :
+                    user.penalty = int(g.user.penalty) + 3
 
                 
             user.time1 = tempdata['time']
