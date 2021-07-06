@@ -222,9 +222,7 @@ class round5_ans(FlaskForm):
     a7 = StringField('key7', validators=[InputRequired()] )
     a8 = StringField('key8', validators=[InputRequired()] )
     a9 = StringField('key9', validators=[InputRequired()] )
-    a10 = StringField('key10', validators=[InputRequired()] )
-    a11 = StringField('key11', validators=[InputRequired()] )
-    a12 = StringField('key12', validators=[InputRequired()] )
+
 
 class round8_ans(FlaskForm):
     r1 = StringField('rkey1', validators=[InputRequired()] )
@@ -766,12 +764,9 @@ def round5():
                                     if form.a7.data == str(temp_data.ans_round5[6]):
                                         if form.a8.data == str(temp_data.ans_round5[7]):
                                             if form.a9.data == str(temp_data.ans_round5[8]):
-                                                if form.a10.data == str(temp_data.ans_round5[9]):
-                                                    if form.a11.data == str(temp_data.ans_round5[10]):
-                                                        if form.a12.data == str(temp_data.ans_round5[11]):
-                                                            user.key5 = '1'                   
-                                                            db.session.add(user)
-                                                            db.session.commit()
+                                                user.key5 = '1'                   
+                                                db.session.add(user)
+                                                db.session.commit()
         elif request.method == 'POST':
             print('Incoming..')
             print(request.get_json())  # parse as JSON 

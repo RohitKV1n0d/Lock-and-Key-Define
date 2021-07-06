@@ -33,6 +33,9 @@
 
         <!-- Modal content -->      
 
+        <div style="text-align: center; margin-top: 10em;" id="goback"> <a href="/crossword"> Go back to puzzule</a></div>
+        <div style="text-align: center; margin-top: 8em"><p>(Case sensitive)</p></div>
+        
     <section class="key-answers">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -47,10 +50,7 @@
                 {{form.a7}}
                 {{form.a8}}
                 {{form.a9}}
-                {{form.a10}}
-                {{form.a11}}
-                {{form.a12}}
-             
+              
                 
 
                 
@@ -92,7 +92,7 @@
 
 
 <!-- <button id="myBtn" >Hints </button> -->
-<div class="hint-btn">
+<div class="hint-btn" style="display: none;">
     <img id="myBtn"   src="{{url_for('static',filename='Images/hint.png')}}" alt="hints"></div>
     
     <!-- The Modal -->

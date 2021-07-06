@@ -14,7 +14,7 @@ ans_round1 = "NotHiNG00"
 ans_round2 = ['2','5','2','4','6','9']
 ans_round3 = "answer"   #bonus round
 ans_round4 = ['UAE','Oman','Qatar','Kuwait','Bahrain','Saudi Arabia']
-ans_round5 = ['0','0','0','0','0','0','0','0','0','0','0','0']
+ans_round5 = ['A','E','H','D','E','O','T','A','S']
 ans_round6 = "o julius caesar, thou art mighty yet"
 ans_round7 = "answer"
 ans_round8 = "i am you"
@@ -22,6 +22,8 @@ ans_round9 = "love"
 
 
                                 #hints
+
+                                
 #rond1  
 r1_hint1="A Hint is hidden right side of the IMAGE"
 r1_hint2="What You see is part of bigger picture"
