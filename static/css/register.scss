@@ -19,6 +19,9 @@ body{
    
 }
 
+
+
+
 .register{
     color: gray;
     text-align: center;
@@ -26,7 +29,7 @@ body{
     
 
     label,textarea{
-        padding-right: 2em;
+        padding-right: 0em;
         
         
     }
@@ -93,6 +96,23 @@ body{
     }
     
 
+    label{
+        margin-bottom: 3em;
+       
+    }
+
+    #username{
+        margin-left: 2.5em;
+    }
+
+
+    #bookingID{
+        margin-left: 2em;
+    } 
+    
+    #password{
+        margin-left: 3em;
+    }
 
 
 }

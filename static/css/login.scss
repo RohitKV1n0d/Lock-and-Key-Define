@@ -35,14 +35,17 @@ body{
 
     .username{
         padding-bottom: 2em;
-        padding-right: 1em;
+        margin-left: -1em;
         font-size: large;
         input{
-            margin-left: 0em;
+            margin-left: 3em;
             box-sizing: 2em;
             padding: .3em;
             padding-right: 2em;
-            border-radius: .35em;
+            border-radius: .35em;   
+        }
+        label{
+            margin-right: 0em;
         }
     }
 
@@ -50,6 +53,7 @@ body{
         padding-bottom: 1em;
         
         input{
+            margin-left: 5em;
             
             padding: .3em;
             padding-right: 2em;
@@ -86,11 +90,8 @@ body{
     }
 
 
-   
-
-
-
 }
+
 
 
 .footer{

@@ -18,41 +18,36 @@
     </section>
 
     <section class="register">
-        <div class="container">
-            <h2>Register</h2>
-            <form action="register.html" method="POST">
-                {{ form.hidden_tag() }}
-              
-                <div class="name">
-                    <p>Username</p>
-                    {{ form.username }}
-                    {% for error in form.username.error: %}
-                        <li class="name-error" style="color:red;">{{ error }}</li>
-                    {% endfor %}  
-                </div>
-
-                <div class="email">
-                    <p>Email</p>
-                    {{ form.email }}
-                    {% for error in form.email.error: %}
-                        <li style="color:red;">{{ error }}</li>
-                    {% endfor %}    
-                </div>
         
-                <div class="pass">
-                    <p>Password</p>
+            <h2>Register</h2>
+            <form action="register.html" method="POST" > 
+                {{ form.hidden_tag() }}
+
+
+              <div class="formArea" style="display: grid;">          
+                    <label for="username">Username
+                    {{ form.username }}
+                    </label>
+    
+                    <label for="bookingID">Booking ID
+                    {{ form.bookingID }}
+                    </label>               
+                
+                    <label for="password">Password
                      {{ form.password }}
-                     {% for error in form.password.error: %}
-                        <li style="color:red;">{{ error }}</li>
-                    {% endfor %}  
+                    </label>
                 </div>
+    
 
                 <button type="submit" class="register-clk" value="Register" id="register-clk">Submit</button>
 
             </form>
 
-        </div>
+       
     </section>
+
+
+    
     <section class="footer">
         <div class="rule">
             <a href="rules.html">Rules & Guidlines</a>

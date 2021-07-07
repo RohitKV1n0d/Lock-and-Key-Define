@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/contacts.css">
+    <title>Contacts</title>
+</head>
+<body>
+<h1>Contact us</h1>
+
+<section class="contacts" style="color: #8d4123;">
+    <div style="display: inline-flex;">
+        <div>
+        
+            <img src="{{url_for('static',filename='Images/contact.png')}}" alt="Contacts"> Joswin C Raju 
+            <p>+91 95267 90477</p>
+        </div>
+        <div>
+            <img src="{{url_for('static',filename='Images/contact.png')}}" alt="Contacts"> AMAL RAJ 
+            <p>+91 85908 69645</p>
+
+        </div>
+    </div> 
+</section>
+
+
+
+
+
+<section class="okay-btn">
+    <a onclick="goBack()" href="#">okay</a>
+    
+</section>
+
+<script>
+    function goBack() {
+      window.history.back();
+    }
+    </script>
+    
+</body>
+</html>

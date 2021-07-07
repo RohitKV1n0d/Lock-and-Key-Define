@@ -23,7 +23,7 @@ body {
 }
 
 .register label, .register textarea {
-  padding-right: 2em;
+  padding-right: 0em;
 }
 
 .register .name {
@@ -86,6 +86,22 @@ body {
 
 .register .register-clk:hover {
   background-color: #8d4123;
+}
+
+.register label {
+  margin-bottom: 3em;
+}
+
+.register #username {
+  margin-left: 2.5em;
+}
+
+.register #bookingID {
+  margin-left: 2em;
+}
+
+.register #password {
+  margin-left: 3em;
 }
 
 .footer {

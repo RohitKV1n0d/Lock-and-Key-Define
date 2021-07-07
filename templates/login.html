@@ -13,11 +13,16 @@
 
     <section class="hero">
         <div class = "container">
-            <a href="#">
+            <a href="/welcome">
             <img src="{{url_for('static',filename='Images/Lock_key.png')}}" alt = "Lock and Key">
         </a> 
         </div>
     </section>
+
+<div>
+
+
+</div>
 
     <section class="login">
         <div class="container">
@@ -27,29 +32,28 @@
                 {{ form.hidden_tag() }}
              
                 <div class="username">
-                    <label>Username</label>
-                        {{ form.username }}
-                    <ul>
-                        {% for error in form.username.error: %}
-                            <li style="color:red;">{{ error }}</li>
-                        {% endfor %}
-                    </ul>
+                    <label id="email">Email</label>
+                        {{ form.email }}
+                    
                 </div>  
 
                 <div class="pass">
-                    <label>Password</label>
-                        {{ form.password }}
-                    <ul>
-                        {% for error in form.password.error: %}
-                            <li style="color:red;">{{ error }}</li>
-                        {% endfor %}
-                    </ul>
+                    <label id="password">Password
+                        {{ form.password }} </label>
                 
                 </div>
 
                 <div class="remember-me">
                     {{ form.remember}}
                     <label>Remember me</label>
+
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <p style="color: brown;">{{msg}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                       
                 </div>  
                 
@@ -67,7 +71,7 @@
             <a href="rules.html">Rules & Guidlines</a>
         </div>
         <div class="contacts">
-            <a href="#">Contacts</a>
+            <a href="/contacts">Contacts</a>
         </div>    
     </section>
 

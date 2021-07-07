@@ -8,7 +8,7 @@ import datetime
 
 # import xlrd
 
-from flask import Flask, render_template, redirect, url_for, session, g , request , jsonify
+from flask import Flask, render_template, redirect, url_for, session, g , request , jsonify, flash
 
 
 from flask_wtf import FlaskForm
@@ -40,7 +40,7 @@ import temp_data
 
 
 app = Flask(__name__,template_folder="templates")
-app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
+app.secret_key = 'aasdaskhvahdcbjabdcoubqduoic'
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../my_flask/user_database.db'
@@ -66,7 +66,7 @@ app.secret_key = 'aasdaskhvahdcbjabdcoubqduoicb'
 #https://lockandkey-define.in/admin/
 
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev' :
     app.debug = True
@@ -103,6 +103,7 @@ login_manager.login_view = 'login'
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    booking_id = db.Column(db.String(256), unique=True)
     username = db.Column(db.String(15), unique=True) 
     email = db.Column(db.String(50), unique=True ) 
     role = db.Column(db.String(256))
@@ -199,13 +200,13 @@ def load_user(user_id):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired('Username is required'),Length(min=4, max=15,message='must be min 4 letters')])
-    password = PasswordField('password', validators= [InputRequired(), Length(min=8, max=81, message=('8 letters!'))])
+    email = StringField('email', validators=[InputRequired('email is required'),Email(), Length(max=50)])
+    password = PasswordField('password', validators= [InputRequired(), Length(min=5, max=81, message=('8 letters!'))])
     remember = BooleanField('remember me')
 
 
 class ResgisterForm(FlaskForm):
-    email = StringField('email', validators = [InputRequired(), Email(), Length(max=50) ])
+    bookingID = StringField('bookingID', validators = [InputRequired(), Length(max=50) ])
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators= [InputRequired(), Length(min=8, max=81)])
 
@@ -298,20 +299,20 @@ admin_status(0)
     
 
 
-check_admin = User.query.filter_by(username='Admin@user').first()
-if check_admin== None :
-    admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword,hints=5,penalty='0',
-                         r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
-                         r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
-                         r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
-                         r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
-                         r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
-                         r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
-                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
-                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
-                         r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
-    db.session.add(admin_user)
-    db.session.commit()
+# check_admin = User.query.filter_by(username='Admin@user').first()
+# if check_admin== None :
+#     admin_user = User(username=AdminUsername, email='crizal501@gmail.com',role='admin', password=AdminPassword,hints=5,penalty='0',
+#                          r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
+#                          r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
+#                          r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
+#                          r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
+#                          r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
+#                          r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
+#                          r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+#                          r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+#                          r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
+#     db.session.add(admin_user)
+#     db.session.commit()
 
 
 
@@ -336,53 +337,72 @@ def welcome():
 
 @app.route('/login.html', methods=['GET', 'POST'])                                   #Login
 def login():   
-    form = LoginForm()
-    if form.validate_on_submit():
-        session.pop('user_id',None)
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            # if check_password_hash(user.password, form.password.data):
+    if 'user_id' in session:
+        return redirect(url_for('start'))
+    else:
+        form = LoginForm()
+        if form.validate_on_submit():
+            session.pop('user_id',None)
+            user = User.query.filter_by(email=form.email.data).first()
+            if user:
+                # if check_password_hash(user.password, form.password.data):
+                
+                # if form.username.data == AdminUsername:
+                #     session['user_id'] = user.id 
+                #     login_user(user,AdminPassword)
+                #     admin_status(1)
+                #     if admin_status:
+                #         return redirect(redirect(url_for('start')))
+                #     else:
+                #         return 'Something Working'
+
+                if user.password == form.password.data:
+                    session['user_id'] = user.id
+                    login_user(user, remember=form.remember.data)
+                    return redirect(url_for('start'))
+            flash("Invalid Email or Passowrd", "info")
             
-            # if form.username.data == AdminUsername:
-            #     session['user_id'] = user.id 
-            #     login_user(user,AdminPassword)
-            #     admin_status(1)
-            #     if admin_status:
-            #         return redirect(redirect(url_for('start')))
-            #     else:
-            #         return 'Something Working'
-
-            if user.password == form.password.data:
-                session['user_id'] = user.id
-                login_user(user, remember=form.remember.data)
-                return redirect(url_for('start'))
-        return '<h1>Invalid username or password</h1>'
-        
-    return render_template("login.html", form=form)
+        return render_template("login.html", form=form)
 
 
 
-@app.route('/register.html', methods=['GET', 'POST'])                                    #Registration
-def register():
-    form = ResgisterForm()
+# @app.route('/register.html', methods=['GET', 'POST'])                                    #Registration
+# def register():
     
-    if form.validate_on_submit():
+    # form = ResgisterForm()
+    # if form.validate_on_submit():
        # hashed_password = generate_password_hash(form.password.data, method='sha256')
         # time =str(datetime.datetime.now())
-        new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, hints=5,penalty='0',
-                         r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
-                         r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
-                         r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
-                         r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
-                         r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
-                         r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
-                         r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
-                         r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
-                         r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)#hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('login'))
-    return render_template("register.html", form=form)
+        # new_user = User(username=form.username.data, email=form.email.data,role='player', password=form.password.data, hints=5,penalty='0',
+        #                  r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
+        #                  r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
+        #                  r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
+        #                  r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
+        #                  r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
+        #                  r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
+        #                  r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+        #                  r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+        #                  r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)#hashed_password)
+    #     user = User.query.filter_by(booking_id=form.bookingID.data).first()
+    #     if user:
+    #         if user.booking_id == form.bookingID.data:
+    #             addUser =  User(role='player',hints=5,penalty='0', booking_id =form.bookingID.data, username=form.username.data, password=form.password.data,
+    #                      r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
+    #                      r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
+    #                      r3h1=temp_data.r3_hint1, r3h2=temp_data.r3_hint2, r3h3=temp_data.r3_hint3,
+    #                      r4h1=temp_data.r4_hint1, r4h2=temp_data.r4_hint2, r4h3=temp_data.r4_hint3,
+    #                      r5h1=temp_data.r5_hint1, r5h2=temp_data.r5_hint2, r5h3=temp_data.r5_hint3,
+    #                      r6h1=temp_data.r6_hint1, r6h2=temp_data.r6_hint2, r6h3=temp_data.r6_hint3,
+    #                      r7h1=temp_data.r7_hint1, r7h2=temp_data.r7_hint2, r7h3=temp_data.r7_hint3,
+    #                      r8h1=temp_data.r8_hint1, r8h2=temp_data.r8_hint2, r8h3=temp_data.r8_hint3,
+    #                      r9h1=temp_data.r9_hint1, r9h2=temp_data.r9_hint2, r9h3=temp_data.r9_hint3)              
+    #             db.session.add(addUser)
+    #             db.session.commit() 
+    #             return redirect(url_for('login'))
+    #     return '<h1>Invalid Booking ID</h1>'
+        
+        
+    # return render_template("register.html", form=form)
 
 
 
@@ -401,6 +421,9 @@ def rules():
     return render_template("rules.html")
 
 
+@app.route('/contacts')
+def contacts():
+    return render_template("contacts.html")
 
 
 
@@ -432,13 +455,13 @@ def start():
 @app.route('/unlock',  methods=['GET', 'POST'])                   #Unlock
 @login_required
 def unlock():
+    form = unlock_round()
     if g.user.role != 'admin' and g.user.unlock != '1': 
         return render_template("early_vistors.html")
     elif  g.user.unlock == '1':
         user = User.query.filter_by(id = g.user.id).first()           
         db.session.add(user)
-        db.session.commit()
-        form = unlock_round()  
+        db.session.commit()       
         if form.validate_on_submit() :
             if form.key_1.data == str(temp_data.key1):
                 if form.key_2.data == str(temp_data.key2):
@@ -1167,7 +1190,8 @@ def round9():
 def logout():
     
     logout_user()
-    return redirect(url_for('welcome'))
+    session.pop('user_id',None)
+    return redirect(url_for('login')) 
 
 
 

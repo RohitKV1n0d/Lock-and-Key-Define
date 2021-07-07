@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap");
+body {
+  background-color: black;
+  margin: 0;
+  font-family: Cinzel;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 0em;
+  font-size: 4em;
+  color: red;
+}
+
+.contacts {
+  text-align: center;
+  font-size: x-large;
+}
+
+.contacts div {
+  padding-right: 2em;
+  padding-left: 2em;
+  padding-top: 3em;
+}
+
+.contacts img {
+  font-size: xx-large;
+  width: 1em;
+  height: 1em;
+}
+
+.contacts p:hover {
+  color: red;
+  font-weight: bolder;
+}
+
+.okay-btn {
+  text-align: center;
+  margin: 3em;
+  font-family: Cinzel;
+}
+
+.okay-btn a {
+  font-size: 1.5em;
+  color: gray;
+  text-decoration: none;
+  border-radius: .8em;
+  border: 3px solid red;
+  padding: .2em;
+}
+
+.okay-btn a:hover {
+  background-color: #ff0000;
+  color: aliceblue;
+  cursor: pointer;
+}
+/*# sourceMappingURL=contacts.css.map */
