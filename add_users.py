@@ -56,7 +56,7 @@ sheet.cell_value(0, 0)
 
 
 
-for i in range(1,11):
+for i in range(1,202):
     addUser =   User(username=sheet.cell_value(i, 2),role='player',email=sheet.cell_value(i, 3) , password=sheet.cell_value(i, 1),hints=5,penalty='0',booking_id =sheet.cell_value(i, 1),
                          r1h1=temp_data.r1_hint1, r1h2=temp_data.r1_hint2, r1h3=temp_data.r1_hint3,
                          r2h1=temp_data.r2_hint1, r2h2=temp_data.r2_hint2, r2h3=temp_data.r2_hint3,
