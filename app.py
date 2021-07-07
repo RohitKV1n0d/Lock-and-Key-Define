@@ -104,8 +104,8 @@ login_manager.login_view = 'login'
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     booking_id = db.Column(db.String(256), unique=True)
-    username = db.Column(db.String(15), unique=True) 
-    email = db.Column(db.String(50), unique=True ) 
+    username = db.Column(db.String(256), unique=True) 
+    email = db.Column(db.String(256), unique=True ) 
     role = db.Column(db.String(256))
     password = db.Column(db.String(256))
     unlock = db.Column(db.String(256))
