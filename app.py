@@ -471,13 +471,14 @@ def unlock():
                                 if form.key_6.data == str(temp_data.key7):
                                     if form.key_7.data == str(temp_data.key8):
                                         if form.key_8.data == str(temp_data.key9):
-                                            
-                                            user.unlcok_time =  datetime.datetime.now()
-                                            user.final_time =  time.time() + int(g.user.penalty)*3600000    
-                                            db.session.add(user)
-                                            db.session.commit()
-                                            return render_template("yay.html")
-  
+                                            if  g.user.key9 == '1':
+                                                user.unlcok_time =  datetime.datetime.now()
+                                                user.final_time =  time.time() + int(g.user.penalty)*3600000    
+                                                db.session.add(user)
+                                                db.session.commit()
+                                                return render_template("yay.html")
+                                            else:
+                                                return "FINISH ALL ROUNDS YOU SNEAKY KID"
         return render_template("unlock.html", form=form)
 
 
