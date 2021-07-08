@@ -246,7 +246,7 @@
     
     
         if(checkTimerNeeded()){
-                    countdown( "ten-countdown", 120000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
+                    countdown( "ten-countdown", 7200000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
                 }
               
                 
@@ -260,7 +260,7 @@
             if(hint_count>0 ) {
                
                 
-                    countdown( "ten-countdown", 120000 ,hintid1, hintid2, hintid3 );
+                    countdown( "ten-countdown", 7200000 ,hintid1, hintid2, hintid3 );
                     
                     let getTime = new Date().getTime();
                     hintID.innerHTML = mainHint;
@@ -313,7 +313,7 @@
             var c_time = new Date().getTime();
             if(lastRecivedTime!=null){ 
                 var elaspedTime = c_time-lastRecivedTime;
-                if(elaspedTime < 120000){
+                if(elaspedTime < 7200000){
                     return true;
                 }
             }
@@ -326,6 +326,12 @@
     
        
         </script>
+        <section class="cmid" style="text-align: center;">
+            <div class="mid">
+                
+              <a class="define" href="http://rsetiedc.in/define" ><img style="width: 8.5em; position: fixed; left: 0; bottom: 1em;" src="{{ url_for('static',filename='Images/Logo.png') }}" alt="Define"></a>
+            </div>
+            </section>
         
     
     

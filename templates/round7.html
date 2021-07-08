@@ -34,14 +34,14 @@
 
 <div class="words" style="display: flex;">
     <h3 style="color: red;" >
-        13:2:13 <br>
-        17:4:40<br>
-        19:15:1<br>
-        21:3:31<br>
-        22:5:24<br>
-        23:13:6<br>
-        24:8:8<br>
-        43:1:12<br>
+        27:2:13<br>
+        31:4:40<br>
+        33:15:1<br>
+        35:3:31<br>
+        36:5:24<br>
+        37:13:6<br>
+        38:8:8<br>
+        57:1:12<br>
         </h3>
 
    
@@ -49,26 +49,28 @@
         <h3 style="color:green;">
 
 
-            16:10:8<br>
-            17:3:1<br>
-            19:7:39<br>
-            21:5:21<br>
-            22:16:4<br>
-            23:13:50<br>
-            24:1:1<br>
-            36:1:36<br>
+            30:10:8<br>
+            31:3:1<br>
+            33:7:39<br>
+            35:3:24<br>
+            36:16:4<br>
+            37:13:50<br>
+            38:1:1<br>
+            50:1:36<br>
+
+         
         </h3>
 
 
-        <h3 style="color: blue;">87:3:2<br>
-            23:19:31 <br>
-            17:4:1<br>
-            19:7:13<br>
-            21:15:21<br>
-            22:20:23<br>
-            23:27:4<br>
-            24:4:14<br>
-            52:4:25<br>
+        <h3 style="color: blue;">
+            37:11:37<br>
+            31:4:1<br>
+            33:7:13<br>
+            35:15:21<br>
+            36:20:23<br>
+            37:27:4<br>
+            38:4:14<br>
+            66:4:25<br>
 
         </div>
 
@@ -275,7 +277,7 @@
     
     
         if(checkTimerNeeded()){
-                    countdown( "ten-countdown", 120000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
+                    countdown( "ten-countdown", 7200000-new Date().getTime()+Number("{{g.user.time1}}"),hint1, hint2, hint3 );
                 }
               
                 
@@ -289,7 +291,7 @@
             if(hint_count>0 ) {
                
                 
-                    countdown( "ten-countdown", 120000 ,hintid1, hintid2, hintid3 );
+                    countdown( "ten-countdown", 7200000 ,hintid1, hintid2, hintid3 );
                     
                     let getTime = new Date().getTime();
                     hintID.innerHTML = mainHint;
@@ -342,7 +344,7 @@
             var c_time = new Date().getTime();
             if(lastRecivedTime!=null){ 
                 var elaspedTime = c_time-lastRecivedTime;
-                if(elaspedTime < 120000){
+                if(elaspedTime < 7200000){
                     return true;
                 }
             }
@@ -351,6 +353,14 @@
          }  
     
         </script>
+
+
+<section class="cmid" style="text-align: center;">
+    <div class="mid">
+        
+      <a class="define" href="http://rsetiedc.in/define" ><img style="width: 8.5em; position: fixed; left: 0; bottom: 1em;" src="{{ url_for('static',filename='Images/Logo.png') }}" alt="Define"></a>
+    </div>
+    </section>
         
 
     
